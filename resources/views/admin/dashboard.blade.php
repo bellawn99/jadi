@@ -1,8 +1,11 @@
 @extends('layouts.master')
 
+@section('icon')
+<i class="mdi mdi-home menu-icon"></i>
+@endsection
 
 @section('title')
-    Dashboard
+	<a href="{{url('/dashboard')}}" style="color:black; text-decoration:none">Dashboard</a>
 @endsection
 
 @section('content')
