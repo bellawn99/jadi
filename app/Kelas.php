@@ -9,7 +9,7 @@ class Kelas extends Model
     protected $table = 'kelas';
 
     protected $fillable = [
-        'id', 'jadwal_id', 'nama', 'semester',
+        'id', 'dosen_id','matkul_id','jadwal_id', 'nama', 'semester',
     ];
 
     protected $casts = ['id' => 'string'];

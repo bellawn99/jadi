@@ -198,7 +198,7 @@
     <link rel="stylesheet" href="{{url('assets/css/responsive.dataTables.min.css')}}">   
     @stack('css')
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{url('assets/images/logo.ico')}}" />
+    <link rel="shortcut icon" href="{{url('assets/images/logo-mini.svg')}}" />
 
  
 

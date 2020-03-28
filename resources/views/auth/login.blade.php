@@ -16,7 +16,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{url('assets/images/logo.ico')}}" />
+    <link rel="shortcut icon" href="{{url('assets/images/logo-mini.svg')}}" />
   </head>
   <body>
     <div class="container-scroller">

@@ -43,6 +43,10 @@
                             <th>ID</th>
                             <th>Nama</th>    
                             <th>Semester</th>
+                            <th>Hari</th>
+                            <th>Jam Mulai</th>
+                            <th>Jam Akhir</th>
+                            <th>Nama Matkul</th>
                             <th>Action</th>
                         </tr>
                       </thead>
@@ -52,6 +56,12 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->nama }}</td>  
                             <td>{{ $item->semester }}</td>
+                            <td>{{ $item->hari }}</td>
+                            <td>{{ $item->jam_mulai }}</td>
+                            <td>{{ $item->jam_akhir }}</td>
+                            @foreach ($a as $ak)
+                            <td>{{ $ak->nama_matkul }}</td>
+                            @endforeach
                             <td>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#yourModal{{$item->id}}" ><i class=" mdi mdi-eye "></i></button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('master/kelas/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
