@@ -5,6 +5,7 @@ use App\Kelas;
 use App\Dosen;
 use App\Matkul;
 use App\Jadwal;
+use App\Ruangan;
 use Carbon\Carbon;
 
 class KelassTableSeeder extends Seeder
@@ -26,11 +27,15 @@ class KelassTableSeeder extends Seeder
         $e = Jadwal::select('id')->where('hari','Rabu')->get()->first();
         $f = Jadwal::select('id')->where('hari','Kamis')->get()->first();
 
+        $g = Ruangan::select('id')->where('nama_ruangan','HY Labkom 5')->get()->first();
+        $h = Ruangan::select('id')->where('nama_ruangan','HY RPL 1')->get()->first();
+
         Kelas::create([
             'id' => 'K'.Carbon::now()->format('ymdHi').rand(100,999),
             'dosen_id' => $a->id,
             'matkul_id' => $c->id,
             'jadwal_id' => $e->id,
+            'ruangan_id' => $g->id,
             'nama' => 'BB',
             'semester' => 4
         ]);
@@ -39,6 +44,7 @@ class KelassTableSeeder extends Seeder
             'dosen_id' => $b->id,
             'matkul_id' => $d->id,
             'jadwal_id' => $f->id,
+            'ruangan_id' => $h->id,
             'nama' => 'AB',
             'semester' => 1
             ]);

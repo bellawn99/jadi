@@ -4,21 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Jadwal extends Model
+class Ruangan extends Model
 {
-    protected $table = 'jadwal';
+    protected $table = 'ruangan';
     public $incrementing = false;
     protected $primaryKey='id';
 
     protected $fillable = [
-        'id', 'hari', 'jam_mulai', 'jam_akhir',
+        'id', 'nama_ruangan',
     ];
 
     protected $casts = ['id' => 'string'];
 
     public $timestamps = false;
-
-    public function kelas(){
-        return $this->belongsTo(Kelas::class);
-    }
 }

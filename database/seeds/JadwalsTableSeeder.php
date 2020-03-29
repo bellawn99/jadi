@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Jadwal;
+use App\Ruangan;
 use Carbon\Carbon;
 
 class JadwalsTableSeeder extends Seeder

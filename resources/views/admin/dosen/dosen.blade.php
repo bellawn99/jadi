@@ -157,7 +157,7 @@
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-        <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
       
       </div>
       </form>

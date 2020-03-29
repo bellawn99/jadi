@@ -11,7 +11,7 @@ class Kelas extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id', 'dosen_id','matkul_id','jadwal_id', 'nama', 'semester',
+        'id', 'ruangan_id','dosen_id','matkul_id','jadwal_id', 'nama', 'semester',
     ];
 
     protected $casts = ['id' => 'string'];
@@ -28,5 +28,9 @@ class Kelas extends Model
 
     public function dosen(){
         return $this->hasMany(Dosen::class);
+    }
+
+    public function ruangan(){
+        return $this->hasMany(Ruangan::class);
     }
 }

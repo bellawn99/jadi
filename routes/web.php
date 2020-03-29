@@ -53,6 +53,16 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function() {
             Route::post('/import','Admin\DataMatkulController@csv_import')->name('import.matkul');
         });
 
+        //master ruangan
+        Route::prefix('/ruangan')->group(function(){
+            Route::get('/', 'Admin\DataRuanganController@index');
+            Route::get('/edit/{id}', 'Admin\DataRuanganController@edit');
+            Route::put('/update/{id}', 'Admin\DataRuanganController@update');
+            Route::post('/', 'Admin\DataRuanganController@store')->name('store.ruangan');
+            Route::delete('/delete/{id}', 'Admin\DataRuanganController@delete');
+            Route::post('/import','Admin\DataRuanganController@csv_import')->name('import.ruangan');
+        });
+
         //master jadwal
         Route::prefix('/jadwal')->group(function(){
             Route::get('/', 'Admin\DataJadwalController@index');

@@ -318,6 +318,7 @@
                   <li class="nav-item"> <a class="nav-link" href="{{ url('master/user') }}"> User </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('master/dosen') }}"> Dosen </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('master/matkul') }}"> Matakuliah </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ url('master/ruangan') }}"> Ruangan </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('master/jadwal') }}"> Jadwal </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('master/kelas') }}"> Kelas </a></li>
                 </ul>

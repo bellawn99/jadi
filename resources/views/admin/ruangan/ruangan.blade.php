@@ -8,14 +8,14 @@
 @endsection
 
 @section('title')
-	<a href="{{url('master/kelas')}}" style="color:black; text-decoration:none">Master Kelas</a>
+	<a href="{{url('master/ruangan')}}" style="color:black; text-decoration:none">Master Ruangan</a>
 @endsection
 
 @section('content')
 <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Tabel Kelas</h4>
+                    <h4 class="card-title">Tabel Ruangan</h4>
                     
                     @if (count($errors)>0)
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
@@ -28,11 +28,11 @@
                     </div>
                   @endif
 
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambahKelas">
-                    Tambah Data Kelas
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambahRuangan">
+                    Tambah Data Ruangan
                     </button>
-                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#importKelas">
-                    Import Data Kelas
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#importRuangan">
+                    Import Data Ruangan
                     </button><br><br>
 
                     
@@ -41,26 +41,17 @@
                       <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nama</th>    
-                            <th>Semester</th>
-                            <th>Hari</th>
-                            <th>Jam Mulai</th>
-                            <th>Jam Akhir</th>
+                            <th>Nama Ruangan</th> 
                             <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          @foreach ($kelass as $item)
+                          @foreach ($ruangans as $item)
                             <td>{{ $item->id }}</td>
-                            <td>{{ $item->nama }}</td>  
-                            <td>{{ $item->semester }}</td>
-                            <td>{{ $item->hari }}</td>
-                            <td>{{ $item->jam_mulai }}</td>
-                            <td>{{ $item->jam_akhir }}</td>
+                            <td>{{ $item->nama_ruangan }}</td>  
                             <td>
-                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#yourModal{{$item->id}}" ><i class=" mdi mdi-eye "></i></button>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('master/kelas/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('master/ruangan/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
                             <a class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
@@ -72,126 +63,24 @@
               </div>
 
 
-<!-- Detail Kelas Modal -->
-@foreach ($kelass as $item)
-<div class="modal fade" id="yourModal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Detail</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
-        <table style="border:0">
-        <tr>
-          <td>ID</td>
-          <td>:</td>
-          <td>{{ $item->id }}</td>
-        </tr>
-        <tr>
-          <td>Nama Kelas</td>
-          <td>:</td>
-          <td>{{ $item->nama }}</td>
-        </tr>
-        <tr>
-          <td>Semester</td>
-          <td>:</td>
-          <td>{{ $item->semester }}</td>
-        </tr>
-        <tr>
-          <td>Nama Matakuliah</td>
-          <td>:</td>
-          <td>{{ $item->nama_matkul }}</td>
-        </tr>
-        <tr>
-          <td>Nama Dosen</td>
-          <td>:</td>
-          <td>{{ $item->nama_dosen }}</td>
-        </tr>
-        <tr>
-          <td>Hari</td>
-          <td>:</td>
-          <td>{{ $item->hari }}</td>
-        </tr>
-        <tr>
-          <td>Jam Mulai</td>
-          <td>:</td>
-          <td>{{ $item->jam_mulai }}</td>
-        </tr>
-        <tr>
-          <td>Jam Akhir</td>
-          <td>:</td>
-          <td>{{ $item->jam_akhir }}</td>
-        </tr>
-        <tr>
-          <td>Nama Ruangan</td>
-          <td>:</td>
-          <td>{{ $item->nama_ruangan }}</td>
-        </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-gradient-primary mr-2" data-dismiss="modal">Ok</button>
-      </div>
-    </div>
-  </div>
-</div>
-@endforeach
-<!-- End Detail Kelas Modal -->
 
 <!-- Add Modal -->
-<div class="modal fade" id="tambahKelas" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="tambahRuangan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Kelas</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Ruangan</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-      <form class="forms-sample" style="{margin:0 auto;}" data-toggle="validator" action="{{ route('store.kelas') }}" method="post">
+      <form class="forms-sample" style="{margin:0 auto;}" data-toggle="validator" action="{{ route('store.ruangan') }}" method="post">
                     {{csrf_field()}}
                     {{ method_field('POST') }}
                     <div class="form-group">
-                        <label for="nama">Nama</label>
-                        <input type="text" class="form-control" name="nama" placeholder="Nama" >
-                      </div>
-                      <div class="form-group">
-                        <label for="semester">Semester</label>
-                        <input type="text" class="form-control" name="semester" placeholder="Semester" >
-                      </div>
-                      <div class="form-group">
-                        <label for="matkul_id">Matakuliah</label>
-                        <select name='matkul_id' class='form-control'>
-                        @foreach ($kelass as $value)
-                                <option value="{{ $value->matkul_id }}">{{ $value->nama_matkul }}</option>
-                        @endforeach
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="dosen_id">Dosen</label>
-                        <select name='dosen_id' class='form-control'>
-                        @foreach ($kelass as $value)
-                                <option value="{{ $value->dosen_id }}">{{ $value->nama_dosen }}</option>
-                        @endforeach
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="jadwal_id">Jadwal</label>
-                        <select name='jadwal_id' class='form-control'>
-                        @foreach ($kelass as $value)
-                                <option value="{{ $value->jadwal_id }}" >{{ $value->hari }} , {{ $value->jam_mulai }}-{{ $value->jam_akhir }}</option>
-                        @endforeach
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="ruangan_id">Ruangan</label>
-                        <select name='ruangan_id' class='form-control'>
-                        @foreach ($kelass as $value)
-                                <option value="{{ $value->ruangan_id }}" >{{ $value->nama_ruangan }}</option>
-                        @endforeach
-                        </select>
+                        <label for="nama_ruangan">Nama Ruangan</label>
+                        <input type="text" class="form-control" name="nama_ruangan" placeholder="Nama Ruangan" >
                       </div>
                     
       </div>
@@ -206,21 +95,21 @@
 <!-- End Add Modal -->
 
 <!-- Import Modal -->
-<div class="modal fade" id="importKelas" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="importRuangan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Kelas</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Ruangan</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-      <form action="{{ route('import.kelas') }}" method="POST" enctype="multipart/form-data">
+      <form action="{{ route('import.ruangan') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-12">
-                    <input type="file" class="custom-file-input" name="file" accept=".csv" id="kolomImportKelas" lang="in">
-                    <label class="custom-file-label" for="kolomImportKelas" data-browse="Cari">Import</label>                         
+                    <input type="file" class="custom-file-input" name="file" accept=".csv" id="kolomImportRuangan" lang="in">
+                    <label class="custom-file-label" for="kolomImportRuangan" data-browse="Cari">Import</label>                         
                     </div>
       </div>
       <div class="modal-footer">
@@ -238,7 +127,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Kelas</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Ruangan</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -247,7 +136,7 @@
       {{ csrf_field() }}
       {{ method_field('DELETE') }} 
       <div class="modal-body"> 
-      <p>Apakah anda yakin menghapus data kelas <input style="border:0" id="deleteKelasForm" readonly></input> </p>
+      <p>Apakah anda yakin menghapus data ruangan <input style="border:0" id="deleteRuanganForm" readonly></input> </p>
       
       </div>
       <div class="modal-footer">
@@ -335,13 +224,13 @@ $(document).ready(function(){
         
         console.log(data);
         
-        $('#deleteKelasForm').val(data[1]+' ?');
+        $('#deleteRuanganForm').val(data[1]+' ?');
         
-        $('#delete_modal').attr('action', '/master/kelas/delete/'+data[0]);
+        $('#delete_modal').attr('action', '/master/ruangan/delete/'+data[0]);
         $('#deletemodalpop').modal('show');
     });
 
-    $('#kolomImportKelas').on('change',function(){
+    $('#kolomImportRuangan').on('change',function(){
                 //get the file name
                 var fileName = $(this).val().split("\\").pop();
                 //replace the "Choose a file" label
