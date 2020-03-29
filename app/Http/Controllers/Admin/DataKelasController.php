@@ -18,14 +18,13 @@ class DataKelasController extends Controller
 {
     public function index()
     {
-        $kelass = Kelas::join('jadwal','kelas.jadwal_id','=','jadwal.id')
-        ->select('kelas.id','kelas.nama','kelas.semester','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir')
-        ->distinct()->get();
-
-        $a = Kelas::join('matkul','kelas.matkul_id','=','matkul.id')
-        ->select('matkul.nama_matkul')
-        ->distinct()->get();
-        return view('admin.kelas.kelas',compact('kelass','a'));        
+        $kelass = Kelas::join('dosen','kelas.dosen_id','=','dosen.id')
+        ->join('matkul','kelas.matkul_id','=','matkul.id')
+        ->join('jadwal','kelas.jadwal_id','=','jadwal.id')
+        ->select('kelas.id','kelas.nama','kelas.semester','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','matkul.nama_matkul','dosen.nama as nama_dosen')
+        ->get();
+        
+       return view('admin.kelas.kelas',compact('kelass'));        
     }
 
     public function csv_import()

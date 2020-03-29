@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Jadwal extends Model
 {
     protected $table = 'jadwal';
+    public $incrementing = false;
+    protected $primaryKey='id';
 
     protected $fillable = [
         'id', 'matkul_id', 'hari', 'jam_mulai', 'jam_akhir',

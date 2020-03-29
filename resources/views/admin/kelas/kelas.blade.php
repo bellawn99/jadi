@@ -59,9 +59,7 @@
                             <td>{{ $item->hari }}</td>
                             <td>{{ $item->jam_mulai }}</td>
                             <td>{{ $item->jam_akhir }}</td>
-                            @foreach ($a as $ak)
-                            <td>{{ $ak->nama_matkul }}</td>
-                            @endforeach
+                            <td>{{ $item->nama_matkul }}</td>
                             <td>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#yourModal{{$item->id}}" ><i class=" mdi mdi-eye "></i></button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('master/kelas/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>

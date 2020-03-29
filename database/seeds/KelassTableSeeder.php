@@ -29,7 +29,7 @@ class KelassTableSeeder extends Seeder
         Kelas::create([
             'id' => 'K'.Carbon::now()->format('ymdHi').rand(100,999),
             'dosen_id' => $a->id,
-            'jadwal_id' => $c->id,
+            'matkul_id' => $c->id,
             'jadwal_id' => $e->id,
             'nama' => 'BB',
             'semester' => 4
@@ -37,7 +37,7 @@ class KelassTableSeeder extends Seeder
         Kelas::create([
             'id' => 'K'.Carbon::now()->format('ymdHi').rand(100,999),
             'dosen_id' => $b->id,
-            'jadwal_id' => $d->id,
+            'matkul_id' => $d->id,
             'jadwal_id' => $f->id,
             'nama' => 'AB',
             'semester' => 1
