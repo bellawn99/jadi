@@ -11,11 +11,7 @@
 |
 */
 
-
-Route::group(['middleware' => 'web'], function () {
-    // your routes
-    Route::get('/', 'LandingController@index')->name('index');
-});
+Route::get('/', 'LandingController@index')->name('index');
 
 Auth::routes(['register' => false]);
 
