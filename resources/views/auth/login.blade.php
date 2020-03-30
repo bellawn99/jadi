@@ -60,11 +60,6 @@
                       <label class="form-check-label text-muted">
                         <input type="checkbox" class="form-check-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Remember me </label>
                     </div>
-                    @if (Route::has('password.request'))
-                                    <a class="auth-link text-black" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
                   </div>
                   </div>
                 </form>

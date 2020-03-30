@@ -14,22 +14,24 @@ class CreateMahasiswaTable extends Migration
     public function up()
     {
         Schema::create('mahasiswa', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('nik');
-            $table->string('npwp');
-            $table->string('jk');
+            $table->string('id',20)->primary();
+            $table->string('user_id')->nullable();
+            $table->string('nik');
+            $table->string('npwp')->nullable();
+            $table->enum('jk',['P','L']);
             $table->string('tempat');
             $table->date('tgl_lahir');
             $table->string('alamat');
             $table->string('prodi');
             $table->string('status');
             $table->string('krs');
-            $table->string('semester');
+            $table->integer('semester');
             $table->string('thn_lulus');
             $table->string('nama_bank');
-            $table->string('no_rekening');
+            $table->string('no_rekening')->unique();
             $table->string('nama_rekening');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('user');
         });
     }
 

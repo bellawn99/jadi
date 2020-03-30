@@ -12,6 +12,8 @@ class User extends Authenticatable
 
 
     protected $table = 'user';
+    protected $primaryKey='id';
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -54,5 +56,13 @@ class User extends Authenticatable
     {
         if($this->role_id == 2)return true;
             return false;
+    }
+
+    public function mahasiswa(){
+        return $this->belongsTo(Mahasiswa::class);
+    }
+
+    public function admin(){
+        return $this->belongsTo(Admin::class);
     }
 }
