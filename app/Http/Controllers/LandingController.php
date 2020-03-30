@@ -16,7 +16,7 @@ class LandingController extends Controller
 
         $user = Auth::user(); 
         if(! $user){
-            return view('welcome');
+            return view('landing');
         }elseif($user->role_id == 1){
             return redirect()->route('admin.dashboard');
         }else{
