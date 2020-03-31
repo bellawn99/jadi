@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Ketentuan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,12 +17,14 @@ class LandingController extends Controller
 
         $user = Auth::user(); 
         if(! $user){
-            return view('landing');
+            $ketentuans = Ketentuan::all();
+            return view('landing')->with('ketentuans',$ketentuans);  
         }elseif($user->role_id == 1){
             return redirect()->route('admin.dashboard');
         }else{
             return redirect()->route('userhome'); 
             
         }
+
     }
 }
