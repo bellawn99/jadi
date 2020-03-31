@@ -82,6 +82,16 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function() {
             Route::delete('/delete/{id}', 'Admin\DataKelasController@delete');
             Route::post('/import','Admin\DataKelasController@csv_import')->name('import.kelas');
         });
+
+        //master ketentuan
+        Route::prefix('ketentuan')->group(function(){
+            Route::get('/', 'Admin\DataKetentuanController@index');
+            Route::get('/edit/{id}', 'Admin\DataKetentuanController@edit');
+            Route::put('/update/{id}', 'Admin\DataKetentuanController@update');
+            Route::post('/', 'Admin\DataKetentuanController@store')->name('store.ketentuan');
+            Route::delete('/delete/{id}', 'Admin\DataKetentuanController@delete');
+            Route::post('/import','Admin\DataKetentuanController@csv_import')->name('import.ketentuan');
+        });
     });
 });
 
