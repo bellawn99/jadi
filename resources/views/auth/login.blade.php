@@ -28,8 +28,6 @@
                 <div class="brand-logo">
                   <img src="{{url('assets/images/logo.svg')}}">
                 </div>
-                <h4>Hello! let's get started</h4>
-                <h6 class="font-weight-light">Login to continue.</h6>
                 <form class="pt-3" method="POST" action="{{ route('login') }}">
                   @csrf
                   <div class="form-group">

@@ -351,20 +351,22 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-                <span class="menu-title">Master Data</span>
-                <i class="menu-arrow"></i>
-                <i class="mdi mdi-medical-bag menu-icon"></i>
+              <a class="nav-link" href="{{ url('/daftar') }}">
+                <span class="menu-title">Daftar</span>
+                <i class=" mdi mdi-file-multiple menu-icon"></i>
               </a>
-              <div class="collapse" id="general-pages">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('master/user') }}"> User </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('master/dosen') }}"> Dosen </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('master/matkul') }}"> Matakuliah </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('master/jadwal') }}"> Jadwal </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('master/kelas') }}"> Kelas </a></li>
-                </ul>
-              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/pengumuman') }}">
+                <span class="menu-title">Pengumuman</span>
+                <i class=" mdi mdi-comment-outline menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/profil') }}">
+                <span class="menu-title">Profil</span>
+                <i class="mdi mdi-account menu-icon"></i>
+              </a>
             </li>
             
           </ul>
@@ -392,7 +394,7 @@
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
               <span class="text-muted text-center d-block d-sm-inline-block" >Copyright © 2020</span>
-              <span class="text-muted text-center d-block d-sm-inline-block">Make with <i class="mdi mdi-heart"></i>and <i class="mdi mdi-json"></i></span>
+              <span class="text-muted text-center d-block d-sm-inline-block">Make with <i class="mdi mdi-heart"></i>and <i class=" mdi mdi-code-tags "></i></span>
             </div>
           </footer>
           <!-- partial -->

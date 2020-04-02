@@ -96,6 +96,6 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function() {
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:mahasiswa']], function() {
-
+    Route::get('/beranda', 'Mahasiswa\MahasiswaController@index')->name('mahasiswa.beranda');
 });
 

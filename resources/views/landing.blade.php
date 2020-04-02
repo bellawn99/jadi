@@ -113,7 +113,7 @@
       <div class="container">
         <div class="row mb-5 justify-content-center">
           <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="">
-            <h2 class="section-title">Courses</h2>
+            <h2 class="section-title">Berita</h2>
           </div>
         </div>
       </div>
@@ -301,7 +301,7 @@
 
           <div class="col-md-4">
             <h3>Hubungi Kami</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt incidunt iure iusto architecto? Numquam, natus?</p>
+            <p><i class="icon-phone" aria-hidden="true"> 088-888-888-888 </i></p>
           </div>
 
         </div>

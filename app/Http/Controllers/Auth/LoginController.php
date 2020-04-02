@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests;
+use App\Mahasiswa;
+use App\User;
+use Carbon\Carbon;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -40,7 +43,20 @@ class LoginController extends Controller
             return redirect()->route('admin.dashboard');
 
         }else{
-            return redirect()->route('mahasiswa.dashboard');
+            
+            $mahasiswas = new Mahasiswa;
+
+            $b = 'M'.Carbon::now()->format('ymdHi').rand(100,999);
+            $id = Auth::id();
+
+            $mahasiswas->id = $b;
+            $mahasiswas->user_id = $id;
+            if(empty($mahasiswas->user_id)){
+            $mahasiswas->save();
+            }else{
+            return redirect()->route('mahasiswa.beranda');
+            }
+           
         }      
     }
 

@@ -22,7 +22,7 @@ class LandingController extends Controller
         }elseif($user->role_id == 1){
             return redirect()->route('admin.dashboard');
         }else{
-            return redirect()->route('userhome'); 
+            return redirect()->route('mahasiswa.beranda'); 
             
         }
 
