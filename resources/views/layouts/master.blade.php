@@ -359,7 +359,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/pengumuman') }}">
                 <span class="menu-title">Pengumuman</span>
-                <i class=" mdi mdi-comment-outline menu-icon"></i>
+                <i class=" mdi mdi-format-list-bulleted menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
