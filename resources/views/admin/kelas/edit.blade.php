@@ -45,38 +45,6 @@
                         <label for="semester">Semester</label>
                         <input type="text" class="form-control" id="semester" name="semester" value="{{$kelass->semester}}">
                       </div>
-                      <div class="form-group">
-                        <label for="matkul_id">Matakuliah</label>
-                        <select name='matkul_id' class='form-control'>
-                        @foreach ($matkuls as $value)
-                                <option value="{{ $value->id }}" {{ $idMatkul->contains($value->id) ? 'selected' : '' }}>{{ $value->nama_matkul }}</option>
-                        @endforeach
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="dosen_id">Dosen</label>
-                        <select name='dosen_id' class='form-control'>
-                        @foreach ($dosens as $value)
-                                <option value="{{ $value->id }}" {{ $idDosen->contains($value->id) ? 'selected' : '' }}>{{ $value->nama }}</option>
-                        @endforeach
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="jadwal_id">Jadwal</label>
-                        <select name='jadwal_id' class='form-control'>
-                        @foreach ($jadwals as $value)
-                                <option value="{{ $value->id }}" {{ $idJadwal->contains($value->id) ? 'selected' : '' }}>{{ $value->hari }} , {{ $value->jam_mulai }}-{{ $value->jam_akhir }}</option>
-                        @endforeach
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="ruangan_id">Ruangan</label>
-                        <select name='ruangan_id' class='form-control'>
-                        @foreach ($ruangans as $value)
-                                <option value="{{ $value->id }}" {{ $idRuangan->contains($value->id) ? 'selected' : '' }}>{{ $value->nama_ruangan }}</option>
-                        @endforeach
-                        </select>
-                      </div>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
                       <input type="submit" class="btn btn-gradient-primary mr-2" value="Edit">

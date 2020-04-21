@@ -93,6 +93,14 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function() {
             Route::post('/import','Admin\DataKetentuanController@csv_import')->name('import.ketentuan');
         });
     });
+    //master praktikum
+    Route::prefix('/praktikum')->group(function(){
+        Route::get('/', 'Admin\DataPraktikumController@index');
+        Route::get('/edit/{id}', 'Admin\DataPraktikumController@edit');
+            Route::put('/update/{id}', 'Admin\DataPraktikumController@update');
+            Route::post('/', 'Admin\DataPraktikumController@store')->name('store.praktikum');
+            Route::delete('/delete/{id}', 'Admin\DataPraktikumController@delete');
+    });
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:mahasiswa']], function() {

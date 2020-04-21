@@ -15,17 +15,9 @@ class CreateKelassTable extends Migration
     {
         Schema::create('kelas', function (Blueprint $table) {
             $table->string('id',20)->primary();
-            $table->string('dosen_id',20)->nullable();
-            $table->string('matkul_id',20)->nullable();
-            $table->string('jadwal_id',20)->nullable();
-            $table->string('ruangan_id',20)->nullable();
             $table->string('nama');
             $table->integer('semester');
             $table->timestamps();
-            $table->foreign('dosen_id')->references('id')->on('dosen');
-            $table->foreign('matkul_id')->references('id')->on('matkul');
-            $table->foreign('jadwal_id')->references('id')->on('jadwal');
-            $table->foreign('ruangan_id')->references('id')->on('ruangan');
         });
     }
 
