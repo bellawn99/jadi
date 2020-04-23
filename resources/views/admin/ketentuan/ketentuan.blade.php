@@ -85,8 +85,8 @@
                     
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-gradient-primary mr-2">Tambah</button>
-        <button class="btn btn-light" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Tambah</button>
+        <button class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
         </form>
       </div>
     </div>
@@ -113,8 +113,8 @@
                     </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-gradient-primary mr-2">Import</button>
-        <button class="btn btn-light" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Import</button>
+        <button class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
         </form>
       </div>
     </div>

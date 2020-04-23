@@ -47,8 +47,8 @@
                       </div>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
-                      <input type="submit" class="btn btn-gradient-primary mr-2" value="Edit">
-                      <button type="button" class="btn btn-light"  onclick="location.href='{{url('master/kelas')}}'">Batal</button>
+                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">
+                      <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('master/kelas')}}'">Batal</button>
                     </form>
                   </div>
                 </div>

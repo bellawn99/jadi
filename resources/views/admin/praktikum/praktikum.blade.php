@@ -28,7 +28,7 @@
                     </div>
                   @endif
 
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambahPraktikum">
+                    <button type="button" class="btn btn-primary btn-sm btn-sm" data-toggle="modal" data-target="#tambahPraktikum">
                     Tambah Data Praktikum
                     </button><br><br>
 
@@ -37,13 +37,14 @@
                     <table class="table table-hover" id="tabel-user">
                       <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Nama</th>    
-                            <th>Semester</th>
-                            <th>Hari</th>
-                            <th>Jam Mulai</th>
-                            <th>Jam Akhir</th>
-                            <th>Action</th>
+                            <th width="5%">ID</th>
+                            <th width="5%">Kelas</th>    
+                            <th width="10%">Semester</th>
+                            <th width="10%">Matakuliah</th>
+                            <th width="5%">Hari</th>
+                            <th width="5%">Jam Mulai</th>
+                            <th width="5%">Jam Akhir</th>
+                            <th width="10%">Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -52,6 +53,7 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->nama }}</td>  
                             <td>{{ $item->semester }}</td>
+                            <td>{{ $item->nama_matkul }}</td>
                             <td>{{ $item->hari }}</td>
                             <td>{{ $item->jam_mulai }}</td>
                             <td>{{ $item->jam_akhir }}</td>
@@ -128,7 +130,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-gradient-primary mr-2" data-dismiss="modal">Ok</button>
+        <button type="button" class="btn btn-gradient-primary mr-2 btn-sm" data-dismiss="modal">OK</button>
       </div>
     </div>
   </div>
@@ -193,8 +195,8 @@
                     
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-gradient-primary mr-2">Tambah</button>
-        <button class="btn btn-light" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Tambah</button>
+        <button class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
         </form>
       </div>
     </div>
@@ -220,8 +222,8 @@
       
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-        <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-danger btn-sm btn-sm">Hapus</button>
+        <button type="button" class="btn btn-light btn-sm btn-sm" data-dismiss="modal">Batal</button>
       
       </div>
       </form>

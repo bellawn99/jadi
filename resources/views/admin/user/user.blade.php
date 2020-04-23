@@ -87,7 +87,7 @@ in: "Cari",
       <img src="{{ URL::to('/') }}/images/{{ $item->foto }}" style="border-radius:50%; max-width:40%; max-height:40%; min-width:40%; min-height:40%; display:block; margin:auto;" width="50%" />
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-gradient-primary mr-2" data-dismiss="modal">Ok</button>
+        <button type="button" class="btn btn-gradient-primary mr-2 btn-sm" data-dismiss="modal">OK</button>
       </div>
     </div>
   </div>
@@ -142,8 +142,8 @@ in: "Cari",
                     
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-gradient-primary mr-2">Tambah</button>
-        <button class="btn btn-light" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Tambah</button>
+        <button class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
         </form>
       </div>
     </div>
@@ -170,8 +170,8 @@ in: "Cari",
                     </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-gradient-primary mr-2">Import</button>
-        <button class="btn btn-light" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Import</button>
+        <button class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
         </form>
       </div>
     </div>
