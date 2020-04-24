@@ -332,9 +332,15 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{ url('/periode') }}">
+                <span class="menu-title">Periode</span>
+                <i class="mdi mdi-av-timer menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="pages/icons/mdi.html">
                 <span class="menu-title">Pengajuan</span>
-                <i class="mdi mdi-contacts menu-icon"></i>
+                <i class="mdi mdi-file-multiple menu-icon"></i>
               </a>
             </li>
             

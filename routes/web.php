@@ -93,13 +93,21 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function() {
             Route::post('/import','Admin\DataKetentuanController@csv_import')->name('import.ketentuan');
         });
     });
-    //master praktikum
+    //praktikum
     Route::prefix('/praktikum')->group(function(){
         Route::get('/', 'Admin\DataPraktikumController@index');
         Route::get('/edit/{id}', 'Admin\DataPraktikumController@edit');
             Route::put('/update/{id}', 'Admin\DataPraktikumController@update');
             Route::post('/', 'Admin\DataPraktikumController@store')->name('store.praktikum');
             Route::delete('/delete/{id}', 'Admin\DataPraktikumController@delete');
+    });
+    //periode
+    Route::prefix('/periode')->group(function(){
+        Route::get('/', 'Admin\DataPeriodeController@index');
+        Route::get('/edit/{id}', 'Admin\DataPeriodeController@edit');
+        Route::put('/update/{id}', 'Admin\DataPeriodeController@update');
+        Route::post('/', 'Admin\DataPeriodeController@store')->name('store.periode');
+        Route::delete('/delete/{id}', 'Admin\DataPeriodeController@delete');
     });
 });
 

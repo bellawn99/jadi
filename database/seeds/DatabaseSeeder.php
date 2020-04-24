@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(KelassTableSeeder::class);
         $this->call(PraktikumsTableSeeder::class);
         $this->call(KetentuansTableSeeder::class);
+        $this->call(PeriodesTableSeeder::class);
     }
 }
