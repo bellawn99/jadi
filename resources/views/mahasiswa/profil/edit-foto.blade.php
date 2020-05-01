@@ -1,23 +1,27 @@
 @extends('layouts.master')
 
 @section('icon')
-<i class="mdi mdi-medical-bag menu-icon"></i>
+<i class="mdi mdi-account menu-icon"></i>
 @endsection
 
 @section('title')
-<a href="{{url('admin/master/ruangan')}}" style="color:black; text-decoration:none">Master Jadwal</a> / <a style="color:grey; text-decoration:none">Edit Ruangan</a>
+<a href="{{url('mahasiswa/profil')}}" style="color:black; text-decoration:none">Profil</a> / <a style="color:grey; text-decoration:none">Edit Foto</a>
 @endsection
 
 @push('css')
+<style type="text/css">
+    $custom-file-text: (
+in: "Cari",
+);
+</style>
 @endpush
-
 @section('content')
 
 <div class="row">
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Edit Data Ruangan</h4>
+                    <h4 class="card-title">Edit Foto</h4>
                     
                   @if (count($errors)>0)
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
@@ -30,21 +34,19 @@
                     </div>
                   @endif
 
-                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('admin/master/ruangan/update/'.$ruangans->id)}}">
+                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('mahasiswa/profil/update-foto/'.Auth::user()->id)}}" enctype="multipart/form-data">
                     {{ csrf_field() }} 
                     {{ method_field('PUT') }}
                       <div class="form-group">
-                        <label for="id">ID</label>
-                        <input type="text" class="form-control" id="id" name="id" value="{{$ruangans->id}}" readonly>
-                      </div>
-                      <div class="form-group">
-                        <label for="nama_ruangan">Nama Ruangan</label>
-                        <input type="text" class="form-control" id="nama_ruangan" name="nama_ruangan" value="{{$ruangans->nama_ruangan}}">
+                        <div class="col-md-12">
+                          <input type="file" class="custom-file-input" name="foto" id="kolomEditFoto" lang="in" value="{{ $users->foto }}">
+                          <label class="custom-file-label" for="kolomEditFoto" data-browse="Cari" value="{{$users->foto}}">{{$users->foto}}</label>                         
+                        </div>
                       </div>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
                       <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">
-                      <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('admin/master/ruangan')}}'">Batal</button>
+                      <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('mahasiswa/profil')}}'">Batal</button>
                     </form>
                   </div>
                 </div>
@@ -54,6 +56,12 @@
 
 @push('js')
 <script>
+    $('#kolomEditFoto').on('change',function(){
+                //get the file name
+                var fileName = $(this).val().split("\\").pop();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').addClass("selected").html(fileName);
+    });
 
     $(".alert").delay(10000).slideUp(200, function() {
     $(this).alert('close');

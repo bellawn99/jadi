@@ -12,29 +12,26 @@
 */
 
 Route::get('/', 'LandingController@index')->name('index');
+Route::post('/', 'LandingController@saveContact');
 
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => ['auth', 'checkRole:admin']], function() {
+Route::group(['middleware' => ['auth', 'admin'], 'prefix'=> 'admin'], function() {
     Route::get('/dashboard', 'Admin\AdminController@home')->name('admin.dashboard');
-    Route::prefix('/master')->group(function(){
-        Route::prefix('/user')->group(function(){
-        // Route::resource('/','Admin\DataUserController');
-        // Route::post('/', 'Admin\DataUserController@store');
+    Route::group(['prefix' => '/master'],function(){
+        Route::group(['prefix' => '/user'],function(){
             Route::get('/', 'Admin\DataUserController@index');
             Route::post('/import','Admin\DataUserController@csv_import')->name('import');
             Route::get('/edit/{id}', 'Admin\DataUserController@edituser');
             Route::put('/update/{id}', 'Admin\DataUserController@updateuser');
             Route::delete('/delete/{id}', 'Admin\DataUserController@delete');
             Route::post('/', 'Admin\DataUserController@store')->name('store.user');
-        // Route::get('/show/{id}', 'Admin\DataUserController@show');
-        // Route::put('/', 'Admin\DataUserController@update')->name('update.user');
         });
 
         //master dosen
-        Route::prefix('/dosen')->group(function(){
+        Route::group(['prefix' => '/dosen'],function(){
             Route::get('/', 'Admin\DataDosenController@index');
             Route::post('/', 'Admin\DataDosenController@store')->name('store.dosen');
             Route::get('/edit/{id}', 'Admin\DataDosenController@edit');
@@ -44,7 +41,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function() {
         });
 
         //master matkul
-        Route::prefix('/matkul')->group(function(){
+        Route::group(['prefix' => '/matkul'],function(){
             Route::get('/', 'Admin\DataMatkulController@index');
             Route::get('/edit/{id}', 'Admin\DataMatkulController@edit');
             Route::put('/update/{id}', 'Admin\DataMatkulController@update');
@@ -54,7 +51,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function() {
         });
 
         //master ruangan
-        Route::prefix('/ruangan')->group(function(){
+        Route::group(['prefix' => '/ruangan'],function(){
             Route::get('/', 'Admin\DataRuanganController@index');
             Route::get('/edit/{id}', 'Admin\DataRuanganController@edit');
             Route::put('/update/{id}', 'Admin\DataRuanganController@update');
@@ -64,7 +61,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function() {
         });
 
         //master jadwal
-        Route::prefix('/jadwal')->group(function(){
+        Route::group(['prefix' => '/jadwal'],function(){
             Route::get('/', 'Admin\DataJadwalController@index');
             Route::get('/edit/{id}', 'Admin\DataJadwalController@edit');
             Route::put('/update/{id}', 'Admin\DataJadwalController@update');
@@ -74,7 +71,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function() {
         });
 
         //master kelas
-        Route::prefix('kelas')->group(function(){
+        Route::group(['prefix' => '/kelas'],function(){
             Route::get('/', 'Admin\DataKelasController@index');
             Route::get('/edit/{id}', 'Admin\DataKelasController@edit');
             Route::put('/update/{id}', 'Admin\DataKelasController@update');
@@ -84,7 +81,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function() {
         });
 
         //master ketentuan
-        Route::prefix('ketentuan')->group(function(){
+        Route::group(['prefix' => '/ketentuan'],function(){
             Route::get('/', 'Admin\DataKetentuanController@index');
             Route::get('/edit/{id}', 'Admin\DataKetentuanController@edit');
             Route::put('/update/{id}', 'Admin\DataKetentuanController@update');
@@ -94,7 +91,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function() {
         });
     });
     //praktikum
-    Route::prefix('/praktikum')->group(function(){
+    Route::group(['prefix' => '/praktikum'],function(){
         Route::get('/', 'Admin\DataPraktikumController@index');
         Route::get('/edit/{id}', 'Admin\DataPraktikumController@edit');
             Route::put('/update/{id}', 'Admin\DataPraktikumController@update');
@@ -102,7 +99,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function() {
             Route::delete('/delete/{id}', 'Admin\DataPraktikumController@delete');
     });
     //periode
-    Route::prefix('/periode')->group(function(){
+    Route::group(['prefix' => '/periode'],function(){
         Route::get('/', 'Admin\DataPeriodeController@index');
         Route::get('/edit/{id}', 'Admin\DataPeriodeController@edit');
         Route::put('/update/{id}', 'Admin\DataPeriodeController@update');
@@ -111,7 +108,19 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function() {
     });
 });
 
-Route::group(['middleware' => ['auth', 'checkRole:mahasiswa']], function() {
-    Route::get('/beranda', 'Mahasiswa\MahasiswaController@index')->name('mahasiswa.beranda');
+Route::group(['middleware' => ['auth', 'mahasiswa'], 'prefix'=> 'mahasiswa'], function() {
+    Route::get('/dashboard', 'Mahasiswa\MahasiswaController@index')->name('mahasiswa.beranda');
+    //profil
+    Route::group(['prefix' => 'profil'],function(){
+        Route::get('/', 'Mahasiswa\ProfilController@index');
+        Route::get('/edit-foto/{id}', 'Mahasiswa\ProfilController@editFoto');
+        Route::put('/update-foto/{id}', 'Mahasiswa\ProfilController@updateFoto');
+        Route::get('/edit-data/{id}', 'Mahasiswa\ProfilController@editData');
+        Route::put('/update-data/{id}', 'Mahasiswa\ProfilController@updateData');
+        Route::get('/edit-bank/{id}', 'Mahasiswa\ProfilController@editBank');
+        Route::put('/update-bank/{id}', 'Mahasiswa\ProfilController@updateBank');
+        Route::get('/edit-mahasiswa/{id}', 'Mahasiswa\ProfilController@editMahasiswa');
+        Route::put('/update-mahasiswa/{id}', 'Mahasiswa\ProfilController@updateMahasiswa');
+    });
 });
 

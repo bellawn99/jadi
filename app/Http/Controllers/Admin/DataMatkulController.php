@@ -23,7 +23,7 @@ class DataMatkulController extends Controller
     {
         Excel::import(new MatkulImport, request()->file('file'));
         Session::flash('statuscode','success');
-            return redirect('master/matkul')->with('status','Berhasil menambahkan data matakuliah!');
+            return redirect('admin/master/matkul')->with('status','Berhasil menambahkan data matakuliah!');
     }
 
     public function store(Request $request){
@@ -49,7 +49,7 @@ class DataMatkulController extends Controller
         $matkuls->save();
         
         Session::flash('statuscode','success');
-        return redirect('master/matkul')->with('status', 'Berhasil Menambahkan Data Matakuliah');
+        return redirect('admin/master/matkul')->with('status', 'Berhasil Menambahkan Data Matakuliah');
     }
 
     public function edit(Request $request, $id)
@@ -77,7 +77,7 @@ class DataMatkulController extends Controller
         $matkuls->update();
 
         Session::flash('statuscode','success');
-        return redirect('master/matkul')->with('status','Data Matakuliah berhasil di ubah');
+        return redirect('admin/master/matkul')->with('status','Data Matakuliah berhasil di ubah');
     }
 
     public function delete($id){
@@ -86,7 +86,7 @@ class DataMatkulController extends Controller
         $matkuls->delete();
 
         Session::flash('statuscode','success');
-        return redirect('master/matkul')->with('status', 'Berhasil Hapus Matakuliah');
+        return redirect('admin/master/matkul')->with('status', 'Berhasil Hapus Matakuliah');
         
     }
 }

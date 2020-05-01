@@ -8,7 +8,7 @@
 @endsection
 
 @section('title')
-	<a href="{{url('master/dosen')}}" style="color:black; text-decoration:none">Master Dosen</a>
+	<a href="{{url('admin/master/dosen')}}" style="color:black; text-decoration:none">Master Dosen</a>
 @endsection
 
 @section('content')
@@ -57,7 +57,7 @@
                             <td>{{ $item->no_hp }}</td>
                             <td>{{ $item->alamat }}</td>
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('master/dosen/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/master/dosen/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
                             <a class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
@@ -242,7 +242,7 @@ $(document).ready(function(){
         
         $('#deleteDosenForm').val(data[2]+' ?');
         
-        $('#delete_modal').attr('action', '/master/dosen/delete/'+data[0]);
+        $('#delete_modal').attr('action', 'admin/master/dosen/delete/'+data[0]);
         $('#deletemodalpop').modal('show');
     });
 

@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<a href="{{url('/praktikum')}}" style="color:black; text-decoration:none">Praktikum</a> / <a style="color:grey; text-decoration:none">Edit Praktikum</a>
+<a href="{{url('admin/praktikum')}}" style="color:black; text-decoration:none">Praktikum</a> / <a style="color:grey; text-decoration:none">Edit Praktikum</a>
 @endsection
 
 @push('css')
@@ -30,7 +30,7 @@
                     </div>
                   @endif
 
-                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('/praktikum/update/'.$praktikums->id)}}">
+                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('admin/praktikum/update/'.$praktikums->id)}}">
                     {{ csrf_field() }} 
                     {{ method_field('PUT') }}
                       <div class="form-group">
@@ -80,7 +80,7 @@
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
                       <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">
-                      <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('/praktikum')}}'">Batal</button>
+                      <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('admin/praktikum')}}'">Batal</button>
                     </form>
                   </div>
                 </div>

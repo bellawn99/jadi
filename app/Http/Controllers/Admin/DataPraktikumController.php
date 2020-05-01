@@ -72,7 +72,7 @@ class DataPraktikumController extends Controller
         $praktikums->save();
         
         Session::flash('statuscode','success');
-        return redirect('/praktikum')->with('status', 'Berhasil Menambahkan Data Praktikum');
+        return redirect('admin/praktikum')->with('status', 'Berhasil Menambahkan Data Praktikum');
         }
     }
 
@@ -119,7 +119,7 @@ class DataPraktikumController extends Controller
         $praktikums->update();
 
         Session::flash('statuscode','success');
-        return redirect('/praktikum')->with('status','Data Praktikum berhasil di ubah');
+        return redirect('admin/praktikum')->with('status','Data Praktikum berhasil di ubah');
     }
 
     public function delete($id){
@@ -128,7 +128,7 @@ class DataPraktikumController extends Controller
         $praktikums->delete();
 
         Session::flash('statuscode','success');
-        return redirect('/praktikum')->with('status', 'Berhasil Hapus Praktikum');
+        return redirect('admin/praktikum')->with('status', 'Berhasil Hapus Praktikum');
         
     }
 }

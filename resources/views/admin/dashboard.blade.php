@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-	<a href="{{url('/dashboard')}}" style="color:black; text-decoration:none">Dashboard</a>
+	<a href="{{url('admin/dashboard')}}" style="color:black; text-decoration:none">Dashboard</a>
 @endsection
 
 @section('content')

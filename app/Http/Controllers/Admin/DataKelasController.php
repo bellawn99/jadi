@@ -24,7 +24,7 @@ class DataKelasController extends Controller
     {
         Excel::import(new KelasImport, request()->file('file'));
         Session::flash('statuscode','success');
-            return redirect('master/kelas')->with('status','Berhasil menambahkan data kelas!');
+            return redirect('admin/master/kelas')->with('status','Berhasil menambahkan data kelas!');
     }
 
     public function store(Request $request){
@@ -48,7 +48,7 @@ class DataKelasController extends Controller
         $kelass->save();
         
         Session::flash('statuscode','success');
-        return redirect('master/kelas')->with('status', 'Berhasil Menambahkan Data Kelas');
+        return redirect('admin/master/kelas')->with('status', 'Berhasil Menambahkan Data Kelas');
     }
 
     public function edit(Request $request, $id)
@@ -74,7 +74,7 @@ class DataKelasController extends Controller
         $kelass->update();
 
         Session::flash('statuscode','success');
-        return redirect('master/kelas')->with('status','Data Kelas berhasil di ubah');
+        return redirect('admin/master/kelas')->with('status','Data Kelas berhasil di ubah');
     }
 
     public function delete($id){
@@ -83,7 +83,7 @@ class DataKelasController extends Controller
         $kelass->delete();
 
         Session::flash('statuscode','success');
-        return redirect('master/kelas')->with('status', 'Berhasil Hapus Kelas');
+        return redirect('admin/master/kelas')->with('status', 'Berhasil Hapus Kelas');
         
     }
 }

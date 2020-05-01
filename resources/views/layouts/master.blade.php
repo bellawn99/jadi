@@ -208,8 +208,13 @@
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="{{ url('/dashboard') }}"><img src="{{url('assets/images/logo.svg')}}" alt="logo" /></a>
-          <a class="navbar-brand brand-logo-mini" href="{{ url('/dashboard') }}"><img src="{{url('assets/images/logo-mini.svg')}}" alt="logo" /></a>
+        @if (Auth::user()->role_id == 1)
+          <a class="navbar-brand brand-logo" href="{{ url('admin/dashboard') }}"><img src="{{url('assets/images/logo.svg')}}" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="{{ url('admin/dashboard') }}"><img src="{{url('assets/images/logo-mini.svg')}}" alt="logo" /></a>
+        @else
+          <a class="navbar-brand brand-logo" href="{{ url('mahasiswa/dashboard') }}"><img src="{{url('assets/images/logo.svg')}}" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="{{ url('mahasiswa/dashboard') }}"><img src="{{url('assets/images/logo-mini.svg')}}" alt="logo" /></a>
+        @endif
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -302,7 +307,7 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/dashboard') }}">
+              <a class="nav-link" href="{{ url('/admin/dashboard') }}">
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
               </a>
@@ -315,24 +320,24 @@
               </a>
               <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('master/user') }}"> User </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('master/dosen') }}"> Dosen </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('master/matkul') }}"> Matakuliah </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('master/ruangan') }}"> Ruangan </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('master/jadwal') }}"> Jadwal </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('master/kelas') }}"> Kelas </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('master/ketentuan') }}"> Ketentuan </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/user') }}"> User </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/dosen') }}"> Dosen </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/matkul') }}"> Matakuliah </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/ruangan') }}"> Ruangan </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/jadwal') }}"> Jadwal </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/kelas') }}"> Kelas </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/ketentuan') }}"> Ketentuan </a></li>
                 </ul>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/praktikum') }}">
+              <a class="nav-link" href="{{ url('/admin/praktikum') }}">
                 <span class="menu-title">Praktikum</span>
                 <i class="mdi mdi-book menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/periode') }}">
+              <a class="nav-link" href="{{ url('/admin/periode') }}">
                 <span class="menu-title">Periode</span>
                 <i class="mdi mdi-av-timer menu-icon"></i>
               </a>
@@ -351,25 +356,25 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/') }}">
+              <a class="nav-link" href="{{ url('/mahasiswa/dashboard') }}">
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/daftar') }}">
+              <a class="nav-link" href="{{ url('/mahasiswa/daftar') }}">
                 <span class="menu-title">Daftar</span>
                 <i class=" mdi mdi-file-multiple menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/pengumuman') }}">
+              <a class="nav-link" href="{{ url('/mahasiswa/pengumuman') }}">
                 <span class="menu-title">Pengumuman</span>
                 <i class=" mdi mdi-format-list-bulleted menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/profil') }}">
+              <a class="nav-link" href="{{ url('/mahasiswa/profil') }}">
                 <span class="menu-title">Profil</span>
                 <i class="mdi mdi-account menu-icon"></i>
               </a>

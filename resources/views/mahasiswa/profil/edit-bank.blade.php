@@ -1,23 +1,27 @@
 @extends('layouts.master')
 
 @section('icon')
-<i class="mdi mdi-medical-bag menu-icon"></i>
+<i class="mdi mdi-account menu-icon"></i>
 @endsection
 
 @section('title')
-<a href="{{url('admin/master/ruangan')}}" style="color:black; text-decoration:none">Master Jadwal</a> / <a style="color:grey; text-decoration:none">Edit Ruangan</a>
+<a href="{{url('mahasiswa/profil')}}" style="color:black; text-decoration:none">Profil</a> / <a style="color:grey; text-decoration:none">Edit Data Diri</a>
 @endsection
 
 @push('css')
+<style type="text/css">
+    $custom-file-text: (
+in: "Cari",
+);
+</style>
 @endpush
-
 @section('content')
 
 <div class="row">
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Edit Data Ruangan</h4>
+                    <h4 class="card-title">Edit Data Bank</h4>
                     
                   @if (count($errors)>0)
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
@@ -30,21 +34,25 @@
                     </div>
                   @endif
 
-                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('admin/master/ruangan/update/'.$ruangans->id)}}">
+                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('mahasiswa/profil/update-data/'.$mahasiswas['id'])}}" enctype="multipart/form-data">
                     {{ csrf_field() }} 
                     {{ method_field('PUT') }}
                       <div class="form-group">
-                        <label for="id">ID</label>
-                        <input type="text" class="form-control" id="id" name="id" value="{{$ruangans->id}}" readonly>
+                        <label for="nama_bank">Nama Bank</label>
+                        <input type="text" class="form-control" id="nama_bank" name="nama_bank" value="{{$mahasiswas->nama_bank}}">
                       </div>
                       <div class="form-group">
-                        <label for="nama_ruangan">Nama Ruangan</label>
-                        <input type="text" class="form-control" id="nama_ruangan" name="nama_ruangan" value="{{$ruangans->nama_ruangan}}">
+                        <label for="no_rekening">No Rekening</label>
+                        <input type="text" class="form-control" id="no_rekening" name="no_rekening" value="{{$mahasiswas->no_rekening}}">
+                      </div>
+                      <div class="form-group">
+                        <label for="nama_rekening">Nama Rekening</label>
+                        <input type="nama_rekening" class="form-control" id="nama_rekening" name="nama_rekening" value="{{$mahasiswas->nama_rekening}}">
                       </div>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
                       <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">
-                      <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('admin/master/ruangan')}}'">Batal</button>
+                      <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('mahasiswa/profil')}}'">Batal</button>
                     </form>
                   </div>
                 </div>

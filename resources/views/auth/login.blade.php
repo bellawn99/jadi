@@ -26,7 +26,8 @@
             <div class="col-lg-4 mx-auto">
               <div class="auth-form-light text-left p-5">
                 <div class="brand-logo">
-                  <img src="{{url('assets/images/logo.svg')}}">
+                  <img src="{{url('assets/images/logo.svg')}}"><br><br>
+                  Silahkan login terlebih dahulu.
                 </div>
                 <form class="pt-3" method="POST" action="{{ route('login') }}">
                   @csrf

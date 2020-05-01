@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<a href="{{url('master/dosen')}}" style="color:black; text-decoration:none">Master Dosen</a> / <a style="color:grey; text-decoration:none">Edit Dosen</a>
+<a href="{{url('admin/master/dosen')}}" style="color:black; text-decoration:none">Master Dosen</a> / <a style="color:grey; text-decoration:none">Edit Dosen</a>
 @endsection
 
 @push('css')
@@ -30,7 +30,7 @@
                     </div>
                   @endif
 
-                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('master/dosen/update/'.$dosens->id)}}">
+                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('admin/master/dosen/update/'.$dosens->id)}}">
                     {{ csrf_field() }} 
                     {{ method_field('PUT') }}
                       <div class="form-group">
@@ -56,7 +56,7 @@
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
                       <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">
-                      <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('master/dosen')}}'">Batal</button>
+                      <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('admin/master/dosen')}}'">Batal</button>
                     </form>
                   </div>
                 </div>

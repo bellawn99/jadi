@@ -23,7 +23,7 @@ class DataKetentuanController extends Controller
     {
         Excel::import(new KetentuanImport, request()->file('file'));
         Session::flash('statuscode','success');
-            return redirect('master/ketentuan')->with('status','Berhasil menambahkan data ketentuan!');
+            return redirect('admin/master/ketentuan')->with('status','Berhasil menambahkan data ketentuan!');
     }
 
     public function store(Request $request){
@@ -42,7 +42,7 @@ class DataKetentuanController extends Controller
         $ketentuans->save();
         
         Session::flash('statuscode','success');
-        return redirect('master/ketentuan')->with('status', 'Berhasil Menambahkan Data Ketentuan');
+        return redirect('admin/master/ketentuan')->with('status', 'Berhasil Menambahkan Data Ketentuan');
     }
 
     public function edit(Request $request, $id)
@@ -66,7 +66,7 @@ class DataKetentuanController extends Controller
         $ketentuans->update();
 
         Session::flash('statuscode','success');
-        return redirect('master/ketentuan')->with('status','Data Ketentuan berhasil di ubah');
+        return redirect('admin/master/ketentuan')->with('status','Data Ketentuan berhasil di ubah');
     }
 
     public function delete($id){
@@ -75,7 +75,7 @@ class DataKetentuanController extends Controller
         $ketentuans->delete();
 
         Session::flash('statuscode','success');
-        return redirect('master/ketentuan')->with('status', 'Berhasil Hapus Ketentuan');
+        return redirect('admin/master/ketentuan')->with('status', 'Berhasil Hapus Ketentuan');
         
     }
 }

@@ -13,7 +13,7 @@ in: "Cari",
 @endsection
 
 @section('title')
-	<a href="{{url('master/user')}}" style="color:black; text-decoration:none">Master User</a>
+	<a href="{{url('admin/master/user')}}" style="color:black; text-decoration:none">Master User</a>
 @endsection
 
 @section('content')
@@ -64,7 +64,7 @@ in: "Cari",
                             <td>{{ $item->no_hp }}</td>
                             <td><a type="button" data-toggle="modal" data-target="#yourModal{{$item->id}}"><img src="{{ URL::to('/') }}/images/{{ $item->foto }}" class="img-thumbnail" width="100%" /></a></td>
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('master/user/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/master/user/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
                             <a class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
@@ -283,7 +283,7 @@ $(document).ready(function(){
         
         $('#deleteuserForm').val(data[2]+' ?');
         
-        $('#delete_modal').attr('action', '/master/user/delete/'+data[0]);
+        $('#delete_modal').attr('action', 'admin/master/user/delete/'+data[0]);
         $('#deletemodalpop').modal('show');
     });
 

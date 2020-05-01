@@ -8,7 +8,7 @@
 @endsection
 
 @section('title')
-	<a href="{{url('/periode')}}" style="color:black; text-decoration:none">Periode</a>
+	<a href="{{url('admin/periode')}}" style="color:black; text-decoration:none">Periode</a>
 @endsection
 
 @section('content')
@@ -52,7 +52,7 @@
                             <td>{{ $item->tgl_selesai }}</td>
                             <td>{{ $item->thn_ajaran }}</td>
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('periode/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/periode/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
                             <a class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
@@ -206,7 +206,7 @@ $(document).ready(function(){
         
         $('#deletePeriodeForm').val(data[1]+' ?');
         
-        $('#delete_modal').attr('action', '/periode/delete/'+data[0]);
+        $('#delete_modal').attr('action', 'admin/periode/delete/'+data[0]);
         $('#deletemodalpop').modal('show');
     });
 

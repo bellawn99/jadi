@@ -40,7 +40,7 @@ class DataUserController extends Controller
     {
         Excel::import(new CsvImport, request()->file('file'));
         Session::flash('statuscode','success');
-            return redirect('master/user')->with('status','Berhasil menambahkan data user!');
+            return redirect('admin/master/user')->with('status','Berhasil menambahkan data user!');
     }
 
     // public function getdata(){
@@ -53,7 +53,7 @@ class DataUserController extends Controller
 
         if($id == Auth()->user()->id){
             Session::flash('statuscode','error');
-            return redirect('master/user')->with('status','Tidak dapat mengubah diri sendiri!');
+            return redirect('admin/master/user')->with('status','Tidak dapat mengubah diri sendiri!');
         }
         else{
 
@@ -102,7 +102,7 @@ class DataUserController extends Controller
         $users->update();
 
         Session::flash('statuscode','success');
-        return redirect('master/user')->with('status','Data User berhasil di ubah');
+        return redirect('admin/master/user')->with('status','Data User berhasil di ubah');
     }
 
     public function store(Request $request){
@@ -139,7 +139,7 @@ class DataUserController extends Controller
         $users->save();
         
         Session::flash('statuscode','success');
-        return redirect('master/user')->with('status', 'Berhasil Menambahkan Data User');
+        return redirect('admin/master/user')->with('status', 'Berhasil Menambahkan Data User');
     }
 
     public function delete($id){
@@ -153,7 +153,7 @@ class DataUserController extends Controller
         $users->delete();
 
         Session::flash('statuscode','success');
-        return redirect('master/user')->with('status', 'Berhasil Hapus User');
+        return redirect('admin/master/user')->with('status', 'Berhasil Hapus User');
         }
     }
 }

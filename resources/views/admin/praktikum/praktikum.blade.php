@@ -8,7 +8,7 @@
 @endsection
 
 @section('title')
-	<a href="{{url('/praktikum')}}" style="color:black; text-decoration:none">Praktikum</a>
+	<a href="{{url('admin/praktikum')}}" style="color:black; text-decoration:none">Praktikum</a>
 @endsection
 
 @section('content')
@@ -59,7 +59,7 @@
                             <td>{{ $item->jam_akhir }}</td>
                             <td>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#yourModal{{$item->id}}" ><i class=" mdi mdi-eye "></i></button>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('praktikum/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/praktikum/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
                             <a class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
@@ -308,7 +308,7 @@ $(document).ready(function(){
         
         $('#deletePraktikumForm').val(data[1]+' ?');
         
-        $('#delete_modal').attr('action', '/praktikum/delete/'+data[0]);
+        $('#delete_modal').attr('action', 'admin/praktikum/delete/'+data[0]);
         $('#deletemodalpop').modal('show');
     });
     //start edit

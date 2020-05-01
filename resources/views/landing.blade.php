@@ -245,31 +245,39 @@
           </div>
           <div class="col-lg-7 mr-auto order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
             <h2 class="section-title mb-3">Hubungi Kami</h2>
-
-            <form method="post" data-aos="fade">
+            @if (count($errors)>0)
+                    <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
+                    @foreach($errors->all() as $error)
+                      <li>{{$error}}</li>
+                    @endforeach
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+            @endif
+            <form method="post" data-aos="fade" action="/">
+            {{csrf_field()}}
               <div class="form-group row">
-                <div class="col-md-6 mb-3 mb-lg-0">
-                  <input type="text" class="form-control" placeholder="First name">
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" placeholder="Last name">
+                <div class="col-md-12">
+                  <input type="text" name="nama" class="form-control" placeholder="Nama">
                 </div>
               </div>
 
               <div class="form-group row">
                 <div class="col-md-12">
-                  <input type="text" class="form-control" placeholder="Subject">
+                  <input type="email" name="email" class="form-control" placeholder="Email">
                 </div>
               </div>
 
               <div class="form-group row">
                 <div class="col-md-12">
-                  <input type="email" class="form-control" placeholder="Email">
+                  <input type="text" name="no_hp" class="form-control" placeholder="No Telepon">
                 </div>
               </div>
+
               <div class="form-group row">
                 <div class="col-md-12">
-                  <textarea class="form-control" id="" cols="30" rows="10" placeholder="Write your message here."></textarea>
+                  <textarea class="form-control" name="pesan" id="" cols="30" rows="10" placeholder="Tulis pesanmu disini."></textarea>
                 </div>
               </div>
 
@@ -328,6 +336,16 @@
   <script src="{{ url('landing/js/jquery-3.3.1.min.js')}}"></script>
   <script src="{{ url('landing/js/jquery-migrate-3.0.1.min.js')}}"></script>
   <script src="{{ url('landing/js/jquery-ui.js')}}"></script>
+  <script src="{{url('assets/js/sweetalert.min.js')}}"></script>
+    <script>
+      @if(session('status'))
+      swal({
+        title:'{{ session('status') }}',
+        icon : '{{ session('statuscode') }}',
+        button : "OK",
+      });
+      @endif
+    </script>
   <script src="{{ url('landing/js/popper.min.js')}}"></script>
   <script src="{{ url('landing/js/bootstrap.min.js')}}"></script>
   <script src="{{ url('landing/js/owl.carousel.min.js')}}"></script>
