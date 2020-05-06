@@ -58,7 +58,7 @@ class DataPraktikumController extends Controller
 
         if($a->count() > 0){
             Session::flash('statuscode','error');
-        return redirect('/praktikum')->with('status', 'Gagal Menambahkan Data Praktikum');
+        return redirect('admin/praktikum')->with('status', 'Gagal Menambahkan Data Praktikum');
         }else{
 
         $praktikums = new Praktikum;

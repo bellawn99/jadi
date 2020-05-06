@@ -60,7 +60,7 @@
                             <td>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#yourModal{{$item->id}}" ><i class=" mdi mdi-eye "></i></button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/praktikum/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
-                            <a class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
+                            <a data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" data-matkul="{{ $item->nama_matkul }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -218,7 +218,7 @@
       {{ csrf_field() }}
       {{ method_field('DELETE') }} 
       <div class="modal-body"> 
-      <p>Apakah anda yakin menghapus data praktikum <input style="border:0" id="deletePraktikumForm" readonly></input> </p>
+      <p>Apakah anda yakin menghapus data praktikum <input size="50" style="border:0" id="deletePraktikumForm" readonly></input> </p>
       
       </div>
       <div class="modal-footer">
@@ -298,6 +298,9 @@ $(document).ready(function(){
                       },
     });
     $('#tabel-user').on('click', '.deletebtn', function(){
+      var id = $(this).data('id');
+      var nama = $(this).data('nama');
+      var matkul = $(this).data('matkul');
       $tr = $(this).closest('tr');
 
         var data = $tr.children("td").map(function(){
@@ -306,9 +309,9 @@ $(document).ready(function(){
         
         console.log(data);
         
-        $('#deletePraktikumForm').val(data[1]+' ?');
+        $('#deletePraktikumForm').val(nama+' matakuliah '+matkul+' ?');
         
-        $('#delete_modal').attr('action', 'admin/praktikum/delete/'+data[0]);
+        $('#delete_modal').attr('action', 'praktikum/delete/'+id);
         $('#deletemodalpop').modal('show');
     });
     //start edit

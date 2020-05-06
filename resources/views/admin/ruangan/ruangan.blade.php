@@ -226,7 +226,7 @@ $(document).ready(function(){
         
         $('#deleteRuanganForm').val(data[1]+' ?');
         
-        $('#delete_modal').attr('action', 'admin/master/ruangan/delete/'+data[0]);
+        $('#delete_modal').attr('action', 'ruangan/delete/'+data[0]);
         $('#deletemodalpop').modal('show');
     });
 

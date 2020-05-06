@@ -53,7 +53,7 @@
                             <td>{{ $item->thn_ajaran }}</td>
                             <td>
                             <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/periode/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
-                            <a class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
+                            <a data-id="{{ $item->id }}" data-tgl_m="{{ $item->tgl_mulai }}" data-tgl_s="{{ $item->tgl_selesai }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -116,7 +116,7 @@
       {{ csrf_field() }}
       {{ method_field('DELETE') }} 
       <div class="modal-body"> 
-      <p>Apakah anda yakin menghapus data periode <input style="border:0" id="deletePeriodeForm" readonly></input> </p>
+      <p>Apakah anda yakin menghapus data periode <input size="50" style="border:0" id="deletePeriodeForm" readonly></input> </p>
       
       </div>
       <div class="modal-footer">
@@ -196,17 +196,18 @@ $(document).ready(function(){
                       },
     });
     $('#tabel-user').on('click', '.deletebtn', function(){
+      var id = $(this).data('id');
+      var tgl_m = $(this).data('tgl_m');
+      var tgl_s = $(this).data('tgl_s');
       $tr = $(this).closest('tr');
 
         var data = $tr.children("td").map(function(){
           return $(this).text();
         }).get();
         
-        console.log(data);
+        $('#deletePeriodeForm').val(tgl_m+' sampai '+tgl_s+' ?');
         
-        $('#deletePeriodeForm').val(data[1]+' ?');
-        
-        $('#delete_modal').attr('action', 'admin/periode/delete/'+data[0]);
+        $('#delete_modal').attr('action', 'periode/delete/'+id);
         $('#deletemodalpop').modal('show');
     });
 

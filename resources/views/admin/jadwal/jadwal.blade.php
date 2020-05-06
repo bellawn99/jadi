@@ -56,7 +56,7 @@
                             <td>{{ $item->jam_akhir }}</td>
                             <td>
                             <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/master/jadwal/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
-                            <a class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
+                            <a data-id="{{ $item->id }}" data-hari="{{ $item->hari }}" data-jam_m="{{ $item->jam_mulai }}" data-jam_a="{{ $item->jam_akhir }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -236,6 +236,10 @@ $(document).ready(function(){
                       },
     });
     $('#tabel-user').on('click', '.deletebtn', function(){
+      var id = $(this).data('id');
+      var hari = $(this).data('hari');
+      var jam_m = $(this).data('jam_m');
+      var jam_a = $(this).data('jam_a');
       $tr = $(this).closest('tr');
 
         var data = $tr.children("td").map(function(){
@@ -244,9 +248,9 @@ $(document).ready(function(){
         
         console.log(data);
         
-        $('#deleteJadwalForm').val(data[1]+' ?');
+        $('#deleteJadwalForm').val(hari+', '+jam_m+'-'+jam_a+' ?');
         
-        $('#delete_modal').attr('action', 'admin/master/jadwal/delete/'+data[0]);
+        $('#delete_modal').attr('action', 'jadwal/delete/'+id);
         $('#deletemodalpop').modal('show');
     });
 

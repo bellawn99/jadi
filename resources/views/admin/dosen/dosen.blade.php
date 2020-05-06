@@ -58,7 +58,7 @@
                             <td>{{ $item->alamat }}</td>
                             <td>
                             <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/master/dosen/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
-                            <a class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
+                            <a data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -232,6 +232,8 @@ $(document).ready(function(){
                       },
     });
     $('#tabel-user').on('click', '.deletebtn', function(){
+      var id = $(this).data('id');
+      var nama = $(this).data('nama');
       $tr = $(this).closest('tr');
 
         var data = $tr.children("td").map(function(){
@@ -240,10 +242,17 @@ $(document).ready(function(){
         
         console.log(data);
         
-        $('#deleteDosenForm').val(data[2]+' ?');
+        $('#deleteDosenForm').val(nama+' ?');
         
-        $('#delete_modal').attr('action', 'admin/master/dosen/delete/'+data[0]);
+        $('#delete_modal').attr('action', 'dosen/delete/'+id);
         $('#deletemodalpop').modal('show');
+    });
+
+    $('#kolomImportDosen').on('change',function(){
+                //get the file name
+                var fileName = $(this).val().split("\\").pop();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').addClass("selected").html(fileName);
     });
 
     //start edit
