@@ -8,14 +8,14 @@
 @endsection
 
 @section('title')
-	<a href="{{url('admin/master/kelas')}}" style="color:black; text-decoration:none">Master Kelas</a>
+	<a href="{{url('admin/master/semester')}}" style="color:black; text-decoration:none">Master Semester</a>
 @endsection
 
 @section('content')
 <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Tabel Kelas</h4>
+                    <h4 class="card-title">Tabel Semester</h4>
                     
                     @if (count($errors)>0)
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
@@ -29,10 +29,10 @@
                   @endif
 
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambahKelas">
-                    Tambah Data Kelas
+                    Tambah Data Semester
                     </button>
                     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#importKelas">
-                    Import Data Kelas
+                    Import Data Semester
                     </button><br><br>
 
                     
@@ -41,18 +41,18 @@
                       <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nama</th>    
+                            <th>Semester</th>    
                             <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          @foreach ($kelass as $item)
+                          @foreach ($semesters as $item)
                             <td>{{ $item->id }}</td>
-                            <td>{{ $item->nama }}</td>  
+                            <td>{{ $item->semester }}</td>  
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/master/kelas/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
-                            <a data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
+                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/master/semester/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <a data-id="{{ $item->id }}" data-semester="{{ $item->semester }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -68,18 +68,18 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Kelas</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Semester</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-      <form class="forms-sample" style="{margin:0 auto;}" data-toggle="validator" action="{{ route('store.kelas') }}" method="post">
+      <form class="forms-sample" style="{margin:0 auto;}" data-toggle="validator" action="{{ route('store.semester') }}" method="post">
                     {{csrf_field()}}
                     {{ method_field('POST') }}
                     <div class="form-group">
-                        <label for="nama">Nama</label>
-                        <input type="text" class="form-control" name="nama" placeholder="Nama" >
+                        <label for="semester">Semester</label>
+                        <input type="text" class="form-control" name="semester" placeholder="Semester" >
                       </div>
                     
       </div>
@@ -94,17 +94,17 @@
 <!-- End Add Modal -->
 
 <!-- Import Modal -->
-<div class="modal fade" id="importKelas" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="importSemester" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Kelas</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Semester</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-      <form action="{{ route('import.kelas') }}" method="POST" enctype="multipart/form-data">
+      <form action="{{ route('import.semester') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-12">
                     <input type="file" class="custom-file-input" name="file" accept=".csv" id="kolomImportKelas" lang="in">
@@ -126,7 +126,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Kelas</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Semester</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -135,7 +135,7 @@
       {{ csrf_field() }}
       {{ method_field('DELETE') }} 
       <div class="modal-body"> 
-      <p>Apakah anda yakin menghapus data kelas <input style="border:0" id="deleteKelasForm" readonly></input> </p>
+      <p>Apakah anda yakin menghapus data semester <input style="border:0" id="deleteSemesterForm" readonly></input> </p>
       
       </div>
       <div class="modal-footer">
@@ -216,7 +216,7 @@ $(document).ready(function(){
     });
     $('#tabel-user').on('click', '.deletebtn', function(){
       var id = $(this).data('id');
-      var nama = $(this).data('nama');
+      var semester = $(this).data('semester');
       $tr = $(this).closest('tr');
 
         var data = $tr.children("td").map(function(){
@@ -225,13 +225,13 @@ $(document).ready(function(){
         
         console.log(data);
         
-        $('#deleteKelasForm').val(nama+' ?');
+        $('#deleteSemesterForm').val(semester+' ?');
         
-        $('#delete_modal').attr('action', 'kelas/delete/'+id);
+        $('#delete_modal').attr('action', 'semester/delete/'+id);
         $('#deletemodalpop').modal('show');
     });
 
-    $('#kolomImportKelas').on('change',function(){
+    $('#kolomImportSemester').on('change',function(){
                 //get the file name
                 var fileName = $(this).val().split("\\").pop();
                 //replace the "Choose a file" label

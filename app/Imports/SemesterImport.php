@@ -2,14 +2,14 @@
 
 namespace App\Imports;
 
-use App\Kelas;
+use App\Semester;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
-class KelasImport implements ToCollection
+class SemesterImport implements ToCollection
 {
     /**
     * @param array $row
@@ -34,10 +34,10 @@ class KelasImport implements ToCollection
     public function collection(Collection $collection){
         foreach($collection as $key => $row){
             if($key>=1){
-                $b = 'K'.Carbon::now()->format('ymdHi').rand(100,999);
-                    Kelas::create([    
+                $b = 'S'.Carbon::now()->format('ymdHi').rand(100,999);
+                    Semester::create([    
                         'id' => $b,
-                        'nama' => $row[0]
+                        'semester' => $row[0]
                     ]);
             }
         }

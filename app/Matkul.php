@@ -19,7 +19,7 @@ class Matkul extends Model
 
     protected $casts = ['id' => 'string'];
 
-    public function kelas(){
+    public function praktikum(){
         return $this->belongsTo(Kelas::class);
     }
 }

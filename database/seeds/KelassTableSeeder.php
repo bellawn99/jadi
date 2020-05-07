@@ -18,13 +18,11 @@ class KelassTableSeeder extends Seeder
 
         Kelas::create([
             'id' => 'K'.Carbon::now()->format('ymdHi').rand(100,999),
-            'nama' => 'BB',
-            'semester' => 4
+            'nama' => 'BB'
         ]);
         Kelas::create([
             'id' => 'K'.Carbon::now()->format('ymdHi').rand(100,999),
-            'nama' => 'AB',
-            'semester' => 1
+            'nama' => 'AB'
             ]);
     }
 }

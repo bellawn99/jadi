@@ -88,19 +88,13 @@
                       </div>
                       <div class="form-group">
                         <label for="jam_mulai">Jam Mulai</label>
-                        <input type="text" class="form-control" name="jam_mulai" placeholder="Jam Mulai" >
+                        <input type="time" class="form-control" name="jam_mulai" placeholder="Jam Mulai" >
+                        <small>contoh : 08.00 AM</small>
                       </div>
                       <div class="form-group">
                         <label for="jam_akhir">Jam Akhir</label>
-                        <input type="text" class="form-control" name="jam_akhir" placeholder="Jam Akhir">
-                      </div>
-                      <div class="form-group">
-                        <label for="matkul_id">Nama Matakuliah</label>
-                        <select name='matkul_id' class='form-control'>
-                        @foreach ($jadwals as $value)
-                                <option value="{{ $value->nomor }}">{{ $value->nama_matkul }}</option>
-                        @endforeach
-                        </select>
+                        <input type="time" class="form-control" name="jam_akhir" placeholder="Jam Akhir">
+                        <small>contoh : 02.00 PM</small>
                       </div>
                     
       </div>

@@ -23,7 +23,7 @@ class DataDosenController extends Controller
     {
         Excel::import(new DosenImport, request()->file('file'));
         Session::flash('statuscode','success');
-            return redirect('admin/master/dosen')->with('status','Berhasil menambahkan data dosen!');
+            return redirect('admin/master/dosen')->with('status','Berhasil Menambahkan Data Dosen');
     }
 
     public function store(Request $request){
@@ -79,7 +79,7 @@ class DataDosenController extends Controller
         $dosens->update();
 
         Session::flash('statuscode','success');
-        return redirect('admin/master/dosen')->with('status','Data Dosen berhasil di ubah');
+        return redirect('admin/master/dosen')->with('status','Data Dosen Berhasil Diubah');
     }
 
     public function delete($id){

@@ -24,17 +24,23 @@ class DataKelasController extends Controller
     {
         Excel::import(new KelasImport, request()->file('file'));
         Session::flash('statuscode','success');
-            return redirect('admin/master/kelas')->with('status','Berhasil menambahkan data kelas!');
+            return redirect('admin/master/kelas')->with('status','Berhasil Menambahkan Data Kelas');
     }
 
     public function store(Request $request){
         $this->validate($request,[
-            'nama' => ['required', 'string', 'max:255'],
-            'semester' => 'required'
+            'nama' => ['required', 'string', 'max:255']
         ]);
 
     
-        
+        $a = Kelas::where(['nama'=>$request->nama])->get();
+
+        //return $a[1];
+
+        if($a->count() > 0){
+            Session::flash('statuscode','error');
+        return redirect('admin/master/kelas')->with('status', 'Gagal Menambahkan Data Kelas!');
+        }else{
         
 
         $kelass = new Kelas;
@@ -43,12 +49,12 @@ class DataKelasController extends Controller
 
         $kelass->id = $b;
         $kelass->nama = $request->input('nama');
-        $kelass->semester = $request->input('semester');
 
         $kelass->save();
         
         Session::flash('statuscode','success');
         return redirect('admin/master/kelas')->with('status', 'Berhasil Menambahkan Data Kelas');
+        }
     }
 
     public function edit(Request $request, $id)
@@ -61,20 +67,18 @@ class DataKelasController extends Controller
     {
 
         $this->validate($request,[
-            'nama' => ['required', 'string', 'max:255'],
-            'semester' => 'required'
+            'nama' => ['required', 'string', 'max:255']
             
         ]);
         
         $kelass = Kelas::find($id);
 
         $kelass->nama = $request->input('nama');
-        $kelass->semester = $request->input('semester');
 
         $kelass->update();
 
         Session::flash('statuscode','success');
-        return redirect('admin/master/kelas')->with('status','Data Kelas berhasil di ubah');
+        return redirect('admin/master/kelas')->with('status','Data Kelas berhasil Diubah');
     }
 
     public function delete($id){

@@ -69,7 +69,7 @@ class DataPeriodeController extends Controller
         $periodes->update();
 
         Session::flash('statuscode','success');
-        return redirect('admin/periode')->with('status','Data Periode berhasil di ubah');
+        return redirect('admin/periode')->with('status','Data Periode Berhasil Diubah');
     }
 
     public function delete($id){

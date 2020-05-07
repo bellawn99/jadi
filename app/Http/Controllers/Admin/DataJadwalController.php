@@ -23,7 +23,7 @@ class DataJadwalController extends Controller
     {
         Excel::import(new JadwalImport, request()->file('file'));
         Session::flash('statuscode','success');
-            return redirect('admin/master/jadwal')->with('status','Berhasil menambahkan data jadwal!');
+            return redirect('admin/master/jadwal')->with('status','Berhasil Menambahkan Data Jadwal');
     }
 
     public function store(Request $request){
@@ -34,7 +34,14 @@ class DataJadwalController extends Controller
         ]);
 
     
-        
+        $a = Jadwal::where(['hari'=>$request->hari,'jam_mulai'=>$request->jam_mulai,'jam_akhir'=>$request->jam_akhir])->get();
+
+        //return $a[1];
+
+        if($a->count() > 0){
+            Session::flash('statuscode','error');
+        return redirect('admin/master/jadwal')->with('status', 'Gagal Menambahkan Data Jadwal!');
+        }else{
         
 
         $jadwals = new Jadwal;
@@ -50,6 +57,7 @@ class DataJadwalController extends Controller
         
         Session::flash('statuscode','success');
         return redirect('admin/master/jadwal')->with('status', 'Berhasil Menambahkan Data Jadwal');
+        }
     }
 
     public function edit(Request $request, $id)
@@ -77,7 +85,7 @@ class DataJadwalController extends Controller
         $jadwals->update();
 
         Session::flash('statuscode','success');
-        return redirect('admin/master/jadwal')->with('status','Data Jadwal berhasil di ubah');
+        return redirect('admin/master/jadwal')->with('status','Data Jadwal Berhasil Diubah');
     }
 
     public function delete($id){

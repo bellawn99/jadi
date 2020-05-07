@@ -11,7 +11,7 @@ class Praktikum extends Model
     public $incrementing = true;
 
     protected $fillable = [
-        'id', 'ruangan_id','dosen_id','matkul_id','jadwal_id',
+        'id', 'ruangan_id','dosen_id','matkul_id','jadwal_id', 'semester_id'
     ];
 
     public $timestamps = false;
@@ -34,5 +34,9 @@ class Praktikum extends Model
 
     public function kelas(){
         return $this->hasMany(Kelas::class);
+    }
+
+    public function semester(){
+        return $this->hasMany(Semester::class);
     }
 }

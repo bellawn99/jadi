@@ -23,7 +23,7 @@ class DataRuanganController extends Controller
     {
         Excel::import(new RuanganImport, request()->file('file'));
         Session::flash('statuscode','success');
-            return redirect('admin/master/ruangan')->with('status','Berhasil menambahkan data ruangan!');
+            return redirect('admin/master/ruangan')->with('status','Berhasil Menambahkan Data Ruangan');
     }
 
     public function store(Request $request){
@@ -32,7 +32,14 @@ class DataRuanganController extends Controller
         ]);
 
     
-        
+        $a = Ruangan::where(['nama_ruangan'=>$request->nama_ruangan])->get();
+
+        //return $a[1];
+
+        if($a->count() > 0){
+            Session::flash('statuscode','error');
+        return redirect('admin/master/ruangan')->with('status', 'Gagal Menambahkan Data Ruangan');
+        }else{
         
 
         $ruangans = new Ruangan;
@@ -46,6 +53,7 @@ class DataRuanganController extends Controller
         
         Session::flash('statuscode','success');
         return redirect('admin/master/ruangan')->with('status', 'Berhasil Menambahkan Data Ruangan');
+        }
     }
 
     public function edit(Request $request, $id)
@@ -69,7 +77,7 @@ class DataRuanganController extends Controller
         $ruangans->update();
 
         Session::flash('statuscode','success');
-        return redirect('admin/master/ruangan')->with('status','Data Ruangan berhasil di ubah');
+        return redirect('admin/master/ruangan')->with('status','Data Ruangan Berhasil Diubah');
     }
 
     public function delete($id){

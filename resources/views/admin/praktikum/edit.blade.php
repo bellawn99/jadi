@@ -77,6 +77,14 @@
                         @endforeach
                         </select>
                       </div>
+                      <div class="form-group">
+                        <label for="semester_id">Semester</label>
+                        <select name='semester_id' class='form-control'>
+                        @foreach ($semesters as $value)
+                                <option value="{{ $value->id }}" {{ $idSemester->contains($value->id) ? 'selected' : '' }}>{{ $value->semester }}</option>
+                        @endforeach
+                        </select>
+                      </div>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
                       <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">

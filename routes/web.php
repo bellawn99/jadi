@@ -80,6 +80,16 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix'=> 'admin'], function()
             Route::post('/import','Admin\DataKelasController@csv_import')->name('import.kelas');
         });
 
+        //master semester
+        Route::group(['prefix' => '/semester'],function(){
+            Route::get('/', 'Admin\DataSemesterController@index');
+            Route::get('/edit/{id}', 'Admin\DataSemesterController@edit');
+            Route::put('/update/{id}', 'Admin\DataSemesterController@update');
+            Route::post('/', 'Admin\DataSemesterController@store')->name('store.semester');
+            Route::delete('/delete/{id}', 'Admin\DataSemesterController@delete');
+            Route::post('/import','Admin\DataSemesterController@csv_import')->name('import.semester');
+        });
+
         //master ketentuan
         Route::group(['prefix' => '/ketentuan'],function(){
             Route::get('/', 'Admin\DataKetentuanController@index');

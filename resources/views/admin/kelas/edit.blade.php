@@ -41,10 +41,6 @@
                         <label for="nama">Nama</label>
                         <input type="text" class="form-control" id="nama" name="nama" value="{{$kelass->nama}}">
                       </div>
-                      <div class="form-group">
-                        <label for="semester">Semester</label>
-                        <input type="text" class="form-control" id="semester" name="semester" value="{{$kelass->semester}}">
-                      </div>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
                       <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">

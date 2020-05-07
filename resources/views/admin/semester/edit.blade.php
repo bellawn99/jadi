@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<a href="{{url('admin/master/jadwal')}}" style="color:black; text-decoration:none">Master Jadwal</a> / <a style="color:grey; text-decoration:none">Edit Jadwal</a>
+<a href="{{url('admin/master/semester')}}" style="color:black; text-decoration:none">Master Semester</a> / <a style="color:grey; text-decoration:none">Edit Semester</a>
 @endsection
 
 @push('css')
@@ -17,7 +17,7 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Edit Data Jadwal</h4>
+                    <h4 class="card-title">Edit Data Semester</h4>
                     
                   @if (count($errors)>0)
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
@@ -30,31 +30,21 @@
                     </div>
                   @endif
 
-                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('admin/master/jadwal/update/'.$jadwals->id)}}">
+                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('admin/master/semester/update/'.$semesters->id)}}">
                     {{ csrf_field() }} 
                     {{ method_field('PUT') }}
                       <div class="form-group">
                         <label for="id">ID</label>
-                        <input type="text" class="form-control" id="id" name="id" value="{{$jadwals->id}}" readonly>
+                        <input type="text" class="form-control" id="id" name="id" value="{{$semesters->id}}" readonly>
                       </div>
                       <div class="form-group">
-                        <label for="hari">Hari</label>
-                        <input type="text" class="form-control" id="hari" name="hari" value="{{$jadwals->hari}}">
-                      </div>
-                      <div class="form-group">
-                        <label for="jam_mulai">Jam Mulai</label>
-                        <input type="time" class="form-control" id="jam_mulai" name="jam_mulai" value="{{$jadwals->jam_mulai}}">
-                        <small>contoh : 08.00 AM</small>
-                      </div>
-                      <div class="form-group">
-                        <label for="jam_akhir">Jam Akhir</label>
-                        <input type="time" class="form-control" id="jam_akhir" name="jam_akhir" value="{{$jadwals->jam_akhir}}">
-                        <small>contoh : 02.00 PM</small>
+                        <label for="semester">Semester</label>
+                        <input type="text" class="form-control" id="semester" name="semester" value="{{$semesters->semester}}">
                       </div>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
                       <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">
-                      <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('admin/master/jadwal')}}'">Batal</button>
+                      <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('admin/master/semester')}}'">Batal</button>
                     </form>
                   </div>
                 </div>

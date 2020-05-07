@@ -192,6 +192,14 @@
                         @endforeach
                         </select>
                       </div>
+                      <div class="form-group">
+                        <label for="semester_id">Semester</label>
+                        <select name='semester_id' class='form-control'>
+                        @foreach ($semesters as $value)
+                                <option value="{{ $value->id }}">{{ $value->semester }}</option>
+                        @endforeach
+                        </select>
+                      </div>
                     
       </div>
       <div class="modal-footer">

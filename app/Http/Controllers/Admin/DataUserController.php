@@ -146,7 +146,7 @@ class DataUserController extends Controller
 
         if($id == Auth()->user()->id){
             Session::flash('statuscode','error');
-            return redirect('master/user')->with('status','Tidak dapat menghapus diri sendiri!');
+            return redirect('admin/master/user')->with('status','Tidak dapat menghapus diri sendiri!');
         }
         else{
         $users = User::findOrFail($id);

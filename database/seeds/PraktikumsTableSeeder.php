@@ -7,6 +7,7 @@ use App\Jadwal;
 use App\Ruangan;
 use App\Praktikum;
 use App\Kelas;
+use App\Semester;
 use Carbon\Carbon;
 
 class PraktikumsTableSeeder extends Seeder
@@ -34,13 +35,17 @@ class PraktikumsTableSeeder extends Seeder
         $i = Kelas::select('id')->where('nama','BB')->get()->first();
         $j = Kelas::select('id')->where('nama','AB')->get()->first();
 
+        $k = Semester::select('id')->where('semester',1)->get()->first();
+        $l = Semester::select('id')->where('semester',2)->get()->first();
+
         Praktikum::create([
             'id' => 1,
             'dosen_id' => $a->id,
             'matkul_id' => $c->id,
             'jadwal_id' => $e->id,
             'ruangan_id' => $g->id,
-            'kelas_id' => $i->id
+            'kelas_id' => $i->id,
+            'semester_id' => $k->id
         ]);
         Praktikum::create([
             'id' => 2,
@@ -48,7 +53,8 @@ class PraktikumsTableSeeder extends Seeder
             'matkul_id' => $d->id,
             'jadwal_id' => $f->id,
             'ruangan_id' => $h->id,
-            'kelas_id' => $j->id
+            'kelas_id' => $j->id,
+            'semester_id' => $l->id
             ]);
     }
 }

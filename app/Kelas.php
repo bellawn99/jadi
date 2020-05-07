@@ -18,7 +18,7 @@ class Kelas extends Model
 
     public $timestamps = false;
 
-    public function kelas(){
+    public function praktikum(){
         return $this->belongsTo(Jadwal::class);
     }
 }

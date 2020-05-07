@@ -20,12 +20,14 @@ class CreatePraktikumsTable extends Migration
             $table->string('jadwal_id',20)->nullable();
             $table->string('ruangan_id',20)->nullable();
             $table->string('kelas_id',20)->nullable();
+            $table->string('semester_id',20)->nullable();
             $table->timestamps();
             $table->foreign('dosen_id')->references('id')->on('dosen');
             $table->foreign('matkul_id')->references('id')->on('matkul');
             $table->foreign('jadwal_id')->references('id')->on('jadwal');
             $table->foreign('ruangan_id')->references('id')->on('ruangan');
             $table->foreign('kelas_id')->references('id')->on('kelas');
+            $table->foreign('semester_id')->references('id')->on('semester');
         });
     }
 

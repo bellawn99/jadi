@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Jadwal extends Model
+class Semester extends Model
 {
-    protected $table = 'jadwal';
-    public $incrementing = false;
+    protected $table = 'semester';
     protected $primaryKey='id';
+    public $incrementing = false;
 
     protected $fillable = [
-        'id', 'hari', 'jam_mulai', 'jam_akhir',
+        'id', 'semester',
     ];
 
     protected $casts = ['id' => 'string'];

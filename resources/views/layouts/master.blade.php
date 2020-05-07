@@ -326,6 +326,7 @@
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/ruangan') }}"> Ruangan </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/jadwal') }}"> Jadwal </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/kelas') }}"> Kelas </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/semester') }}"> Semester </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/ketentuan') }}"> Ketentuan </a></li>
                 </ul>
               </div>

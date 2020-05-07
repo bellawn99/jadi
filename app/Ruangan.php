@@ -17,4 +17,8 @@ class Ruangan extends Model
     protected $casts = ['id' => 'string'];
 
     public $timestamps = false;
+
+    public function praktikum(){
+        return $this->belongsTo(Kelas::class);
+    }
 }
