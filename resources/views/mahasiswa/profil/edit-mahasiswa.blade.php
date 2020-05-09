@@ -37,17 +37,9 @@ in: "Cari",
                     <form class="forms-sample" method="post" data-toggle="validator" action="{{url('mahasiswa/profil/update-mahasiswa/'.$mahasiswas['id'])}}" enctype="multipart/form-data">
                     {{ csrf_field() }} 
                     {{ method_field('PUT') }}
-                    @if($mahasiswas->status === 'Mahasiswa')
                       <div class="form-group">
                         <label for="prodi">Program Studi</label>
                         <input type="text" class="form-control" id="prodi" name="prodi" value="{{$mahasiswas->prodi}}">
-                      </div>
-                      <div class="form-group">
-                        <label for="status">Status</label>
-                        <select name="status" class="form-control">
-                                <option value="Mahasiswa" @if($mahasiswas->status == "Mahasiswa") selected @endif>Mahasiswa</option>
-                                <option value="Lulus" @if($mahasiswas->status == "Lulus") selected @endif>Lulus</option>
-                            </select>
                       </div>
                       <div class="form-group">
                         <label for="semester">Semester</label>
@@ -58,20 +50,7 @@ in: "Cari",
                           <input type="file" class="custom-file-input" name="krs" id="kolomEditKrs" lang="in" value="{{ $mahasiswas->krs }}">
                           <label class="custom-file-label" for="kolomEditFoto" data-browse="Cari" value="{{$mahasiswas->krs}}">{{$mahasiswas->krs}}</label>                         
                         </div>
-                      </div>
-                      @else
-                      <div class="form-group">
-                        <label for="status">Status</label>
-                        <select name="status" class="form-control">
-                                <option value="Mahasiswa" @if($mahasiswas->status == "Mahasiswa") selected @endif>Mahasiswa</option>
-                                <option value="Lulus" @if($mahasiswas->status == "Lulus") selected @endif>Lulus</option>
-                            </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="thn_lulus">Tahun Lulus</label>
-                        <input type="thn_lulus" class="form-control" id="thn_lulus" name="thn_lulus" value="{{$mahasiswas->thn_lulus}}">
-                      </div>
-                      @endif
+                      </div>                      
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
                       <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">

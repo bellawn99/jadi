@@ -21,13 +21,11 @@ class ProfilController extends Controller
     public function index()
     {
         $profils = User::leftJoin('mahasiswa','mahasiswa.user_id','=','user.id')
-        ->select('mahasiswa.id as mhs_id','mahasiswa.nik','mahasiswa.npwp','mahasiswa.jk','mahasiswa.alamat','mahasiswa.tempat','mahasiswa.nim','mahasiswa.tgl_lahir','mahasiswa.prodi','mahasiswa.status','mahasiswa.krs','mahasiswa.semester','mahasiswa.thn_lulus','mahasiswa.nama_bank','mahasiswa.no_rekening','mahasiswa.nama_rekening','user.id','user.nama','user.username','user.password','user.no_hp','user.foto')
+        ->select('user.username','mahasiswa.id as mhs_id','mahasiswa.nik','mahasiswa.npwp','mahasiswa.jk','mahasiswa.alamat','mahasiswa.tempat','mahasiswa.nim','mahasiswa.tgl_lahir','mahasiswa.prodi','mahasiswa.krs','mahasiswa.semester','mahasiswa.nama_bank','mahasiswa.no_rekening','mahasiswa.nama_rekening','user.id','user.nama','user.username','user.password','user.no_hp','user.foto')
         ->where('mahasiswa.user_id',Auth::user()->id)
         ->get();
-
-        $cek = Mahasiswa::select('status')->where('user_id',Auth::user()->id)->first();
         
-        return view('mahasiswa.profil.profil',compact('profils','cek'));
+        return view('mahasiswa.profil.profil',compact('profils'));
     }
 
     public function editFoto(Request $request, $id)
@@ -145,14 +143,9 @@ class ProfilController extends Controller
 
     public function updateMahasiswa(Request $request, $id)
     {
-
-        $cek = Mahasiswa::select('status')->where('user_id',Auth::user()->id)->first();
-
-        if($cek->status === 'Mahasiswa'){
             $this->validate($request,[
                 'prodi' => 'required',
                 'krs' => 'required:pdf',
-                'status' => 'required',
                 'semester' => 'required',
             ]);
 
@@ -165,28 +158,12 @@ class ProfilController extends Controller
 
             $mahasiswas->prodi = $request->prodi;
             $mahasiswas->krs = $new_name;
-            $mahasiswas->status = $request->status;
             $mahasiswas->semester = $request->semester;
 
             $mahasiswas->update();
 
             Session::flash('statuscode','success');
             return redirect('mahasiswa/profil')->with('status','Data mahasiswa berhasil di ubah');
-        }else{
-            $this->validate($request,[
-                'status' => 'required',
-                'thn_lulus' => 'required',
-            ]);
-            $mahasiswas = Mahasiswa::find($id);
-
-            $mahasiswas->status = $request->status;
-            $mahasiswas->thn_lulus = $request->thn_lulus;
-
-            $mahasiswas->update();
-
-            Session::flash('statuscode','success');
-            return redirect('mahasiswa/profil')->with('status','Data mahasiswa berhasil di ubah');
-        }
     }
 
 }

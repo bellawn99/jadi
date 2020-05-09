@@ -279,9 +279,15 @@
                 </div>
               </a>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+              @if (Auth::user()->role_id == 1)
                 <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-cached mr-2 text-success"></i> Activity Log </a>
+                  <i class="mdi mdi-lock-open mr-2 text-success"></i> Ubah Password </a>
                 <div class="dropdown-divider"></div>
+              @else
+                <a class="dropdown-item" href="{{ url('mahasiswa/ubah-password') }}">
+                  <i class="mdi mdi-lock-open mr-2 text-success"></i> Ubah Password </a>
+                <div class="dropdown-divider"></div>
+              @endif
                 <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">

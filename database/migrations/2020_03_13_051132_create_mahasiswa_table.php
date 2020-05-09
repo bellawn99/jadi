@@ -24,10 +24,8 @@ class CreateMahasiswaTable extends Migration
             $table->date('tgl_lahir')->nullable();
             $table->string('alamat')->nullable();
             $table->string('prodi')->nullable();
-            $table->enum('status',['Mahasiswa','Lulus'])->nullable();
             $table->string('krs')->nullable();
             $table->integer('semester')->nullable();
-            $table->string('thn_lulus')->nullable();
             $table->string('nama_bank')->nullable();
             $table->string('no_rekening')->unique()->nullable();
             $table->string('nama_rekening')->nullable();

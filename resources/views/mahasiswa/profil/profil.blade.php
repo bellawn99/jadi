@@ -1,6 +1,51 @@
 @extends('layouts.master')
 
 @push('css')
+<style>
+
+
+
+h3 > span {
+    border-bottom: 2px solid #C2C2C2;
+    display: inline-block;
+    padding: 0 5px 5px;
+}
+
+/* USER PROFILE */
+
+#user-profile .profile-user-info {
+	padding-bottom: auto;
+}
+#user-profile .profile-user-info .profile-user-details {
+	position: relative;
+	padding: 4px 0;
+}
+#user-profile .profile-user-info .profile-user-details .profile-user-details-label {
+	width: auto;
+	float: left;
+	bottom: 0;
+	font-weight: bold;
+	left: 0;
+	text-align: right;
+	top: 0;
+	padding-top: 4px 0;
+}
+#user-profile .profile-user-info .profile-user-details .profile-user-details-value {
+	margin-left: 50%;
+}
+@media only screen and (max-width: 767px) {
+	#user-profile .profile-user-info .profile-user-details .profile-user-details-label {
+		float: none;
+		position: relative;
+		text-align: left;
+	}
+	#user-profile .profile-user-info .profile-user-details .profile-user-details-value {
+		margin-left: 0;
+	}
+}
+
+
+</style>
 @endpush
 
 @section('icon')
@@ -27,144 +72,220 @@
                       </button>
                     </div>
                   @endif
-                    <div class="row">
-                    <div class="col-md-3 grid-margin">
-                        <div class="text-center">
-                    @foreach($profils as $item)
-                    <img style="margin-left:auto;margin-right:auto;" class="img-responsive img-circle avatar-view" src="{{asset('images/'.$item->foto.'')}}" alt="Avatar" title="Change the avatar">
-                    <br><br><a href="{{url('mahasiswa/profil/edit-foto/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Edit Foto</a>
-                    @endforeach
-                    </div>
-                        </div>
-                    <div class="col-md-9 grid-margin stretch-card">                
-                    <div class="table-responsive">
-                    <table class="table table-hover" width="100%">
-                      <thead>
-                        <tr>
-                        @foreach ($profils as $item)
-                            <td>Nama</td>
-                            <td>{{ $item->nama }}</td>  
-                        </tr>
-                        <tr>
-                            <td>NIM</td>
-                            <td>{{ $item->nim }}</td>
-                        </tr>  
-                        <tr>
-                            <td>No Telepon</td>
-                            <td>{{ $item->no_hp }}</td>
-                        </tr>
-                        <tr>
-                            <td>Jenis Kelamin</td>
-                            <td>
-                            @if($item->jk == 'P')    
-                            Perempuan
-                            @else
-                            Laki-laki
-                            @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>NIK</td>
-                            <td>{{ $item->nik }}</td>
-                        </tr>
-                        <tr>
-                            <td>NPWP</td>
-                            <td>{{ $item->npwp }}</td>
-                        </tr>  
-                        <tr>
-                            <td>Tempat Lahir</td>
-                            <td>{{ $item->tempat }}</td>
-                        </tr>
-                        <tr>
-                            <td>Tanggal Lahir</td>
-                            <td>{{ $item->tgl_lahir }}</td>
-                        </tr>
-                        <tr>
-                            <td>Alamat</td>
-                            <td>{{ $item->alamat }}</td>
-                        </tr>
-                        @endforeach
-                      </thead>
-                    </table>
-                    <div class="text-center">
-                    <a href="{{url('mahasiswa/profil/edit-data/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Edit Data Diri</a>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    <div class="row"><div class="col-md-6 grid-margin stretch-card">                
-                    <div class="table-responsive">
-                        <h4 class="card-title">Data Mahasiswa</h4>
-                    <table class="table table-hover" width="100%">
-                      <thead>
-                        @if($cek->status === 'Mahasiswa')
-                        <tr>
-                        @foreach ($profils as $item)
-                            <td width="10%">Program Studi</td>
-                            <td>{{ $item->prodi }}</td>  
-                        </tr>
-                        <tr>
-                            <td>Status</td>
-                            <td>{{ $item->status }}</td>
-                        </tr> 
-                        <tr>
-                            <td>Semester</td>
-                            <td>{{ $item->semester }}</td>
-                        </tr>  
-                        <tr>
-                            <td>Kartu Rencana Studi</td>
-                            <td>{{ $item->krs }}</td>
-                        </tr>
-                        @endforeach
-                        @else
-                        <tr>
-                        @foreach ($profils as $item)
-                            <td>Status</td>
-                            <td>{{ $item->status }}</td>
-                        </tr>    
-                        <tr>
-                            <td>Tahun Lulus</td>
-                            <td>{{ $item->thn_lulus }}</td>
-                        </tr>
-                        @endforeach
-                        @endif
-                      </thead>
-                    </table>
-                    <div class="text-center">
-                    <a href="{{url('mahasiswa/profil/edit-mahasiswa/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Edit Data Mahasiswa</a>
-                    </div>
-                    </div>
-                    </div>
-                    <div class="col-md-6 grid-margin stretch-card">                
-                    <div class="table-responsive">
-                        <h4 class="card-title">Data Bank</h4>
-                    <table class="table table-hover" width="100%">
-                      <thead>
-                        <tr>
-                        @foreach ($profils as $item)
-                            <td width="10%">Nama Bank</td>
-                            <td>{{ $item->nama_bank }}</td>  
-                        </tr>
-                        <tr>
-                            <td>Nomor Rekening</td>
-                            <td>{{ $item->no_rekening }}</td>
-                        </tr> 
-                        <tr>
-                            <td>Nama Rekening</td>
-                            <td>{{ $item->nama_rekening }}</td>
-                        </tr>   
                         
-                      </thead>
-                    </table>
+
+                  
+            <div class="bootstrap snippets">
+                <div class="row" id="user-profile">
+                    <div class="col-lg-3 col-md-4 col-sm-4">
                     <div class="text-center">
-                    <a href="{{url('mahasiswa/profil/edit-bank/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Edit Data Bank</a>
-                    @endforeach    
+                          @foreach($profils as $item)
+                                <img style="margin-left:auto;margin-right:auto;" class="img-responsive img-circle avatar-view" src="{{asset('images/'.$item->foto.'')}}" alt="Avatar" title="Change the avatar">
+                                <br><br>
+                            <div class="profile-message-btn center-block text-center">
+                            <a href="{{url('mahasiswa/profil/edit-foto/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Edit Foto</a>
+                          @endforeach
+                            </div>
+                    </div>
+                    </div>
+
+                    <div class="col-lg-9 col-md-8 col-sm-8">
+                        <div class="main-box clearfix">
+                            <div class="row profile-user-info">
+                                <div class="col-sm-9">
+                                @foreach ($profils as $item)
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            Username 
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->username }}
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            Nama 
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->nama }}
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            Nomor Induk Mahasiswa
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->nim }}
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            No Telepon
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->no_hp }}
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            Jenis Kelamin
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            @if($item->jk == 'P')    
+                                            Perempuan
+                                            @else
+                                            Laki-laki
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            Nomor Induk Kependudukan
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->nik }}
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            NPWP
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->npwp }}
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            Tampat Lahir
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->tempat }}
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            Tanggal Lahir
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->tgl_lahir }}
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            Alamat
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->alamat }}
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    <div class="text-center">
+                                    <a href="{{url('mahasiswa/profil/edit-data/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Edit Data Diri</a>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+
+                            
+
+                        </div>
+                    </div>
+                    
                 </div>
+            </div>
+
+            <div class="bootstrap snippets">
+                <div class="row" id="user-profile">
+                    <div class="col-lg-6 col-md-5 col-sm-5">
+                    <h4 class="card-title">Data Mahasiswa</h4>
+                        <div class="main-box clearfix">
+                            <div class="row profile-user-info">
+                                <div class="col-sm-9">
+                                @foreach ($profils as $item)
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            Program Studi
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->prodi }}
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            Semester
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->semester }}
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            Kartu Rencana Studi
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->krs }}
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    <div class="text-center">
+                                    <a href="{{url('mahasiswa/profil/edit-mahasiswa/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Edit Data Mahasiswa</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+
+                            
+
+                        </div>
                     </div>
+                    <div class="col-lg-6 col-md-5 col-sm-5">
+                    <h4 class="card-title">Data Bank</h4>
+                        <div class="main-box clearfix">
+                            <div class="row profile-user-info">
+                                <div class="col-sm-9">
+                                @foreach ($profils as $item)
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            Nama Bank
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->nama_bank }}
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            Nomor Rekening
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->no_rekening }}
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
+                                            Nama Rekening
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->nama_rekening }}
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    <div class="text-center">
+                                    <a href="{{url('mahasiswa/profil/edit-bank/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Edit Data Bank</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+
+                        </div>
                     </div>
-                    </div>
-                  </div>
                 </div>
+            </div>
+
+
+              </div>
+              </div>
               </div>
 
 @endsection

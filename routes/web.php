@@ -132,5 +132,11 @@ Route::group(['middleware' => ['auth', 'mahasiswa'], 'prefix'=> 'mahasiswa'], fu
         Route::get('/edit-mahasiswa/{id}', 'Mahasiswa\ProfilController@editMahasiswa');
         Route::put('/update-mahasiswa/{id}', 'Mahasiswa\ProfilController@updateMahasiswa');
     });
+
+    //ubah-password
+    Route::group(['prefix' => 'ubah-password'],function(){
+        Route::get('/', 'Mahasiswa\UbahPasswordController@index');
+        Route::put('/', 'Mahasiswa\UbahPasswordController@changePassword')->name('changePassword');
+    });
 });
 
