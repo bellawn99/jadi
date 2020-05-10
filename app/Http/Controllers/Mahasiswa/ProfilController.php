@@ -99,7 +99,11 @@ class ProfilController extends Controller
             if($mahasiswas->update()){
                 $users = User::find($id);
                 $users = User::where('id',$id)->first();
-                $users->username = substr ($request->input('nim'), 3, 6);
+                if(strcmp($request->get('nim'), $request->get('username')) == 0){
+                    $users->username = $request->input('nim');
+                }else{
+                    $users->username = substr ($request->input('nim'), 3, 6);
+                }
                 $users->update();
 
                 Session::flash('statuscode','success');

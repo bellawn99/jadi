@@ -87,7 +87,11 @@ class ProfilController extends Controller
             if($admins->update()){
                 $users = User::find($id);
                 $users = User::where('id',$id)->first();
-                $users->username = substr ($request->input('nip'), 0, 6);
+                if(strcmp($request->get('nip'), $request->get('username')) == 0){
+                    $users->username = $request->input('nip');
+                }else{
+                    $users->username = substr ($request->input('nip'), 0, 6);
+                }
                 $users->update();
 
                 Session::flash('statuscode','success');
