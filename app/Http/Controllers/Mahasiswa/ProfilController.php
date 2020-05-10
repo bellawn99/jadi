@@ -80,7 +80,7 @@ class ProfilController extends Controller
         ]);
 
         $users = User::find($id);
-        $user = User::where('id',$id)->first();
+        $users = User::where('id',$id)->first();
         $users->nama = $request->input('nama');
         $users->no_hp = $request->input('no_hp');
 
@@ -94,10 +94,19 @@ class ProfilController extends Controller
             $mahasiswas->tempat = $request->input('tempat');
             $mahasiswas->tgl_lahir = $request->input('tgl_lahir');
             $mahasiswas->alamat = $request->input('alamat');
-            $mahasiswas->update();
+            
 
-            Session::flash('statuscode','success');
-        return redirect('mahasiswa/profil')->with('status','Data diri berhasil di ubah');
+            if($mahasiswas->update()){
+                $users = User::find($id);
+                $users = User::where('id',$id)->first();
+                $users->username = substr ($request->input('nim'), 3, 6);
+                $users->update();
+
+                Session::flash('statuscode','success');
+                return redirect('mahasiswa/profil')->with('status','Data diri berhasil di ubah');
+            }
+
+            
         }
 
         Session::flash('statuscode','error');

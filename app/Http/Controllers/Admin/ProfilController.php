@@ -75,18 +75,24 @@ class ProfilController extends Controller
         ]);
 
         $users = User::find($id);
-        $user = User::where('id',$id)->first();
+        $users = User::where('id',$id)->first();
         $users->nama = $request->input('nama');
         $users->no_hp = $request->input('no_hp');
 
         if($users->update()){
-            $mahasiswas = Admin::find($id);
-            $mahasiswas = Admin::where('user_id',$id)->first();
-            $mahasiswas->nip = $request->input('nip');
-            $mahasiswas->update();
+            $admins = Admin::find($id);
+            $admins = Admin::where('user_id',$id)->first();
+            $admins->nip = $request->input('nip');
 
-            Session::flash('statuscode','success');
-        return redirect('admin/profil')->with('status','Data diri berhasil di ubah');
+            if($admins->update()){
+                $users = User::find($id);
+                $users = User::where('id',$id)->first();
+                $users->username = substr ($request->input('nip'), 0, 6);
+                $users->update();
+
+                Session::flash('statuscode','success');
+                return redirect('admin/profil')->with('status','Data diri berhasil di ubah');
+            }
         }
 
         Session::flash('statuscode','error');
