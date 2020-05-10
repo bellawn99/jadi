@@ -116,6 +116,12 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix'=> 'admin'], function()
         Route::post('/', 'Admin\DataPeriodeController@store')->name('store.periode');
         Route::delete('/delete/{id}', 'Admin\DataPeriodeController@delete');
     });
+
+    //ubah-password
+    Route::group(['prefix' => 'ubah-password'],function(){
+        Route::get('/', 'Admin\UbahPasswordController@index');
+        Route::put('/', 'Admin\UbahPasswordController@changePassword')->name('changePasswordAdmin');
+    });
 });
 
 Route::group(['middleware' => ['auth', 'mahasiswa'], 'prefix'=> 'mahasiswa'], function() {

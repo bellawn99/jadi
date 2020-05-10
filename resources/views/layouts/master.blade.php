@@ -280,7 +280,7 @@
               </a>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
               @if (Auth::user()->role_id == 1)
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ url('admin/ubah-password') }}">
                   <i class="mdi mdi-lock-open mr-2 text-success"></i> Ubah Password </a>
                 <div class="dropdown-divider"></div>
               @else
