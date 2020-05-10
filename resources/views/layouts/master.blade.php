@@ -319,6 +319,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="pages/icons/mdi.html">
+                <span class="menu-title">Pengajuan</span>
+                <i class="mdi mdi-file-multiple menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
                 <span class="menu-title">Master Data</span>
                 <i class="menu-arrow"></i>
@@ -350,9 +356,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/icons/mdi.html">
-                <span class="menu-title">Pengajuan</span>
-                <i class="mdi mdi-file-multiple menu-icon"></i>
+              <a class="nav-link" href="{{ url('/admin/profil') }}">
+                <span class="menu-title">Profil</span>
+                <i class="mdi mdi-account menu-icon"></i>
               </a>
             </li>
             

@@ -32,7 +32,7 @@ in: "Cari",
                     </div>
                   @endif
 
-                    <form class="forms-sample" method="post" data-toggle="validator" action="{{ route('changePassword') }}">
+                    <form class="forms-sample" method="post" data-toggle="validator" action="{{ route('changePasswordAdmin') }}">
                     {{ method_field('PUT') }}
                     {{ csrf_field() }} 
                       <div class="form-group">

@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<a href="{{url('mahasiswa/profil')}}" style="color:black; text-decoration:none">Profil</a> / <a style="color:grey; text-decoration:none">Edit Data Diri</a>
+<a href="{{url('admin/profil')}}" style="color:black; text-decoration:none">Profil</a> / <a style="color:grey; text-decoration:none">Edit Data Diri</a>
 @endsection
 
 @push('css')
@@ -34,7 +34,7 @@ in: "Cari",
                     </div>
                   @endif
 
-                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('mahasiswa/profil/update-data/'.Auth::user()->id)}}" enctype="multipart/form-data">
+                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('admin/profil/update-data/'.Auth::user()->id)}}" enctype="multipart/form-data">
                     {{ csrf_field() }} 
                     {{ method_field('PUT') }}
                       <div class="form-group">
@@ -46,44 +46,17 @@ in: "Cari",
                         <input type="text" class="form-control" id="nama" name="nama" value="{{$users->nama}}">
                       </div>
                       <div class="form-group">
-                        <label for="nim">NIM</label>
-                        <input type="text" class="form-control" id="nim" name="nim" value="{{$mahasiswas->nim}}">
+                        <label for="nip">NIP</label>
+                        <input type="text" class="form-control" id="nip" name="nip" value="{{$admins->nip}}">
                       </div>
                       <div class="form-group">
                         <label for="no_hp">No Telepon</label>
                         <input type="text" class="form-control" id="no_hp" name="no_hp" value="{{$users->no_hp}}">
                       </div>
-                      <div class="form-group">
-                        <label for="jk">Jenis Kelamin</label>
-                        <select name="jk" class="form-control">
-                                <option value="P" @if($mahasiswas->jk == "P") selected @endif>Perempuan</option>
-                                <option value="L" @if($mahasiswas->jk == "L") selected @endif>Laki-laki</option>
-                            </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="nik">NIK</label>
-                        <input type="text" class="form-control" id="nik" name="nik" value="{{$mahasiswas->nik}}">
-                      </div>
-                      <div class="form-group">
-                        <label for="npwp">NPWP</label>
-                        <input type="text" class="form-control" id="npwp" name="npwp" value="{{$mahasiswas->npwp}}">
-                      </div>
-                      <div class="form-group">
-                        <label for="tempat">Tempat Lahir</label>
-                        <input type="text" class="form-control" id="tempat" name="tempat" value="{{$mahasiswas->tempat}}">
-                      </div>
-                      <div class="form-group">
-                        <label for="tgl_lahir">Tanggal Lahir</label>
-                        <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="{{$mahasiswas->tgl_lahir}}">
-                      </div>
-                      <div class="form-group">
-                        <label for="alamat">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" value="{{$mahasiswas->alamat}}">
-                      </div>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
                       <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">
-                      <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('mahasiswa/profil')}}'">Batal</button>
+                      <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('admin/profil')}}'">Batal</button>
                     </form>
                   </div>
                 </div>

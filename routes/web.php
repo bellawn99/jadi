@@ -122,6 +122,15 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix'=> 'admin'], function()
         Route::get('/', 'Admin\UbahPasswordController@index');
         Route::put('/', 'Admin\UbahPasswordController@changePassword')->name('changePasswordAdmin');
     });
+
+    //profil
+    Route::group(['prefix' => 'profil'],function(){
+        Route::get('/', 'Admin\ProfilController@index');
+        Route::get('/edit-foto/{id}', 'Admin\ProfilController@editFoto');
+        Route::put('/update-foto/{id}', 'Admin\ProfilController@updateFoto');
+        Route::get('/edit-data/{id}', 'Admin\ProfilController@editData');
+        Route::put('/update-data/{id}', 'Admin\ProfilController@updateData');        
+    });
 });
 
 Route::group(['middleware' => ['auth', 'mahasiswa'], 'prefix'=> 'mahasiswa'], function() {
