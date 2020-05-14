@@ -20,6 +20,24 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth', 'admin'], 'prefix'=> 'admin'], function() {
     Route::get('/dashboard', 'Admin\AdminController@home')->name('admin.dashboard');
+    
+    Route::group(['prefix' => '/pengguna'],function(){
+        Route::group(['prefix' => '/user-admin'],function(){
+            Route::get('/', 'Admin\PenggunaAdminController@index');
+            Route::post('/import','Admin\PenggunaAdminController@csv_import')->name('import.pengguna.admin');
+            Route::post('/', 'Admin\PenggunaAdminController@store')->name('store.pengguna.admin');
+            Route::delete('/delete/{id}', 'Admin\PenggunaAdminController@delete');
+        });
+
+        Route::group(['prefix' => '/user-mahasiswa'],function(){
+            Route::get('/', 'Admin\PenggunaMahasiswaController@index');
+            Route::post('/import','Admin\PenggunaMahasiswaController@csv_import')->name('import.pengguna.mhs');
+            Route::post('/', 'Admin\PenggunaMahasiswaController@store')->name('store.pengguna.mhs');
+            Route::delete('/delete/{id}', 'Admin\PenggunaMahasiswaController@delete');
+        });
+
+    });
+
     Route::group(['prefix' => '/master'],function(){
         Route::group(['prefix' => '/user'],function(){
             Route::get('/', 'Admin\DataUserController@index');

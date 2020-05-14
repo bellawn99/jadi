@@ -326,6 +326,19 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+                <span class="menu-title">Pengguna</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-medical-bag menu-icon"></i>
+              </a>
+              <div class="collapse" id="general-pages">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/pengguna/user-admin') }}"> Admin </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/pengguna/user-mahasiswa') }}"> Mahasiswa </a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
                 <span class="menu-title">Master Data</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-medical-bag menu-icon"></i>

@@ -53,7 +53,7 @@ h3 > span {
 @endsection
 
 @section('title')
-	<a href="{{url('admin/profil')}}" style="color:black; text-decoration:none">Profil Mahasiswa</a>
+	<a href="{{url('admin/profil')}}" style="color:black; text-decoration:none">Profil Admin</a>
 @endsection
 
 @section('content')

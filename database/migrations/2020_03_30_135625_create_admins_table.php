@@ -15,7 +15,7 @@ class CreateAdminsTable extends Migration
     {
         Schema::create('admin', function (Blueprint $table) {
             $table->string('id',20)->primary();
-            $table->string('user_id')->nullable();
+            $table->string('user_id')->unique();
             $table->string('nip')->unique();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('user');
