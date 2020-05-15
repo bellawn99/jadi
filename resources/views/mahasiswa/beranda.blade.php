@@ -5,9 +5,31 @@
 @endsection
 
 @section('title')
-	<a href="{{url('/dashboard')}}" style="color:black; text-decoration:none">Dashboard</a>
+	<a href="{{url('/mahasiswa/dashboard')}}" style="color:black; text-decoration:none">Dashboard</a>
 @endsection
 
 @section('content')
-    Selamat Datang {{ Auth::user()->nama }}
+<div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    
+                    @if (count($errors)>0)
+                    <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
+                    @foreach($errors->all() as $error)
+                      <li>{{$error}}</li>
+                    @endforeach
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                  @endif                    
+                    
+                  Selamat Datang {{ Auth::user()->nama }}
+                  </div>
+                </div>
+              </div>
+
 @endsection
+
+@push('js')
+@endpush

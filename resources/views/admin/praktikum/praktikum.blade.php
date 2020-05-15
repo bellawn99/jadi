@@ -53,7 +53,7 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->nama }}</td>  
                             <td>{{ $item->semester }}</td>
-                            <td>{{ $item->nama_matkul }}</td>
+                            <td>{{ str_limit($item->nama_matkul, 15) }}</td>
                             <td>{{ $item->hari }}</td>
                             <td>{{ $item->jam_mulai }}</td>
                             <td>{{ $item->jam_akhir }}</td>
