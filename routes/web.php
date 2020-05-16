@@ -171,5 +171,10 @@ Route::group(['middleware' => ['auth', 'mahasiswa'], 'prefix'=> 'mahasiswa'], fu
         Route::get('/', 'Mahasiswa\UbahPasswordController@index');
         Route::put('/', 'Mahasiswa\UbahPasswordController@changePassword')->name('changePassword');
     });
+
+    //daftar
+    Route::group(['prefix' => 'daftar'],function(){
+        Route::get('/', 'Mahasiswa\DaftarController@index');
+    });
 });
 

@@ -39,4 +39,8 @@ class Praktikum extends Model
     public function semester(){
         return $this->hasMany(Semester::class);
     }
+
+    public function daftar(){
+        return $this->belongsTo(Daftar::class);
+    }
 }
