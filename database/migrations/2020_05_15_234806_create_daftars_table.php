@@ -17,7 +17,7 @@ class CreateDaftarsTable extends Migration
             $table->string('id',20)->primary();
             $table->string('user_id',20)->nullable();
             $table->integer('praktikum_id')->nullable()->unsigned();
-            $table->enum('status',['menunggu','diproses','diterima','ditolak'])->nullable();
+            $table->enum('status',['daftar','batal','menunggu','diproses','diterima','ditolak'])->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('user');
             $table->foreign('praktikum_id')->references('id')->on('praktikum');

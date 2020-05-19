@@ -31,19 +31,19 @@
                     <table class="table table-hover" id="tabel-user">
                       <thead>
                         <tr>
-                            <th width="5%">ID</th>
-                            <th width="5%">Kelas</th>    
-                            <th width="10%">Semester</th>
-                            <th width="10%">Matakuliah</th>
-                            <th width="5%">Hari</th>
-                            <th width="5%">Jam Mulai</th>
-                            <th width="5%">Jam Akhir</th>
-                            <th width="10%">Action</th>
+                            <th width>ID</th>
+                            <th width>Kelas</th>    
+                            <th width>Semester</th>
+                            <th width>Matakuliah</th>
+                            <th width>Hari</th>
+                            <th width>Jam Mulai</th>
+                            <th width>Jam Akhir</th>
+                            <th width>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          @foreach ($praktikums as $item)
+                          @foreach ($daftars as $item)
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->nama }}</td>  
                             <td>{{ $item->semester }}</td>
@@ -52,13 +52,138 @@
                             <td>{{ $item->jam_mulai }}</td>
                             <td>{{ $item->jam_akhir }}</td>
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/praktikum/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
-                            <a data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" data-matkul="{{ $item->nama_matkul }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#detail{{$item->id}}" ><i class=" mdi mdi-eye "></i></button>
+                            @if($item->status === 'daftar') 
+                            <a data-id="{{ $item->noDaftar }}" data-nama="{{ $item->nama_matkul }}" data-hari="{{ $item->hari }}"  data-jam_mulai="{{ $item->jam_mulai }}"  data-jam_akhir="{{ $item->jam_akhir }}" class="btn btn-gradient-dark btn-sm deletebtn" href="javascript:void(0)">Batal</a>
+                            @elseif($item->status == null)
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#daftar{{$item->id}}" >Daftar</button>
+                            @endif
                             </td>
                         </tr>
                         @endforeach
                       </tbody>
                     </table>
+
+<!-- Detail Praktikum Modal -->
+@foreach ($daftars as $item)
+<div class="modal fade" id="detail{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Detail</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <table style="border:0">
+        <tr>
+          <td>ID</td>
+          <td>:</td>
+          <td>{{ $item->id }}</td>
+        </tr>
+        <tr>
+          <td>Nama Kelas</td>
+          <td>:</td>
+          <td>{{ $item->nama }}</td>
+        </tr>
+        <tr>
+          <td>Semester</td>
+          <td>:</td>
+          <td>{{ $item->semester }}</td>
+        </tr>
+        <tr>
+          <td>Nama Matakuliah</td>
+          <td>:</td>
+          <td>{{ $item->nama_matkul }}</td>
+        </tr>
+        <tr>
+          <td>Nama Dosen</td>
+          <td>:</td>
+          <td>{{ $item->nama_dosen }}</td>
+        </tr>
+        <tr>
+          <td>Hari</td>
+          <td>:</td>
+          <td>{{ $item->hari }}</td>
+        </tr>
+        <tr>
+          <td>Jam Mulai</td>
+          <td>:</td>
+          <td>{{ $item->jam_mulai }}</td>
+        </tr>
+        <tr>
+          <td>Jam Akhir</td>
+          <td>:</td>
+          <td>{{ $item->jam_akhir }}</td>
+        </tr>
+        <tr>
+          <td>Nama Ruangan</td>
+          <td>:</td>
+          <td>{{ $item->nama_ruangan }}</td>
+        </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gradient-primary mr-2 btn-sm" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
+<!-- End Detail Praktikum Modal -->
+
+
+<!-- Daftar Praktikum Modal -->
+<div class="modal fade" id="batal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Batal</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <form id="delete_modal" method="POST">                
+      {{ csrf_field() }}
+      {{ method_field('DELETE') }} 
+      <div class="modal-body">
+      Yakin ingin membatalkan asistensi matakuliah?
+      <input type="hidden" id="noDaftar" name="noDaftar">
+      </div>
+      <div class="modal-footer">
+      <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Iya</button>
+      <button class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Daftar Praktikum Modal -->
+
+@foreach ($daftars as $item)
+<!-- Daftar Praktikum Modal -->
+<div class="modal fade" id="daftar{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Daftar</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+      <form class="forms-sample" style="{margin:0 auto;}" data-toggle="validator" action="{{ route('store.daftar') }}" method="post">
+        {{csrf_field()}}
+        {{ method_field('POST') }}
+      <input type="hidden" value="{{ $item->id }}" id="id" name="id">
+      Yakin ingin mendaftar asistensi matakuliah {{ $item->nama_matkul }} {{ $item->hari }}, {{ $item->jam_mulai }}-{{ $item->jam_akhir }}?
+      </div>
+      <div class="modal-footer">
+      <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Daftar</button>
+      <button class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
+<!-- End Daftar Praktikum Modal -->
+
                   </div>
                 </div>
               </div>
@@ -71,12 +196,32 @@ $(document).ready(function(){
     $('#tabel-user').DataTable({
       'responsive' : true,
       'autoWidth' : false,
+      "scrollX": true,
       'language' : {
                         'search' : "_INPUT_",
                         'searchPlaceholder' : "Search",
                         'autoWidth' : false
 
                       },
+    });
+
+    $('#tabel-user').on('click', '.deletebtn', function(){
+      var id = $(this).data('id');
+      var nama_matkul = $(this).data('nama_matkul');
+      var hari = $(this).data('hari');
+      var jam_mulai = $(this).data('jam_mulai');
+      var jam_akhir = $(this).data('jam_akhir');
+      $tr = $(this).closest('tr');
+
+        var data = $tr.children("td").map(function(){
+          return $(this).text();
+        }).get();
+        
+        console.log(data);
+        
+        
+        $('#delete_modal').attr('action', 'daftar/delete/'+id);
+        $('#batal').modal('show');
     });
 });
 </script>
