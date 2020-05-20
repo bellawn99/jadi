@@ -43,9 +43,7 @@ class DaftarController extends Controller
         ->whereDate('tgl_selesai', '>', $now->toDateString())
         ->get();
 
-        $users = User::leftJoin('mahasiswa','user.id','=','mahasiswa.user_id')
-        ->where('user.id',Auth::user()->id)
-        ->get();
+        $users = Daftar::where('daftar.user_id',Auth::user()->id)->get();
 
        // $status = Praktikum::leftJoint()->leftJoin('daftar','daftar.praktikum_id','=','praktikum.id')
        // ->select('status')->first();
