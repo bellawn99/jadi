@@ -58,7 +58,7 @@
                             <td>{{ $item->jam_akhir }}</td>
                             <td>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#detail{{$item->id}}" ><i class=" mdi mdi-eye "></i></button>
-                            @if($item->status === 'daftar') 
+                            @if($item->status === 'daftar' && count($users) > 0) 
                             <a data-id="{{ $item->noDaftar }}" data-nama="{{ $item->nama_matkul }}" data-hari="{{ $item->hari }}"  data-jam_mulai="{{ $item->jam_mulai }}"  data-jam_akhir="{{ $item->jam_akhir }}" class="btn btn-dark btn-sm deletebtn" href="javascript:void(0)">Batal</a>
                             @elseif(count($users) < 2)
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#daftar{{$item->id}}" >Daftar</button>
