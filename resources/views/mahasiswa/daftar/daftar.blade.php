@@ -8,14 +8,14 @@
 @endsection
 
 @section('title')
-	<a href="{{url('mahasiswa/daftar')}}" style="color:black; text-decoration:none">Daftar Asisten Praktikum</a>
+	<a href="{{url('mahasiswa/daftar')}}" style="color:black; text-decoration:none">Daftar Asistensi</a>
 @endsection
 
 @section('content')
 <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Daftar Asisten Praktikum</h4>
+                    <h4 class="card-title">Daftar Asistensi</h4>
                     
                     @if (count($errors)>0)
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
@@ -31,14 +31,14 @@
                     <table class="table table-hover" id="tabel-user">
                       <thead>
                         <tr>
-                            <th width>ID</th>
-                            <th width>Kelas</th>    
-                            <th width>Semester</th>
-                            <th width>Matakuliah</th>
-                            <th width>Hari</th>
-                            <th width>Jam Mulai</th>
-                            <th width>Jam Akhir</th>
-                            <th width>Action</th>
+                            <th>ID</th>
+                            <th>Kelas</th>    
+                            <th>Semester</th>
+                            <th>Matakuliah</th>
+                            <th>Hari</th>
+                            <th>Jam Mulai</th>
+                            <th>Jam Akhir</th>
+                            <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -54,7 +54,7 @@
                             <td>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#detail{{$item->id}}" ><i class=" mdi mdi-eye "></i></button>
                             @if($item->status === 'daftar') 
-                            <a data-id="{{ $item->noDaftar }}" data-nama="{{ $item->nama_matkul }}" data-hari="{{ $item->hari }}"  data-jam_mulai="{{ $item->jam_mulai }}"  data-jam_akhir="{{ $item->jam_akhir }}" class="btn btn-gradient-dark btn-sm deletebtn" href="javascript:void(0)">Batal</a>
+                            <a data-id="{{ $item->noDaftar }}" data-nama="{{ $item->nama_matkul }}" data-hari="{{ $item->hari }}"  data-jam_mulai="{{ $item->jam_mulai }}"  data-jam_akhir="{{ $item->jam_akhir }}" class="btn btn-dark btn-sm deletebtn" href="javascript:void(0)">Batal</a>
                             @elseif($item->status == null)
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#daftar{{$item->id}}" >Daftar</button>
                             @endif
@@ -131,7 +131,7 @@
 @endforeach
 <!-- End Detail Praktikum Modal -->
 
-
+@foreach ($daftars as $item)
 <!-- Daftar Praktikum Modal -->
 <div class="modal fade" id="batal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -144,7 +144,7 @@
       {{ csrf_field() }}
       {{ method_field('DELETE') }} 
       <div class="modal-body">
-      Yakin ingin membatalkan asistensi matakuliah?
+      Yakin ingin membatalkan asistensi matakuliah {{ $item->nama_matkul }} {{ $item->hari }}, {{ $item->jam_mulai }}-{{ $item->jam_akhir }}?
       <input type="hidden" id="noDaftar" name="noDaftar">
       </div>
       <div class="modal-footer">
@@ -157,7 +157,6 @@
 </div>
 <!-- End Daftar Praktikum Modal -->
 
-@foreach ($daftars as $item)
 <!-- Daftar Praktikum Modal -->
 <div class="modal fade" id="daftar{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-dialog-centered" role="document">

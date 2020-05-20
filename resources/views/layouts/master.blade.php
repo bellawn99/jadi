@@ -319,7 +319,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/icons/mdi.html">
+              <a class="nav-link" href="{{ url('/admin/pengajuan') }}">
                 <span class="menu-title">Pengajuan</span>
                 <i class="mdi mdi-file-multiple menu-icon"></i>
               </a>

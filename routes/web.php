@@ -149,6 +149,13 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix'=> 'admin'], function()
         Route::get('/edit-data/{id}', 'Admin\ProfilController@editData');
         Route::put('/update-data/{id}', 'Admin\ProfilController@updateData');        
     });
+
+    //pengajuan
+    Route::group(['prefix' => 'pengajuan'],function(){
+        Route::get('/', 'Admin\PengajuanController@index');
+        Route::get('/{id}', ['as' => 'pengajuans.status', 'uses' => 'Admin\PengajuanController@editStat']);
+        Route::post('/update', ['as' => 'pengajuans.change', 'uses' => 'Admin\PengajuanController@statusUpdate']);
+    });
 });
 
 Route::group(['middleware' => ['auth', 'mahasiswa'], 'prefix'=> 'mahasiswa'], function() {
