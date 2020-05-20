@@ -27,6 +27,11 @@
                       </button>
                     </div>
                   @endif                    
+
+                  @if(count($awals) > 0 || count($akhirs) > 0)
+                    <p>BUKAN PERIODE PENDAFTARAN ASISTENSI</p>
+                  
+                  @else
                     
                     <table class="table table-hover" id="tabel-user">
                       <thead>
@@ -63,6 +68,8 @@
                         @endforeach
                       </tbody>
                     </table>
+                  
+                  @endif
 
 <!-- Detail Praktikum Modal -->
 @foreach ($daftars as $item)
