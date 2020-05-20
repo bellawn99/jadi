@@ -325,12 +325,12 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+              <a class="nav-link" data-toggle="collapse" href="#general-page" aria-expanded="false" aria-controls="general-pages">
                 <span class="menu-title">Pengguna</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-account-multiple menu-icon"></i>
               </a>
-              <div class="collapse" id="general-pages">
+              <div class="collapse" id="general-page">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/pengguna/user-admin') }}"> Admin </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/pengguna/user-mahasiswa') }}"> Mahasiswa </a></li>
