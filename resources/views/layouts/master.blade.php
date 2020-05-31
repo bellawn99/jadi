@@ -345,7 +345,6 @@
               </a>
               <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/user') }}"> User </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/dosen') }}"> Dosen </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/matkul') }}"> Matakuliah </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/ruangan') }}"> Ruangan </a></li>

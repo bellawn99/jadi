@@ -185,5 +185,10 @@ Route::group(['middleware' => ['auth', 'mahasiswa'], 'prefix'=> 'mahasiswa'], fu
         Route::post('/', 'Mahasiswa\DaftarController@store')->name('store.daftar');
         Route::delete('/delete/{id}', 'Mahasiswa\DaftarController@delete');
     });
+
+    //pengumuman
+    Route::group(['prefix' => 'pengumuman'],function(){
+        Route::get('/', 'Mahasiswa\PengumumanController@index');
+    });
 });
 

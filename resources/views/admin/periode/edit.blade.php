@@ -49,6 +49,13 @@
                         <label for="thn_ajaran">Tahun Ajaran</label>
                         <input type="text" class="form-control" id="thn_ajaran" name="thn_ajaran" value="{{$periodes->thn_ajaran}}">
                       </div>
+                      <div class="form-group">
+                        <label for="status">Status</label>
+                        <select name="status" class="form-control">
+                                <option value="Daftar" @if($periodes->status == "daftar") selected @endif>Daftar</option>
+                                <option value="Pengumuman" @if($periodes->status == "pengumuman") selected @endif>Pengumuman</option>
+                            </select>
+                      </div>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
                       <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">

@@ -8,17 +8,19 @@
 @endsection
 
 @section('title')
-	<a href="{{url('mahasiswa/daftar')}}" style="color:black; text-decoration:none">Daftar Asistensi</a>
+	<a href="{{url('mahasiswa/pengumuman')}}" style="color:black; text-decoration:none">Daftar Pengumuman</a>
 @endsection
 
 @section('content')
 <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                  @if((count($awals) == 0 || count($akhirs) == 0) || (count($awals) == 0 && count($akhirs) == 0))
-                  <h3><center>BUKAN PERIODE PENDAFTARAN</center></h3>
+                  @if(count($awals) == 0)
+                    <h3><center>BUKAN PERIODE PENGUMUMAN ASISTENSI</center></h3>
+                  
                   @else
-                  <h4 class="card-title">Daftar Asistensi</h4>
+                    <h4 class="card-title">Daftar Pengumuman</h4>
+                    
                     @if (count($errors)>0)
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
                     @foreach($errors->all() as $error)
@@ -28,8 +30,10 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                  @endif
+                  @endif                    
+
                   
+                    
                     <table class="table table-hover" id="tabel-user">
                       <thead>
                         <tr>
@@ -40,13 +44,13 @@
                             <th>Hari</th>
                             <th>Jam Mulai</th>
                             <th>Jam Akhir</th>
-                            <th>Action</th>
+                            <th>Status</th>
+                            <th>Detail</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                         
-                          @foreach ($daftars as $index => $item)
+                          @foreach ($pengumumans as $index => $item)
                             <td>{{ $index+1 }}</td>
                             <td>{{ $item->nama }}</td>  
                             <td>{{ $item->semester }}</td>
@@ -55,23 +59,22 @@
                             <td>{{ $item->jam_mulai }}</td>
                             <td>{{ $item->jam_akhir }}</td>
                             <td>
-                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#detail{{$item->id}}" ><i class=" mdi mdi-eye "></i></button>
-                            
-                              @if(isset($users[$item->id]))
-                              <a data-id="{{ $users[$item->id] }}" data-nama="{{ $item->nama_matkul }}" data-hari="{{ $item->hari }}"  data-jam_mulai="{{ $item->jam_mulai }}"  data-jam_akhir="{{ $item->jam_akhir }}" class="btn btn-dark btn-sm deletebtn" href="javascript:void(0)">Batal</a>
-                              @else
-                              <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#daftar{{$item->id}}" >Daftar</button>
-                              @endif
-                            
+                            @if($item->status === "diterima")
+                            <label class="badge badge-gradient-success">Diterima</label>
+                            @elseif($item->status === "ditolak")
+                            <label class="badge badge-gradient-danger">Ditolak</label>
+                            @endif
                             </td>
+                            <td><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#detail{{$item->id}}" ><i class=" mdi mdi-eye "></i></button></tr>
                         </tr>
                         @endforeach
-                        
                       </tbody>
                     </table>
+                  
                   @endif
+
 <!-- Detail Praktikum Modal -->
-@foreach ($daftars as $item)
+@foreach ($pengumumans as $item)
 <div class="modal fade" id="detail{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -137,57 +140,6 @@
 @endforeach
 <!-- End Detail Praktikum Modal -->
 
-@foreach ($daftars as $item)
-<!-- Daftar Praktikum Modal -->
-<div class="modal fade" id="batal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Batal</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <form id="delete_modal" method="POST">                
-      {{ csrf_field() }}
-      {{ method_field('DELETE') }} 
-      <div class="modal-body">
-      Yakin ingin membatalkan asistensi matakuliah {{ $item->nama_matkul }} {{ $item->hari }}, {{ $item->jam_mulai }}-{{ $item->jam_akhir }}?
-      <input type="hidden" id="noDaftar" name="noDaftar">
-      </div>
-      <div class="modal-footer">
-      <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Iya</button>
-      <button class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
-      </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End Daftar Praktikum Modal -->
-
-<!-- Daftar Praktikum Modal -->
-<div class="modal fade" id="daftar{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Daftar</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
-      <form class="forms-sample" style="{margin:0 auto;}" data-toggle="validator" action="{{ route('store.daftar') }}" method="post">
-        {{csrf_field()}}
-        {{ method_field('POST') }}
-      <input type="hidden" value="{{ $item->id }}" id="id" name="id">
-      Yakin ingin mendaftar asistensi matakuliah {{ $item->nama_matkul }} {{ $item->hari }}, {{ $item->jam_mulai }}-{{ $item->jam_akhir }}?
-      </div>
-      <div class="modal-footer">
-      <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Daftar</button>
-      <button class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
-      </form>
-      </div>
-    </div>
-  </div>
-</div>
-@endforeach
-<!-- End Daftar Praktikum Modal -->
 
                   </div>
                 </div>
@@ -210,24 +162,6 @@ $(document).ready(function(){
                       },
     });
 
-    $('#tabel-user').on('click', '.deletebtn', function(){
-      var id = $(this).data('id');
-      var nama_matkul = $(this).data('nama_matkul');
-      var hari = $(this).data('hari');
-      var jam_mulai = $(this).data('jam_mulai');
-      var jam_akhir = $(this).data('jam_akhir');
-      $tr = $(this).closest('tr');
-
-        var data = $tr.children("td").map(function(){
-          return $(this).text();
-        }).get();
-        
-        console.log(data);
-        
-        
-        $('#delete_modal').attr('action', 'daftar/delete/'+id);
-        $('#batal').modal('show');
-    });
 });
 </script>
 @endpush

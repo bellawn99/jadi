@@ -41,6 +41,7 @@
                             <th>Tanggal Mulai</th>    
                             <th>Tanggal Selesai</th>
                             <th>Tahun Ajaran</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                       </thead>
@@ -51,6 +52,13 @@
                             <td>{{ $item->tgl_mulai }}</td>  
                             <td>{{ $item->tgl_selesai }}</td>
                             <td>{{ $item->thn_ajaran }}</td>
+                            <td>
+                            @if($item->status === 'daftar')
+                            Daftar
+                            @else
+                            Pengumuman
+                            @endif
+                            </td>
                             <td>
                             <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/periode/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
                             <a data-id="{{ $item->id }}" data-tgl_m="{{ $item->tgl_mulai }}" data-tgl_s="{{ $item->tgl_selesai }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
@@ -89,6 +97,13 @@
                       <div class="form-group">
                         <label for="thn_ajaran">Tahun Ajaran</label>
                         <input type="text" class="form-control" name="thn_ajaran" placeholder="Tahun Ajaran" >
+                      </div>
+                      <div class="form-group">
+                        <label for="status">Status</label>
+                        <select name="status" class="form-control">
+                                <option value="Daftar" name="daftar" id="daftar">Daftar</option>
+                                <option value="Pengumuman" name="pengumuman" id="pengumuman">Pengumuman</option>
+                            </select>
                       </div>
                     
       </div>

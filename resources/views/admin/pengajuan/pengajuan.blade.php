@@ -42,8 +42,8 @@
                       </thead>
                       <tbody>
                         <tr>
-                          @foreach ($pengajuans as $item)
-                            <td>{{ $item->id }}</td>
+                          @foreach ($pengajuans as $index => $item)
+                            <td>{{ $index+1 }}</td>
                             <td>{{ $item->user }}</td>
                             <td>{{ $item->nama }}</td>  
                             <td>{{ $item->semester }}</td>

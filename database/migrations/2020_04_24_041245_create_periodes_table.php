@@ -16,8 +16,9 @@ class CreatePeriodesTable extends Migration
         Schema::create('periode', function (Blueprint $table) {
             $table->string('id',20)->primary();
             $table->date('tgl_mulai');
-            $table->date('tgl_selesai');
+            $table->date('tgl_selesai')->nullable();
             $table->string('thn_ajaran');
+            $table->enum('status',['daftar','pengumuman']);
             $table->timestamps();
         });
     }

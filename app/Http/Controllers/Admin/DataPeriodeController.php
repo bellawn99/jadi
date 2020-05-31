@@ -21,8 +21,8 @@ class DataPeriodeController extends Controller
     public function store(Request $request){
         $this->validate($request,[
             'tgl_mulai' => 'required',
-            'tgl_selesai' => 'required',
             'thn_ajaran' => 'required',
+            'status' => 'required'
         ]);
 
     
@@ -37,6 +37,7 @@ class DataPeriodeController extends Controller
         $periodes->tgl_mulai = $request->input('tgl_mulai');
         $periodes->tgl_selesai = $request->input('tgl_selesai');
         $periodes->thn_ajaran = $request->input('thn_ajaran');
+        $periodes->status = $request->input('status');
 
         $periodes->save();
         
@@ -55,8 +56,8 @@ class DataPeriodeController extends Controller
 
         $this->validate($request,[
             'tgl_mulai' => 'required',
-            'tgl_selesai' => 'required',
             'thn_ajaran' => 'required',
+            'status' => 'required'
             
         ]);
         
@@ -65,6 +66,7 @@ class DataPeriodeController extends Controller
         $periodes->tgl_mulai = $request->input('tgl_mulai');
         $periodes->tgl_selesai = $request->input('tgl_selesai');
         $periodes->thn_ajaran = $request->input('thn_ajaran');
+        $periodes->status = $request->input('status');
 
         $periodes->update();
 

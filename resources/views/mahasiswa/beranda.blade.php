@@ -24,7 +24,8 @@
                     </div>
                   @endif                    
                     
-                  Selamat Datang {{ Auth::user()->nama }}
+                  <center>Selamat Datang, <b>{{ Auth::user()->nama }}</b></center><br>
+                  <center>Silahkan Melengkapi Data Diri Untuk Melanjutkan Proses Pendaftaran</center>
                   </div>
                 </div>
               </div>

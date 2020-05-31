@@ -19,38 +19,56 @@ use Session;
 use Auth;
 use Carbon\Carbon;
 
+
 class DaftarController extends Controller
 {
     public function index()
     {
-        $daftars = Praktikum::leftJoin('dosen','praktikum.dosen_id','=','dosen.id')
-        ->leftJoin('matkul','praktikum.matkul_id','=','matkul.id')
-        ->leftJoin('jadwal','praktikum.jadwal_id','=','jadwal.id')
-        ->leftJoin('ruangan','praktikum.ruangan_id','=','ruangan.id')
-        ->leftJoin('daftar','daftar.praktikum_id','=','praktikum.id')
-        ->leftJoin('kelas','praktikum.kelas_id','=','kelas.id')
-        ->leftJoin('semester','praktikum.semester_id','=','semester.id')
-        ->select('daftar.id as noDaftar','daftar.status','praktikum.id','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','semester.semester','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
-        ->get();  
+        // $daftars = Praktikum::
+        // join('dosen','praktikum.dosen_id','=','dosen.id')
+        // ->join('matkul','praktikum.matkul_id','=','matkul.id')
+        // ->join('jadwal','praktikum.jadwal_id','=','jadwal.id')
+        // ->join('ruangan','praktikum.ruangan_id','=','ruangan.id')
+        // ->leftJoin('daftar','daftar.praktikum_id','=','praktikum.id')
+        // ->join('kelas','praktikum.kelas_id','=','kelas.id')
+        // ->join('semester','praktikum.semester_id','=','semester.id')
+        // ->select('daftar.id as noDaftar','daftar.status','praktikum.id','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','semester.semester','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
+        // ->get();
         
+        $daftars = Praktikum::
+        join('dosen','praktikum.dosen_id','=','dosen.id')
+        ->join('matkul','praktikum.matkul_id','=','matkul.id')
+        ->join('jadwal','praktikum.jadwal_id','=','jadwal.id')
+        ->join('ruangan','praktikum.ruangan_id','=','ruangan.id')
+        ->join('kelas','praktikum.kelas_id','=','kelas.id')
+        ->join('semester','praktikum.semester_id','=','semester.id')
+        ->select('praktikum.id','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','semester.semester','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
+        ->get();
+
+
         $now = Carbon::now();
 
         $awals = Periode::select('tgl_mulai')
-        ->whereDate('tgl_mulai', '<', $now->toDateString())
+        ->whereDate('tgl_mulai', '>=', $now->toDateString())
         ->get();
 
         $akhirs = Periode::select('tgl_selesai')
-        ->whereDate('tgl_selesai', '>', $now->toDateString())
+        ->whereDate('tgl_selesai', '>=', $now->toDateString())
         ->get();
 
-        $users = Daftar::where('daftar.user_id',Auth::user()->id)->get();
+        $usr = Daftar::where('daftar.user_id',Auth::user()->id)->get();
+        foreach($usr as $key=>$val){
+            $users[$val->praktikum_id]=$val->id;
+        }
 
         $tes = User::join('mahasiswa','user.id','=','mahasiswa.user_id')
         ->where('mahasiswa.user_id',Auth::user()->id)->get();
 
+        // return response()->json(['praktikum'=>$daftars,'awal'=>$awals,'akhir'=>$akhirs,'user'=>$users,'tes'=>$tes]);
+        // exit();
        // $status = Praktikum::leftJoint()->leftJoin('daftar','daftar.praktikum_id','=','praktikum.id')
        // ->select('status')->first();
-        //return $daftars;
+    //    dd(count($akhirs));
        return view('mahasiswa.daftar.daftar',compact('daftars','awals','akhirs','users','tes'));        
     }
 
@@ -81,6 +99,7 @@ class DaftarController extends Controller
         $daftars->user_id = Auth::user()->id;
         $daftars->praktikum_id = $request->id;
         $daftars->status = 'daftar';
+        $daftars->created_at = Carbon::today();
 
         $daftars->save();
         
