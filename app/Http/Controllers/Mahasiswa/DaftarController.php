@@ -23,18 +23,7 @@ use Carbon\Carbon;
 class DaftarController extends Controller
 {
     public function index()
-    {
-        // $daftars = Praktikum::
-        // join('dosen','praktikum.dosen_id','=','dosen.id')
-        // ->join('matkul','praktikum.matkul_id','=','matkul.id')
-        // ->join('jadwal','praktikum.jadwal_id','=','jadwal.id')
-        // ->join('ruangan','praktikum.ruangan_id','=','ruangan.id')
-        // ->leftJoin('daftar','daftar.praktikum_id','=','praktikum.id')
-        // ->join('kelas','praktikum.kelas_id','=','kelas.id')
-        // ->join('semester','praktikum.semester_id','=','semester.id')
-        // ->select('daftar.id as noDaftar','daftar.status','praktikum.id','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','semester.semester','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
-        // ->get();
-        
+    {        
         $daftars = Praktikum::
         join('dosen','praktikum.dosen_id','=','dosen.id')
         ->join('matkul','praktikum.matkul_id','=','matkul.id')
@@ -61,14 +50,11 @@ class DaftarController extends Controller
             $users[$val->praktikum_id]=$val->id;
         }
 
-        $tes = User::join('mahasiswa','user.id','=','mahasiswa.user_id')
-        ->where('mahasiswa.user_id',Auth::user()->id)->get();
-
         // return response()->json(['praktikum'=>$daftars,'awal'=>$awals,'akhir'=>$akhirs,'user'=>$users,'tes'=>$tes]);
         // exit();
        // $status = Praktikum::leftJoint()->leftJoin('daftar','daftar.praktikum_id','=','praktikum.id')
        // ->select('status')->first();
-    //    dd(count($akhirs));
+    //    dd($tes['krs']);
        return view('mahasiswa.daftar.daftar',compact('daftars','awals','akhirs','users','tes'));        
     }
 
@@ -84,10 +70,10 @@ class DaftarController extends Controller
             Session::flash('statuscode','error');
         return redirect('mahasiswa/daftar')->with('status', 'Gagal Mendaftar!');
         }else{
-        $tes = User::leftJoin('mahasiswa','user.id','=','mahasiswa.user_id')
-        ->where('mahasiswa.user_id',Auth::user()->id)->get();
+            $tes = User::join('mahasiswa','user.id','=','mahasiswa.user_id')
+            ->where('mahasiswa.user_id',Auth::user()->id)->first()->toArray();
 
-        if(count($tes) < 0){
+        if(is_null($tes['nama']) || is_null($tes['username']) || is_null($tes['foto']) || is_null($tes['nim']) || is_null($tes['nik']) || is_null($tes['jk']) || is_null($tes['tempat']) || is_null($tes['tgl_lahir']) || is_null($tes['alamat']) || is_null($tes['prodi']) || is_null($tes['krs']) || is_null($tes['semester']) || is_null($tes['nama_bank']) || is_null($tes['no_rekening']) || is_null($tes['nama_rekening'])){
             Session::flash('statuscode','error');
         return redirect('mahasiswa/daftar')->with('status', 'Silahkan Melengkapi Profil Terlebih Dahulu!');
         }else{

@@ -40,42 +40,9 @@ class LoginController extends Controller
     {   
 
         if ($user->isAdmin()){
-
-            $id = Auth::id();
-            $nip = Auth::user()->username;
-
-            $tes=Admin::where(['user_id'=>$id])->get()->count();
-            if($tes<1){
-                $admins = new Admin;
-                $a = 'A'.Carbon::now()->format('ymdHi').rand(100,999);
-                $admins->id = $a;
-                $admins->user_id = $id;
-                $admins->nip = $nip;
-                $admins->save();
             return redirect()->route('admin.dashboard');
-            }else{
-            return redirect()->route('admin.dashboard');
-            }
-
         }else{
-           
-            $id = Auth::id();
-            $nim = Auth::user()->username;
-
-           
-            $cek=Mahasiswa::where(['user_id'=>$id])->get()->count();
-            if($cek<1){
-                $mahasiswas = new Mahasiswa;
-                $b = 'M'.Carbon::now()->format('ymdHi').rand(100,999);
-                $mahasiswas->id = $b;
-                $mahasiswas->user_id = $id;
-                $mahasiswas->nim = $nim;
-                $mahasiswas->save();
-            return redirect()->route('mahasiswa.beranda');
-            }else{
-            return redirect()->route('mahasiswa.beranda');
-            }
-           
+            return redirect()->route('mahasiswa.beranda');          
         }      
     }
 

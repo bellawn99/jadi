@@ -56,7 +56,6 @@
                             <td>{{ $item->jam_akhir }}</td>
                             <td>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#detail{{$item->id}}" ><i class=" mdi mdi-eye "></i></button>
-                            
                               @if(isset($users[$item->id]))
                               <a data-id="{{ $users[$item->id] }}" data-nama="{{ $item->nama_matkul }}" data-hari="{{ $item->hari }}"  data-jam_mulai="{{ $item->jam_mulai }}"  data-jam_akhir="{{ $item->jam_akhir }}" class="btn btn-dark btn-sm deletebtn" href="javascript:void(0)">Batal</a>
                               @else
