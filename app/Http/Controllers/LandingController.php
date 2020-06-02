@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Kontak;
 use App\Ketentuan;
+use App\Berita;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,8 @@ class LandingController extends Controller
         $user = Auth::user(); 
         if(! $user){
             $ketentuans = Ketentuan::all();
-            return view('landing')->with('ketentuans',$ketentuans);  
+            $berita = Berita::all();
+            return view('landing')->with('ketentuans',$ketentuans)->with('berita',$berita);  
         }elseif($user->role_id == 1){
             return redirect()->route('admin.dashboard');
         }else{
@@ -63,5 +65,12 @@ class LandingController extends Controller
         Session::flash('statuscode','success');
         return back()->with('status', 'Terimakasih sudah menghubungi kami!');
 
+    }
+
+    public function berita(Request $request, $id){
+        $berita = Berita::findOrFail($id);
+        $nama = $berita::join('user','berita.user_id','=','user.id')->first();
+        $lain = Berita::where('id',!$id);
+        return view('berita', compact('berita','lain','nama'));
     }
 }

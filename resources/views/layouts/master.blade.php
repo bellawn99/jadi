@@ -227,7 +227,7 @@
                 <span class="count-symbol bg-danger"></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                <h6 class="p-3 mb-0">Notifications</h6>
+                <h6 class="p-3 mb-0">Notifikasi</h6>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
@@ -352,6 +352,7 @@
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/kelas') }}"> Kelas </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/semester') }}"> Semester </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/ketentuan') }}"> Ketentuan </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/berita') }}"> Berita </a></li>
                 </ul>
               </div>
             </li>

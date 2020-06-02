@@ -39,5 +39,10 @@ class KetentuansTableSeeder extends Seeder
             'ketentuan' => 'Tidak sedang mengulang matakuliah yang
             diasisteni'
         ]);
+
+        Ketentuan::create([
+            'id' => 6,
+            'ketentuan' => 'Setiap mahasiswa diperbolehkan memilih 2 matakuliah untuk diasisteni'
+        ]);
     }
 }

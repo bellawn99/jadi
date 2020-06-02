@@ -18,6 +18,7 @@ class CreatePeriodesTable extends Migration
             $table->date('tgl_mulai');
             $table->date('tgl_selesai')->nullable();
             $table->string('thn_ajaran');
+            $table->enum('semester',['genap','ganjil']);
             $table->enum('status',['daftar','pengumuman']);
             $table->timestamps();
         });

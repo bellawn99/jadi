@@ -21,7 +21,9 @@ class PeriodesTableSeeder extends Seeder
             'tgl_mulai' => '2020-01-15',
             'tgl_selesai' => '2020-01-30',
             'thn_ajaran' => '2019/2020',
-            'status' => 'daftar'
+            'semester' => 'genap',
+            'status' => 'daftar',
+            'created_at' => '2020-01-15'
         ]);
     }
 }

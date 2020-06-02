@@ -13,6 +13,7 @@
 
 Route::get('/', 'LandingController@index')->name('index');
 Route::post('/', 'LandingController@saveContact');
+Route::get('/berita/{id}', 'LandingController@berita');
 
 Auth::routes(['register' => false]);
 
@@ -116,6 +117,15 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix'=> 'admin'], function()
             Route::post('/', 'Admin\DataKetentuanController@store')->name('store.ketentuan');
             Route::delete('/delete/{id}', 'Admin\DataKetentuanController@delete');
             Route::post('/import','Admin\DataKetentuanController@csv_import')->name('import.ketentuan');
+        });
+
+        //master berita
+        Route::group(['prefix' => '/berita'],function(){
+            Route::get('/', 'Admin\DataBeritaController@index');
+            Route::post('/', 'Admin\DataBeritaController@store')->name('store.berita');
+            Route::get('/edit/{id}', 'Admin\DataBeritaController@edit');
+            Route::put('/update/{id}', 'Admin\DataBeritaController@update');
+            Route::delete('/delete/{id}', 'Admin\DataBeritaController@delete');
         });
     });
     //praktikum
