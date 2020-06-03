@@ -70,7 +70,7 @@ class LandingController extends Controller
     public function berita(Request $request, $id){
         $berita = Berita::findOrFail($id);
         $nama = $berita::join('user','berita.user_id','=','user.id')->first();
-        $lain = Berita::where('id',!$id);
+        $lain = Berita::where('id','!=',$id)->get();
         return view('berita', compact('berita','lain','nama'));
     }
 }

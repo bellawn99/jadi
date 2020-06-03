@@ -75,7 +75,7 @@
               <div class="course-inner-text py-4 px-4">
                 <div class="meta"><span class="icon-clock-o"></span>{{ date('d-m-Y', strtotime($b->created_at)) }}</div>
                 <h3><a href="{{url('berita/'.$b['id'])}}">{{ $b->judul }}</a></h3>
-                <p>{{ str_limit($b->isi, 20) }} </p>
+                <p>{!!str_limit(nl2br(str_replace(" ", " &nbsp;", $b->isi)),20)!!} </p>
               </div>
               
             </div>

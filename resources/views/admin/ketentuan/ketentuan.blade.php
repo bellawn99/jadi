@@ -8,7 +8,7 @@
 @endsection
 
 @section('title')
-	<a href="{{url('admin/master/ketentuan')}}" style="color:black; text-decoration:none">Master Ketentuan</a>
+	<a href="{{url('admin/ketentuan')}}" style="color:black; text-decoration:none">Ketentuan</a>
 @endsection
 
 @section('content')
@@ -30,9 +30,6 @@
 
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambahKetentuan">
                     Tambah Data Ketentuan
-                    </button>
-                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#importKetentuan">
-                    Import Data Ketentuan
                     </button><br><br>
 
                     
@@ -51,7 +48,7 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->ketentuan }}</td>
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/master/ketentuan/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/ketentuan/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
                             <a data-id="{{ $item->id }}" data-nama="{{ $item->ketentuan }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
@@ -93,34 +90,6 @@
   </div>
 </div>
 <!-- End Add Modal -->
-
-<!-- Import Modal -->
-<div class="modal fade" id="importKetentuan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Ketentuan</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form action="{{ route('import.ketentuan') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="col-md-12">
-                    <input type="file" class="custom-file-input" name="file" accept=".csv" id="kolomImportKetentuan" lang="in">
-                    <label class="custom-file-label" for="kolomImportKetentuan" data-browse="Cari">Import</label>                         
-                    </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Import</button>
-        <button class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End Import Modal -->
 
 <!-- Delete Modal -->
 <div class="modal fade" id="deletemodalpop" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -230,13 +199,6 @@ $(document).ready(function(){
         
         $('#delete_modal').attr('action', 'ketentuan/delete/'+id);
         $('#deletemodalpop').modal('show');
-    });
-
-    $('#kolomImportKetentuan').on('change',function(){
-                //get the file name
-                var fileName = $(this).val().split("\\").pop();
-                //replace the "Choose a file" label
-                $(this).next('.custom-file-label').addClass("selected").html(fileName);
     });
     //start edit
     // table.on('click', '.edit', function(){

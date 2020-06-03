@@ -351,8 +351,6 @@
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/jadwal') }}"> Jadwal </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/kelas') }}"> Kelas </a></li>
                   <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/semester') }}"> Semester </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/ketentuan') }}"> Ketentuan </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/berita') }}"> Berita </a></li>
                 </ul>
               </div>
             </li>
@@ -366,6 +364,18 @@
               <a class="nav-link" href="{{ url('/admin/periode') }}">
                 <span class="menu-title">Periode</span>
                 <i class="mdi mdi-av-timer menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/ketentuan') }}">
+                <span class="menu-title">Ketentuan</span>
+                <i class="mdi mdi-book-open-page-variant menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/berita') }}">
+                <span class="menu-title">Berita</span>
+                <i class="mdi mdi-newspaper menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">

@@ -108,25 +108,6 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix'=> 'admin'], function()
             Route::delete('/delete/{id}', 'Admin\DataSemesterController@delete');
             Route::post('/import','Admin\DataSemesterController@csv_import')->name('import.semester');
         });
-
-        //master ketentuan
-        Route::group(['prefix' => '/ketentuan'],function(){
-            Route::get('/', 'Admin\DataKetentuanController@index');
-            Route::get('/edit/{id}', 'Admin\DataKetentuanController@edit');
-            Route::put('/update/{id}', 'Admin\DataKetentuanController@update');
-            Route::post('/', 'Admin\DataKetentuanController@store')->name('store.ketentuan');
-            Route::delete('/delete/{id}', 'Admin\DataKetentuanController@delete');
-            Route::post('/import','Admin\DataKetentuanController@csv_import')->name('import.ketentuan');
-        });
-
-        //master berita
-        Route::group(['prefix' => '/berita'],function(){
-            Route::get('/', 'Admin\DataBeritaController@index');
-            Route::post('/', 'Admin\DataBeritaController@store')->name('store.berita');
-            Route::get('/edit/{id}', 'Admin\DataBeritaController@edit');
-            Route::put('/update/{id}', 'Admin\DataBeritaController@update');
-            Route::delete('/delete/{id}', 'Admin\DataBeritaController@delete');
-        });
     });
     //praktikum
     Route::group(['prefix' => '/praktikum'],function(){
@@ -143,6 +124,24 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix'=> 'admin'], function()
         Route::put('/update/{id}', 'Admin\DataPeriodeController@update');
         Route::post('/', 'Admin\DataPeriodeController@store')->name('store.periode');
         Route::delete('/delete/{id}', 'Admin\DataPeriodeController@delete');
+    });
+
+    //ketentuan
+    Route::group(['prefix' => '/ketentuan'],function(){
+        Route::get('/', 'Admin\DataKetentuanController@index');
+        Route::get('/edit/{id}', 'Admin\DataKetentuanController@edit');
+        Route::put('/update/{id}', 'Admin\DataKetentuanController@update');
+        Route::post('/', 'Admin\DataKetentuanController@store')->name('store.ketentuan');
+        Route::delete('/delete/{id}', 'Admin\DataKetentuanController@delete');
+    });
+
+    //berita
+    Route::group(['prefix' => '/berita'],function(){
+        Route::get('/', 'Admin\DataBeritaController@index');
+        Route::post('/', 'Admin\DataBeritaController@store')->name('store.berita');
+        Route::get('/edit/{id}', 'Admin\DataBeritaController@edit');
+        Route::put('/update/{id}', 'Admin\DataBeritaController@update');
+        Route::delete('/delete/{id}', 'Admin\DataBeritaController@delete');
     });
 
     //ubah-password

@@ -36,7 +36,7 @@ class PengumumanController extends Controller
         $now = Carbon::now()->subday(14);
 
         $awals = Periode::select('tgl_mulai')
-        ->where('status','pengumuman')
+        ->where('status','=','pengumuman')
         ->whereDate('tgl_mulai', '>=', $now->toDateString())
         ->get();
 

@@ -21,14 +21,14 @@ class BeritasTableSeeder extends Seeder
             'judul' => 'Pendaftaran Asistensi Semester Genap TA 2020/2021',
             'isi' => 'PERSIAPKAN DIRIMU !
             
-            Kami dari Admin Asisteni menyelenggarakan Open Recruitment Asisten Praktikum Semester Genap Tahun Akademik 2020/2021.
+Kami dari Admin Asistensi menyelenggarakan Open Recruitment Asisten Praktikum Semester Genap Tahun Akademik 2020/2021.
             
-            Catat tanggalnya :
-            Pendaftaran : 15 Januari 2020 - 30 Januari 2020
+Catat tanggalnya :
+Pendaftaran : 15 Januari 2020 - 30 Januari 2020
             
-            Informasi lebih lanjut
-            CP : 088-888-888-888
-            Daftarkan segera dan jadilah bagian dari kami.',
+Informasi lebih lanjut
+CP : 088-888-888-888
+Daftarkan segera dan jadilah bagian dari kami.',
             'foto' => 'daftar.png',
             'created_at' => '2020-01-15',
             'user_id' => $a->id

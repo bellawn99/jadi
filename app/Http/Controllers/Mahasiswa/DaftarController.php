@@ -39,10 +39,12 @@ class DaftarController extends Controller
 
         $awals = Periode::select('tgl_mulai')
         ->whereDate('tgl_mulai', '>=', $now->toDateString())
+        ->where('status','=','daftar')
         ->get();
 
         $akhirs = Periode::select('tgl_selesai')
         ->whereDate('tgl_selesai', '>=', $now->toDateString())
+        ->where('status','=','daftar')
         ->get();
 
         $usr = Daftar::where('daftar.user_id',Auth::user()->id)->get();
@@ -54,7 +56,7 @@ class DaftarController extends Controller
         // exit();
        // $status = Praktikum::leftJoint()->leftJoin('daftar','daftar.praktikum_id','=','praktikum.id')
        // ->select('status')->first();
-    //    dd($tes['krs']);
+    //    dd($awals);
        return view('mahasiswa.daftar.daftar',compact('daftars','awals','akhirs','users','tes'));        
     }
 
@@ -81,8 +83,16 @@ class DaftarController extends Controller
         
         $b = 'D'.Carbon::now()->format('ymdHi').rand(100,999);
 
+        $now = Carbon::now();
+
+        $awals = Periode::select('id','tgl_mulai')
+        ->whereDate('tgl_mulai', '>=', $now->toDateString())
+        ->where('status','=','daftar')
+        ->first();
+
         $daftars->id = $b;
         $daftars->user_id = Auth::user()->id;
+        $daftars->periode_id = $awals->id;
         $daftars->praktikum_id = $request->id;
         $daftars->status = 'daftar';
         $daftars->created_at = Carbon::today();

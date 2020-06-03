@@ -17,4 +17,8 @@ class Periode extends Model
     protected $casts = ['id' => 'string'];
 
     public $timestamps = false;
+
+    public function berita(){
+        return $this->belongsTo(Berita::class);
+    }
 }

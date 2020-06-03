@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Periode;
+use App\Berita;
 use Carbon\Carbon;
 
 class PeriodesTableSeeder extends Seeder
@@ -15,9 +16,11 @@ class PeriodesTableSeeder extends Seeder
     {
 
     
+        $a = Berita::select('id')->where('foto', 'daftar.png')->get()->first();
 
         Periode::create([
             'id' => 'P'.Carbon::now()->format('ymdHi').rand(100,999),
+            'berita_id' => $a->id,
             'tgl_mulai' => '2020-01-15',
             'tgl_selesai' => '2020-01-30',
             'thn_ajaran' => '2019/2020',

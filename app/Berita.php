@@ -17,4 +17,12 @@ class Berita extends Model
     protected $casts = ['id' => 'string'];
 
     public $timestamps = false;
+
+    public function periode(){
+        return $this->belongsTo(Periode::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

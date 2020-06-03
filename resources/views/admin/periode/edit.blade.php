@@ -30,7 +30,7 @@
                     </div>
                   @endif
 
-                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('admin/periode/update/'.$periodes->id)}}">
+                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('admin/periode/update/'.$periodes->berita_id)}}">
                     {{ csrf_field() }} 
                     {{ method_field('PUT') }}
                       <div class="form-group">
@@ -48,6 +48,13 @@
                       <div class="form-group">
                         <label for="thn_ajaran">Tahun Ajaran</label>
                         <input type="text" class="form-control" id="thn_ajaran" name="thn_ajaran" value="{{$periodes->thn_ajaran}}">
+                      </div>
+                      <div class="form-group">
+                        <label for="semester">Semester</label>
+                        <select name="semester" class="form-control">
+                                <option value="Genap" @if($periodes->semester == "genap") selected @endif>Genap</option>
+                                <option value="Ganjil" @if($periodes->semester == "ganjil") selected @endif>Ganjil</option>
+                            </select>
                       </div>
                       <div class="form-group">
                         <label for="status">Status</label>

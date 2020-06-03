@@ -68,7 +68,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Daftar</h4>
+        <h4 class="modal-title" id="myModalLabel">Terima</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
@@ -80,7 +80,7 @@
       Yakin ingin menerima asistensi matakuliah {{ $item->nama_matkul }} dengan nama {{ $item->user }}
       </div>
       <div class="modal-footer">
-      <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm" from="pengajuanForm">Daftar</button>
+      <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm" from="pengajuanForm">Terima</button>
       <button class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
       </form>
       </div>
@@ -94,7 +94,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Daftar</h4>
+        <h4 class="modal-title" id="myModalLabel">Tolak</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
@@ -107,7 +107,7 @@
       Yakin ingin menolak asistensi matakuliah {{ $item->nama_matkul }} dengan nama {{ $item->user }}
       </div>
       <div class="modal-footer">
-      <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm" from="tolakForm">Daftar</button>
+      <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm" from="tolakForm">Tolak</button>
       <button class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
       </form>
       </div>

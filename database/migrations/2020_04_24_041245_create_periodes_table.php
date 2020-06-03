@@ -15,12 +15,14 @@ class CreatePeriodesTable extends Migration
     {
         Schema::create('periode', function (Blueprint $table) {
             $table->string('id',20)->primary();
+            $table->string('berita_id',20)->nullable();
             $table->date('tgl_mulai');
             $table->date('tgl_selesai')->nullable();
             $table->string('thn_ajaran');
             $table->enum('semester',['genap','ganjil']);
             $table->enum('status',['daftar','pengumuman']);
             $table->timestamps();
+            $table->foreign('berita_id')->references('id')->on('berita');
         });
     }
 

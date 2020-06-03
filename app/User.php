@@ -69,4 +69,8 @@ class User extends Authenticatable
     public function daftar(){
         return $this->belongsTo(Daftar::class);
     }
+
+    public function berita(){
+        return $this->belongsTo(Berita::class);
+    }
 }

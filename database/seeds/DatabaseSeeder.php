@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SemestersTableSeeder::class);
         $this->call(PraktikumsTableSeeder::class);
         $this->call(KetentuansTableSeeder::class);
+        $this->call(BeritasTableSeeder::class);
         $this->call(PeriodesTableSeeder::class);
         $this->call(DaftarsTableSeeder::class);
-        $this->call(BeritasTableSeeder::class);
     }
 }

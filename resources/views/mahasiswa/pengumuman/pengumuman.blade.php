@@ -63,6 +63,8 @@
                             <label class="badge badge-gradient-success">Diterima</label>
                             @elseif($item->status === "ditolak")
                             <label class="badge badge-gradient-danger">Ditolak</label>
+                            @elseif($item->status === "daftar")
+                            <label class="badge badge-gradient-warning">Diproses</label>
                             @endif
                             </td>
                             <td><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#detail{{$item->id}}" ><i class=" mdi mdi-eye "></i></button></tr>
