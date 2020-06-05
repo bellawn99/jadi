@@ -42,6 +42,14 @@ class PenggunaAdminController extends Controller
             'nama' => ['required', 'string', 'max:255'],
             'nip' => ['required', 'string', 'max:10','min:6'],
             'password' => ['required', 'string', 'max:255']
+        ],
+        [
+            'nama.required' => 'Nama Wajib Diisi',
+            'nama.max' => 'Nama Terlalu Panjang!',
+            'nip.required' => 'NIP Wajib Diisi',
+            'nip.max' => 'NIP Terlalu Panjang!',
+            'password.required' => 'Password Wajib Diisi',
+            'password.max' => 'Password Terlalu Panjang!',
         ]);    
         
 

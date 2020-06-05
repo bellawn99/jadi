@@ -58,7 +58,7 @@ class LandingController extends Controller
              ), function($message) use ($request)
                {
                   $message->from($request->email);
-                  $message->to('bwulan99@gmail.com');
+                  $message->to('asistensikomsi@gmail.com');
                });
 
         

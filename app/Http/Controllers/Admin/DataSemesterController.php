@@ -30,6 +30,9 @@ class DataSemesterController extends Controller
     public function store(Request $request){
         $this->validate($request,[
             'semester' => 'required'
+        ],
+        [
+            'semester.required' => 'Semester Wajib Diisi',
         ]);
 
     
@@ -69,6 +72,9 @@ class DataSemesterController extends Controller
         $this->validate($request,[
             'semester' => 'required'
             
+        ],
+        [
+            'semester.required' => 'Semester Wajib Diisi',
         ]);
         
         $semesters = Semester::find($id);

@@ -32,6 +32,16 @@ class DataDosenController extends Controller
             'nama' => ['required', 'string', 'max:255'],
             'no_hp' => ['required', 'string', 'max:15'],
             'alamat' => ['required', 'string', 'max:255']
+        ],
+        [
+            'nidn.required' => 'NIDN Wajib Diisi',
+            'nidn.max' => 'NIDN Terlalu Panjang!',
+            'nama.required' => 'Nama Wajib Diisi',
+            'nama.max' => 'Nama Terlalu Panjang!',
+            'no_hp.required' => 'No Hp Wajib Diisi',
+            'no_hp.max' => 'NIDN Terlalu Panjang!',
+            'alamat.required' => 'Alamat Wajib Diisi',
+            'alamat.max' => 'Alamat Terlalu Panjang!',
         ]);
 
     
@@ -68,6 +78,16 @@ class DataDosenController extends Controller
             'nama' => ['required', 'string', 'max:255'],
             'no_hp' => ['required', 'string', 'max:15'],
             'alamat' => ['required', 'string', 'max:255']
+        ],
+        [
+            'nidn.required' => 'NIDN Wajib Diisi',
+            'nidn.max' => 'NIDN Terlalu Panjang!',
+            'nama.required' => 'Nama Wajib Diisi',
+            'nama.max' => 'Nama Terlalu Panjang!',
+            'no_hp.required' => 'No Hp Wajib Diisi',
+            'no_hp.max' => 'NIDN Terlalu Panjang!',
+            'alamat.required' => 'Alamat Wajib Diisi',
+            'alamat.max' => 'Alamat Terlalu Panjang!',
         ]);
         
         $dosens = Dosen::find($id);

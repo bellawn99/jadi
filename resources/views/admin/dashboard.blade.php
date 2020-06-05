@@ -48,7 +48,45 @@
                 <div class="card">
                   <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
                     <div class="clearfix">
-                      <h4 class="card-title float-left">Grafik Pengajuan</h4>
+                      <h4 class="card-title float-left">Grafik Pengajuan</h4><br><br>
+                      <form class="forms-sample" style="{margin:0 auto;}" data-toggle="validator" action=" {{ route('search') }} " method="POST">
+                    {{csrf_field()}}
+                    {{ method_field('POST') }}
+                      <div class="form-group">
+                        <label for="thn_ajaran">Tahun Ajaran</label>
+                        <select name='thn_ajaran' class='form-control'>
+                        @foreach ($thn_ajaran as $value)
+                                <option value="{{ $value->thn_ajaran }}">{{ $value->thn_ajaran }}</option>
+                        @endforeach
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="semester">Semester</label>
+                        <select name='semester' class='form-control'>
+                        @foreach ($thn_ajaran as $value)
+                                <option value="{{ $value->semester }}">{{ $value->semester }}</option>
+                        @endforeach
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="bulan">Bulan</label>
+                        <select name='bulan' class='form-control'>
+                                <option value=01>Januari</option>
+                                <option value=02>Februari</option>
+                                <option value=03>Maret</option>
+                                <option value=04>April</option>
+                                <option value=05>Mei</option>
+                                <option value=06>Juni</option>
+                                <option value=07>Juli</option>
+                                <option value=08>Agustus</option>
+                                <option value=09>September</option>
+                                <option value=10>Oktober</option>
+                                <option value=11>November</option>
+                                <option value=12>Desember</option>
+                        </select>
+                      </div>
+                      <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Filter</button>
+                      </form>
                       <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
                     </div>
                     <canvas id="visit-sale-chart" class="mt-4 chartjs-render-monitor" style="display: block; width: 497px; height: 248px;" width="497" height="248"></canvas>
@@ -125,7 +163,7 @@
     
     Chart.defaults.global.legend.labels.usePointStyle = true;
     
-    if ($("#visit-sale-chart").length) {
+    //if ($("#visit-sale-chart").length) {
       Chart.defaults.global.legend.labels.usePointStyle = true;
       var ctx = document.getElementById('visit-sale-chart').getContext("2d");
 
@@ -134,9 +172,8 @@
       gradientStrokeViolet.addColorStop(1, 'rgba(154, 85, 255, 1)');
       var gradientLegendViolet = 'linear-gradient(to right, rgba(218, 140, 255, 1), rgba(154, 85, 255, 1))';
     
-      var day = [@for($i=1;$i<=$tgl;$i++) '{{$i}}', @endfor];
+      var day = [@for($i=1;$i<=$tgl;$i++) {{$i}}, @endfor];
       var data_click = [{{$grafik}}];
-      var bln = <?php echo $bln; ?>;
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -212,7 +249,7 @@
           }
       })
       $("#visit-sale-chart-legend").html(myChart.generateLegend());
-    }
+   // }
     if ($("#traffic-chart").length) {
       var gradientStrokeBlue = ctx.createLinearGradient(0, 0, 0, 181);
       gradientStrokeBlue.addColorStop(0, 'rgba(54, 215, 232, 1)');

@@ -31,6 +31,11 @@ class DataJadwalController extends Controller
             'hari' => 'required',
             'jam_mulai' => 'required',
             'jam_akhir' => 'required',
+        ],
+        [
+            'hari.required' => 'Hari Wajib Diisi',
+            'jam_mulai.required' => 'Jam Mulai Wajib Diisi',
+            'jam_akhir.required' => 'Jam Akhir Wajib Diisi'
         ]);
 
     
@@ -74,6 +79,11 @@ class DataJadwalController extends Controller
             'hari' => 'required',
             'jam_mulai' => 'required',
             'jam_akhir' => 'required',
+        ],
+        [
+            'hari.required' => 'Hari Wajib Diisi',
+            'jam_mulai.required' => 'Jam Mulai Wajib Diisi',
+            'jam_akhir.required' => 'Jam Akhir Wajib Diisi'
         ]);
         
         $jadwals = Jadwal::find($id);

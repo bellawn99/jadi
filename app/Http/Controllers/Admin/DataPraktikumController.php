@@ -56,6 +56,14 @@ class DataPraktikumController extends Controller
             'jadwal_id' => 'required',
             'kelas_id' => 'required',
             'semester_id' => 'required'
+        ],
+        [
+            'ruangan_id.required' => 'Ruangan Wajib Diisi',
+            'dosen_id.required' => 'Dosen Wajib Diisi',
+            'matkul_id.required' => 'Matkul Wajib Diisi',
+            'jadwal_id.required' => 'Jadwal Wajib Diisi',
+            'kelas_id.required' => 'Kelas Wajib Diisi',
+            'semester_id.required' => 'Semester Wajib Diisi',
         ]);
         
         $a = Praktikum::where(['ruangan_id'=>$request->ruangan_id,'dosen_id'=>$request->dosen_id,'matkul_id'=>$request->matkul_id,'jadwal_id'=>$request->jadwal_id,'kelas_id'=>$request->kelas_id,'semester_id'=>$request->semester_id])->get();
@@ -117,6 +125,14 @@ class DataPraktikumController extends Controller
             'jadwal_id' => 'required',
             'kelas_id' => 'required',
             'semester_id' => 'required'
+        ],
+        [
+            'ruangan_id.required' => 'Ruangan Wajib Diisi',
+            'dosen_id.required' => 'Dosen Wajib Diisi',
+            'matkul_id.required' => 'Matkul Wajib Diisi',
+            'jadwal_id.required' => 'Jadwal Wajib Diisi',
+            'kelas_id.required' => 'Kelas Wajib Diisi',
+            'semester_id.required' => 'Semester Wajib Diisi',
         ]);
         
         $praktikums = Praktikum::find($id);

@@ -30,6 +30,10 @@ class DataKelasController extends Controller
     public function store(Request $request){
         $this->validate($request,[
             'nama' => ['required', 'string', 'max:255']
+        ],
+        [
+            'nama.required' => 'Nama Wajib Diisi',
+            'nama.max' => 'Nama Terlalu Panjang!'
         ]);
 
     
@@ -69,6 +73,10 @@ class DataKelasController extends Controller
         $this->validate($request,[
             'nama' => ['required', 'string', 'max:255']
             
+        ],
+        [
+            'nama.required' => 'Nama Wajib Diisi',
+            'nama.max' => 'Nama Terlalu Panjang!'
         ]);
         
         $kelass = Kelas::find($id);

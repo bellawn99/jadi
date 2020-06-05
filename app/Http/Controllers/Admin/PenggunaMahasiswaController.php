@@ -41,6 +41,14 @@ class PenggunaMahasiswaController extends Controller
             'nama' => ['required', 'string', 'max:255'],
             'nim' => ['required', 'string', 'max:15','min:6'],
             'password' => ['required', 'string', 'max:255']
+        ],
+        [
+            'nama.required' => 'Nama Wajib Diisi',
+            'nama.max' => 'Nama Terlalu Panjang!',
+            'nim.required' => 'NIM Wajib Diisi',
+            'nim.max' => 'NIM Terlalu Panjang!',
+            'password.required' => 'Password Wajib Diisi',
+            'password.max' => 'Password Terlalu Panjang!',
         ]);    
         
 

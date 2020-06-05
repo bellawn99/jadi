@@ -27,7 +27,13 @@ class DataBeritaController extends Controller
         $this->validate($request,[
             'judul' => 'required',
             'isi' => 'required',
-            'foto' => 'required',
+            'foto' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ],
+        [
+            'judul.required' => 'Judul Wajib Diisi',
+            'isi.required' => 'Isi Wajib Diisi',
+            'foto.required' => 'Foto Wajib Diisi',
+            'foto.mimes' => 'Foto Harus Berupa File: jpeg, png, jpg, atau gif!',
         ]);
 
         $now = Carbon::now();
@@ -61,7 +67,13 @@ class DataBeritaController extends Controller
         $this->validate($request,[
             'judul' => 'required',
             'isi' => 'required',
-            'foto' => 'required',
+            'foto' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ],
+        [
+            'judul.required' => 'Judul Wajib Diisi',
+            'isi.required' => 'Isi Wajib Diisi',
+            'foto.required' => 'Foto Wajib Diisi',
+            'foto.mimes' => 'Foto Harus Berupa File: jpeg, png, jpg, atau gif!',
         ]);
         
         $beritas = Berita::find($id);

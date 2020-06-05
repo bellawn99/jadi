@@ -21,6 +21,9 @@ class DataKetentuanController extends Controller
     public function store(Request $request){
         $this->validate($request,[
             'ketentuan' => 'required',
+        ],
+        [
+            'ketentuan.required' => 'Ketentuan Wajib Diisi'
         ]);
 
     
@@ -49,6 +52,9 @@ class DataKetentuanController extends Controller
 
         $this->validate($request,[
             'ketentuan' => 'required',
+        ],
+        [
+            'ketentuan.required' => 'Nama Wajib Diisi'
         ]);
         
         $ketentuans = Ketentuan::find($id);

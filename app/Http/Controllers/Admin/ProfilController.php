@@ -41,6 +41,10 @@ class ProfilController extends Controller
 
         $this->validate($request,[
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ],
+        [
+            'foto.required' => 'Foto Wajib Diisi',
+            'foto.mimes' => 'Foto Harus Berupa File: jpeg, png, jpg, atau gif!',
         ]);
         
         $users = User::find($id);
@@ -72,6 +76,11 @@ class ProfilController extends Controller
             'nama' => 'required',
             'nip' => 'required',
             'no_hp' => 'required',
+        ],
+        [
+            'nama.required' => 'Nama Wajib Diisi',
+            'nip.required' => 'NIP Wajib Diisi',
+            'no_hp.required' => 'No Hp Wajib Diisi',
         ]);
 
         $users = User::find($id);

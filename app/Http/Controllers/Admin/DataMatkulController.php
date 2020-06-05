@@ -31,6 +31,14 @@ class DataMatkulController extends Controller
             'kode_vmk' => ['required', 'string', 'max:10'],
             'nama_matkul' => ['required', 'string', 'max:255'],
             'sks' => ['required', 'string', 'max:2'],
+        ],
+        [
+            'kode_vmk.required' => 'Kode VMK Wajib Diisi',
+            'kode_vmk.max' => 'Kode VMK Terlalu Panjang!',
+            'nama_matkul.required' => 'Nama Matkul Wajib Diisi',
+            'nama_matkul.max' => 'Nama Matkul Terlalu Panjang!',
+            'sks.required' => 'SKS Wajib Diisi',
+            'sks.max' => 'SKS Terlalu Panjang!',
         ]);
 
     
@@ -66,6 +74,14 @@ class DataMatkulController extends Controller
             'kode_vmk' => ['required', 'string', 'max:10'],
             'nama_matkul' => ['required', 'string', 'max:255'],
             'sks' => ['required', 'string', 'max:2'],
+        ],
+        [
+            'kode_vmk.required' => 'Kode VMK Wajib Diisi',
+            'kode_vmk.max' => 'Kode VMK Terlalu Panjang!',
+            'nama_matkul.required' => 'Nama Matkul Wajib Diisi',
+            'nama_matkul.max' => 'Nama Matkul Terlalu Panjang!',
+            'sks.required' => 'SKS Wajib Diisi',
+            'sks.max' => 'SKS Terlalu Panjang!',
         ]);
         
         $matkuls = Matkul::find($id);

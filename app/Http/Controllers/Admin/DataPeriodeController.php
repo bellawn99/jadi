@@ -24,9 +24,17 @@ class DataPeriodeController extends Controller
     public function store(Request $request){
         $this->validate($request,[
             'tgl_mulai' => 'required',
+            'tgl_selesai' => 'required',
             'thn_ajaran' => 'required',
             'status' => 'required',
             'semester' => 'required'
+        ],
+        [
+            'tgl_mulai.required' => 'Tanggal Mulai Wajib Diisi',
+            'tgl_selesai.required' => 'Tanggal Selesai Wajib Diisi',
+            'thn_ajaran.required' => 'Tahun Ajaran Wajib Diisi',
+            'status.required' => 'Status Wajib Diisi',
+            'semester.required' => 'Semester Wajib Diisi',
         ]);
 
         $periodes = new Periode;
@@ -36,12 +44,12 @@ class DataPeriodeController extends Controller
         $periodes->id = $b;
         $periodes->berita_id = 'B'.Carbon::now()->format('ymdHi').rand(100,999);
         $periodes->tgl_mulai = $request->input('tgl_mulai');
-        $periodes->tgl_selesai = $request->input('tgl_selesai');
         $periodes->thn_ajaran = $request->input('thn_ajaran');
         $periodes->status = $request->input('status');
         $periodes->semester = $request->input('semester');
         $periodes->created_at = Carbon::now();
         if($request->get('status')=='Daftar'){
+            $periodes->tgl_selesai = $request->input('tgl_selesai');
             $beritas = new Berita;
             $beritas->id = $periodes->berita_id;
             $beritas->user_id = Auth()->user()->id;
@@ -65,6 +73,7 @@ Daftarkan segera dan jadilah bagian dari kami.";
             $beritas->save();
             }
         }else{
+            $periodes->tgl_selesai = null;
             $beritas = new Berita;
             $beritas->id = $periodes->berita_id;
             $beritas->user_id = Auth()->user()->id;
@@ -102,9 +111,17 @@ Kami dari Admin Asistensi memberitahukan kepada seluruh calon Asisten Praktikum 
 
         $this->validate($request,[
             'tgl_mulai' => 'required',
+            'tgl_selesai' => 'required',
             'thn_ajaran' => 'required',
             'status' => 'required',
             'semester' => 'required'            
+        ],
+        [
+            'tgl_mulai.required' => 'Tanggal Mulai Wajib Diisi',
+            'tgl_selesai.required' => 'Tanggal Selesai Wajib Diisi',
+            'thn_ajaran.required' => 'Tahun Ajaran Wajib Diisi',
+            'status.required' => 'Status Wajib Diisi',
+            'semester.required' => 'Semester Wajib Diisi',
         ]);
         
         
@@ -164,7 +181,7 @@ Kami dari Admin Asistensi memberitahukan kepada seluruh calon Asisten Praktikum 
             
     
                     $periodes->tgl_mulai = $request->input('tgl_mulai');
-                    $periodes->tgl_selesai = $request->input('tgl_selesai');
+                    $periodes->tgl_selesai = null;
                     $periodes->thn_ajaran = $request->input('thn_ajaran');
                     $periodes->status = $request->input('status');
                     $periodes->semester = $request->input('semester');

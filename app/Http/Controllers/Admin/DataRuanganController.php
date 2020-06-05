@@ -29,6 +29,10 @@ class DataRuanganController extends Controller
     public function store(Request $request){
         $this->validate($request,[
             'nama_ruangan' => ['required', 'string', 'max:255'],
+        ],
+        [
+            'nama_ruangan.required' => 'Nama Ruangan Wajib Diisi',
+            'nama_ruangan.max' => 'Nama Ruangan Terlalu Panjang!',
         ]);
 
     
@@ -68,6 +72,10 @@ class DataRuanganController extends Controller
 
         $this->validate($request,[
             'nama_ruangan' => ['required', 'string', 'max:255'],
+        ],
+        [
+            'nama_ruangan.required' => 'Nama Ruangan Wajib Diisi',
+            'nama_ruangan.max' => 'Nama Ruangan Terlalu Panjang!',
         ]);
         
         $ruangans = Ruangan::find($id);

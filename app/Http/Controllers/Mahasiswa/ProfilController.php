@@ -41,6 +41,10 @@ class ProfilController extends Controller
 
         $this->validate($request,[
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ],
+        [
+            'foto.required' => 'Foto Wajib Diisi',
+            'foto.mimes' => 'Foto Harus Berupa File: jpeg, png, jpg, atau gif!',
         ]);
         
         $users = User::find($id);
@@ -77,6 +81,16 @@ class ProfilController extends Controller
             'tempat' => 'required',
             'tgl_lahir' => 'required',
             'alamat' => 'required',
+        ],
+        [
+            'nama.required' => 'Nama Wajib Diisi',
+            'nim.required' => 'NIM Wajib Diisi',
+            'no_hp.required' => 'No Hp Wajib Diisi',
+            'jk.required' => 'Jenis Kelamin Wajib Diisi',
+            'nik.required' => 'NIK Wajib Diisi',
+            'tempat.required' => 'Tempat Lahir Wajib Diisi',
+            'tgl_lahir.required' => 'Tanggal Lahir Wajib Diisi',
+            'alamat.required' => 'Alamat Wajib Diisi',
         ]);
 
         $users = User::find($id);
@@ -132,6 +146,11 @@ class ProfilController extends Controller
             'nama_bank' => 'required',
             'no_rekening' => 'required',
             'nama_rekening' => 'required',
+        ],
+        [
+            'nama_bank.required' => 'Nama Bank Wajib Diisi',
+            'no_rekening.required' => 'No Rekening Wajib Diisi',
+            'nama_rekening.required' => 'Nama Rekening Wajib Diisi',
         ]);
         
         $mahasiswas = Mahasiswa::find($id);
@@ -160,6 +179,11 @@ class ProfilController extends Controller
                 'prodi' => 'required',
                 'krs' => 'required:pdf',
                 'semester' => 'required',
+            ],
+            [
+                'prodi.required' => 'Prodi Wajib Diisi',
+                'krs.required' => 'KRS Wajib Diisi',
+                'semester.required' => 'Semester Wajib Diisi',
             ]);
 
             $mahasiswas = Mahasiswa::find($id);
