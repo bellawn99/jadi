@@ -43,7 +43,7 @@ class MhsImport implements ToCollection
             'id' => $b,
             'role_id' => $a['id'],
             'nama' =>  $row[0],
-            'username' =>  $row[1],
+            'username' =>  substr ($row[1], 3, 6),
             'password' => \Hash::make($row[1]),
         ]);
         Mahasiswa::create([

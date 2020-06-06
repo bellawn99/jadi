@@ -43,7 +43,7 @@ class AdminImport implements ToCollection
             'id' => $b,
             'role_id' => $a['id'],
             'nama' =>  $row[0],
-            'username' =>  $row[1],
+            'username' =>  substr ($row[1], 0, 6),
             'password' => \Hash::make($row[1]),
         ]);
         Admin::create([
