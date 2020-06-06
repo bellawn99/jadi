@@ -7,11 +7,9 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class DaftarBaru extends Notification implements ShouldQueue
+class DaftarBaru extends Notification
 {
     use Queueable;
-
-    protected $daftars;
 
     /**
      * Create a new notification instance.

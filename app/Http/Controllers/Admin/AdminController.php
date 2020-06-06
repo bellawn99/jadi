@@ -73,7 +73,10 @@ class AdminController extends Controller
 
         //$click = array_column($click, 'jumlah');
 
-        $dim=cal_days_in_month(CAL_GREGORIAN,date('m'),date('Y'));
+        $z=Carbon::now();
+        $bulan = $z->month;
+
+        $dim=cal_days_in_month(CAL_GREGORIAN,$bulan,date('Y'));
         for($i=1;$i<=$dim;$i++){
             //$tgl[]="$i;
             if(isset($dtgrfk[$i])){
@@ -116,6 +119,7 @@ class AdminController extends Controller
         return view('admin.dashboard',$data, $grafik)->with('now',$now)->with('daftars',$daftars)
         ->with('tgl',$dim)
         ->with('thn_ajaran',$thn_ajaran)
+        ->with('bulan',json_encode($bulan,JSON_NUMERIC_CHECK))
         ->with('grafik',$arrgrfk)
         ->with('bln',json_encode($click,JSON_NUMERIC_CHECK));
     }
@@ -211,6 +215,7 @@ class AdminController extends Controller
         ->with('daftars',$daftars)
         ->with('tgl',$dim)
         ->with('thn_ajaran',$thn_ajaran)
+        ->with('bulan',json_encode($bulan,JSON_NUMERIC_CHECK))
         ->with('grafik',$arrgrfk)
         ->with('bln',json_encode($click,JSON_NUMERIC_CHECK));
         

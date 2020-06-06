@@ -201,7 +201,6 @@
     <link rel="shortcut icon" href="{{url('assets/images/logo-mini.svg')}}" />
 
  
-
   </head>
   <body>
     <div class="container-scroller">

@@ -52,7 +52,8 @@
                       <form class="forms-sample" style="{margin:0 auto;}" data-toggle="validator" action=" {{ route('search') }} " method="POST">
                     {{csrf_field()}}
                     {{ method_field('POST') }}
-                      <div class="form-group">
+                    <div class="row">
+                      <div class="form-group col-md-4">
                         <label for="thn_ajaran">Tahun Ajaran</label>
                         <select name='thn_ajaran' class='form-control'>
                         @foreach ($thn_ajaran as $value)
@@ -60,7 +61,7 @@
                         @endforeach
                         </select>
                       </div>
-                      <div class="form-group">
+                      <div class="form-group col-md-4">
                         <label for="semester">Semester</label>
                         <select name='semester' class='form-control'>
                         @foreach ($thn_ajaran as $value)
@@ -68,7 +69,7 @@
                         @endforeach
                         </select>
                       </div>
-                      <div class="form-group">
+                      <div class="form-group col-md-4">
                         <label for="bulan">Bulan</label>
                         <select name='bulan' class='form-control'>
                                 <option value=01>Januari</option>
@@ -85,6 +86,7 @@
                                 <option value=12>Desember</option>
                         </select>
                       </div>
+                    </div>
                       <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Filter</button>
                       </form>
                       <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
@@ -174,13 +176,14 @@
     
       var day = [@for($i=1;$i<=$tgl;$i++) {{$i}}, @endfor];
       var data_click = [{{$grafik}}];
+      const blnArr = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: day,
             datasets: [
               {
-                label: "Pengajuan Pendaftaran Bulan <?php echo date('M') ?>",
+                label: "Pengajuan Asistensi Bulan "+blnArr[{{ $bulan-1 }}],
                 borderColor: gradientStrokeViolet,
                 backgroundColor: gradientStrokeViolet,
                 hoverBackgroundColor: gradientStrokeViolet,
