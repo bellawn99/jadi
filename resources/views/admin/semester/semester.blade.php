@@ -28,10 +28,10 @@
                     </div>
                   @endif
 
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambahKelas">
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambahSemester">
                     Tambah Data Semester
                     </button>
-                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#importKelas">
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#importSemester">
                     Import Data Semester
                     </button><br><br>
 
@@ -64,7 +64,7 @@
 
 
 <!-- Add Modal -->
-<div class="modal fade" id="tambahKelas" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="tambahSemester" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -109,7 +109,14 @@
                     <div class="col-md-12">
                     <input type="file" class="custom-file-input" name="file" accept=".csv" id="kolomImportKelas" lang="in">
                     <label class="custom-file-label" for="kolomImportKelas" data-browse="Cari">Import</label>                         
-                    </div>
+                    </div><br>
+                    <b>PENTING!</b><br><br>
+                    <img src="{{url('assets/images/penjelasan/semester.png')}}" width="100%"/><br>
+                    <ol>
+                      <b><li>Pastikan <u>Judul Kolom</u> yang ada pada file(.xlsx)/(.xls) berada di baris paling atas/pertama</li></b>
+                      <b><li>Pastikan data semester yang ada di file (.xlsx)/(.xls) berada di baris kedua</li></b>
+                      <b><li>Judul kolom tidak perlu sama persis dengan contoh diatas</li></b>
+                    </ol>
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Import</button>

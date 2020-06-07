@@ -126,7 +126,14 @@
                     <div class="col-md-12">
                     <input type="file" class="custom-file-input" name="file" accept=".csv" id="kolomImportDosen" lang="in">
                     <label class="custom-file-label" for="kolomImportDosen" data-browse="Cari">Import</label>                         
-                    </div>
+                    </div><br>
+                    <b>PENTING!</b><br><br>
+                    <img src="{{url('assets/images/penjelasan/dosen.png')}}" width="100%"/><br>
+                    <ol>
+                      <b><li>Pastikan <u>Judul Kolom</u> yang ada pada file(.xlsx)/(.xls) berada di baris paling atas/pertama</li></b>
+                      <b><li>Pastikan data dosen yang ada di file (.xlsx)/(.xls) berada di baris kedua</li></b>
+                      <b><li>Judul kolom tidak perlu sama persis dengan contoh diatas</li></b>
+                    </ol>
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Import</button>

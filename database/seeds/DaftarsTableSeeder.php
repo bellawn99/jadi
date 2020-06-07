@@ -29,6 +29,7 @@ class DaftarsTableSeeder extends Seeder
             'user_id' => $a->id,
             'praktikum_id' => $c->id,
             'status' => 'daftar',
+            'created_at' => Carbon::now(),
         ]);
     }
 }
