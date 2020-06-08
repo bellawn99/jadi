@@ -173,15 +173,18 @@ class AdminController extends Controller
         $bulan = $request->bulan;
         $semester = $request->semester;
 
-        $periode = DB::table('periode')->where('thn_ajaran', $thn_ajaran)->where('semester', $semester)->whereMonth('tgl_mulai', $bulan)->first();
+        $periode = DB::table('periode')->where('thn_ajaran', $thn_ajaran)->where('semester', $semester)->first();
+
+        $batas = DB::table('daftar')->where('periode_id',$periode->id)->whereMonth('created_at', $bulan)->get();
         
         //$periode_id = $periode->id;
-        if (!empty($periode->id)){
+        if (count($batas)>0){
         $data['periode'] = Daftar::where('periode_id',$periode->id)->get();
         // dd($data);
 
         $click = Daftar::select(DB::raw("SUM(status) as jumlah"),(DB::raw("DAY(created_at) as created_at")))
         ->where('periode_id',$periode->id)
+        ->whereMonth('created_at',$bulan)
         ->groupBy('created_at')
         ->orderBy(DB::raw("DAY(created_at)"))
         ->get();
@@ -190,7 +193,9 @@ class AdminController extends Controller
             $dtgrfk[$val->created_at]=$val->jumlah;
         }
         
-        $thn=date('Y',strtotime($periode->tgl_mulai));
+        foreach($batas as $iki){
+            $thn = date("Y", strtotime($iki->created_at));
+            }
         $dim=cal_days_in_month(CAL_GREGORIAN,$bulan,$thn);
         }else{
 
