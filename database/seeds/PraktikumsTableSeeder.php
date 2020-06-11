@@ -35,9 +35,6 @@ class PraktikumsTableSeeder extends Seeder
         $i = Kelas::select('id')->where('nama','BB')->get()->first();
         $j = Kelas::select('id')->where('nama','AB')->get()->first();
 
-        $k = Semester::select('id')->where('semester',1)->get()->first();
-        $l = Semester::select('id')->where('semester',2)->get()->first();
-
         Praktikum::create([
             'id' => 1,
             'dosen_id' => $a->id,
@@ -45,7 +42,7 @@ class PraktikumsTableSeeder extends Seeder
             'jadwal_id' => $e->id,
             'ruangan_id' => $g->id,
             'kelas_id' => $i->id,
-            'semester_id' => $k->id
+            'semester' => 1
         ]);
         Praktikum::create([
             'id' => 2,
@@ -54,7 +51,7 @@ class PraktikumsTableSeeder extends Seeder
             'jadwal_id' => $f->id,
             'ruangan_id' => $h->id,
             'kelas_id' => $j->id,
-            'semester_id' => $l->id
+            'semester' => 3
             ]);
     }
 }

@@ -78,12 +78,15 @@
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="semester_id">Semester</label>
-                        <select name='semester_id' class='form-control'>
-                        @foreach ($semesters as $value)
-                                <option value="{{ $value->id }}" {{ $idSemester->contains($value->id) ? 'selected' : '' }}>{{ $value->semester }}</option>
-                        @endforeach
-                        </select>
+                        <label for="semester">Semester</label>
+                        <select name="semester" class="form-control">
+                                <option value="1" @if($semesters->semester == "1") selected @endif>1</option>
+                                <option value="2" @if($semesters->semester == "2") selected @endif>2</option>
+                                <option value="3" @if($semesters->semester == "3") selected @endif>3</option>
+                                <option value="4" @if($semesters->semester == "4") selected @endif>4</option>
+                                <option value="5" @if($semesters->semester == "5") selected @endif>5</option>
+                                <option value="6" @if($semesters->semester == "6") selected @endif>6</option>
+                            </select>
                       </div>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">

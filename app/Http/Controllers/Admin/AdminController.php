@@ -82,8 +82,7 @@ class AdminController extends Controller
         ->join('periode','daftar.periode_id','=','periode.id')
         ->join('user','daftar.user_id','=','user.id')
         ->join('kelas','praktikum.kelas_id','=','kelas.id')
-        ->join('semester','praktikum.semester_id','=','semester.id')
-        ->select('user.nama as pengguna','user.foto','matkul.sks','daftar.status','kelas.nama as kelas','semester.semester','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','matkul.nama_matkul')
+        ->select('praktikum.semester','user.nama as pengguna','user.foto','matkul.sks','daftar.status','kelas.nama as kelas','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','matkul.nama_matkul')
         ->where('daftar.created_at','=',$now)
         ->get()->toArray();
 
@@ -191,8 +190,7 @@ class AdminController extends Controller
         ->join('periode','daftar.periode_id','=','periode.id')
         ->join('user','daftar.user_id','=','user.id')
         ->join('kelas','praktikum.kelas_id','=','kelas.id')
-        ->join('semester','praktikum.semester_id','=','semester.id')
-        ->select('user.nama as pengguna','user.foto','matkul.sks','daftar.status','kelas.nama as kelas','semester.semester','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','matkul.nama_matkul')
+        ->select('praktikum.semester','user.nama as pengguna','user.foto','matkul.sks','daftar.status','kelas.nama as kelas','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','matkul.nama_matkul')
         ->where('daftar.created_at','=',$now)
         ->get()->toArray();
 

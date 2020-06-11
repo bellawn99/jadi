@@ -11,7 +11,6 @@ use App\Matkul;
 use App\Dosen;
 use App\Ruangan;
 use App\Praktikum;
-use App\Semester;
 use Session;
 
 class DataPraktikumController extends Controller
@@ -23,8 +22,7 @@ class DataPraktikumController extends Controller
         ->leftJoin('jadwal','praktikum.jadwal_id','=','jadwal.id')
         ->leftJoin('ruangan','praktikum.ruangan_id','=','ruangan.id')
         ->join('kelas','praktikum.kelas_id','=','kelas.id')
-        ->join('semester','praktikum.semester_id','=','semester.id')
-        ->select('praktikum.id','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','semester.semester','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
+        ->select('praktikum.semester','praktikum.id','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
         ->get();
 
         $matkuls = Matkul::all();
@@ -42,10 +40,9 @@ class DataPraktikumController extends Controller
         $kelass = Kelas::all();
         $idKelas = $kelass->pluck('kelas_id');
 
-        $semesters = Semester::all();
-        $idSemester = $semesters->pluck('semester_id');
+        $semesters = Praktikum::all();
         
-       return view('admin.praktikum.praktikum',compact('praktikums','kelass','idKelas','matkuls','idMatkul','dosens','idDosen','jadwals','idJadwal','ruangans','idRuangan','semesters','idSemesters'));        
+       return view('admin.praktikum.praktikum',compact('praktikums','kelass','idKelas','matkuls','idMatkul','dosens','idDosen','jadwals','idJadwal','ruangans','idRuangan','semesters'));        
     }
 
     public function store(Request $request){
@@ -55,7 +52,7 @@ class DataPraktikumController extends Controller
             'matkul_id' => 'required',
             'jadwal_id' => 'required',
             'kelas_id' => 'required',
-            'semester_id' => 'required'
+            'semester' => 'required'
         ],
         [
             'ruangan_id.required' => 'Ruangan Wajib Diisi',
@@ -63,7 +60,7 @@ class DataPraktikumController extends Controller
             'matkul_id.required' => 'Matkul Wajib Diisi',
             'jadwal_id.required' => 'Jadwal Wajib Diisi',
             'kelas_id.required' => 'Kelas Wajib Diisi',
-            'semester_id.required' => 'Semester Wajib Diisi',
+            'semester.required' => 'Semester Wajib Diisi',
         ]);
         
         $a = Praktikum::where(['ruangan_id'=>$request->ruangan_id,'dosen_id'=>$request->dosen_id,'matkul_id'=>$request->matkul_id,'jadwal_id'=>$request->jadwal_id,'kelas_id'=>$request->kelas_id,'semester_id'=>$request->semester_id])->get();
@@ -82,7 +79,7 @@ class DataPraktikumController extends Controller
         $praktikums->matkul_id = $request->input('matkul_id');
         $praktikums->ruangan_id = $request->input('ruangan_id');
         $praktikums->kelas_id = $request->input('kelas_id');
-        $praktikums->semester_id = $request->input('semester_id');
+        $praktikums->semester = $request->input('semester');
 
         $praktikums->save();
         
@@ -110,9 +107,8 @@ class DataPraktikumController extends Controller
         $kelass = Kelas::all();
         $idKelas = $kelass->pluck('kelas_id');
 
-        $semesters = Semester::all();
-        $idSemester = $semesters->pluck('semester_id');
-        return view('admin.praktikum.edit', compact('praktikums','kelass','idKelas','matkuls','idMatkul','dosens','idDosen','jadwals','idJadwal','ruangans','idRuangan','semesters','idSemester'));
+        $semesters = Praktikum::all()->where('id',$id)->first();
+        return view('admin.praktikum.edit', compact('praktikums','kelass','idKelas','matkuls','idMatkul','dosens','idDosen','jadwals','idJadwal','ruangans','idRuangan','semesters'));
     }
 
     public function update(Request $request, $id)
@@ -124,7 +120,7 @@ class DataPraktikumController extends Controller
             'matkul_id' => 'required',
             'jadwal_id' => 'required',
             'kelas_id' => 'required',
-            'semester_id' => 'required'
+            'semester' => 'required'
         ],
         [
             'ruangan_id.required' => 'Ruangan Wajib Diisi',
@@ -132,7 +128,7 @@ class DataPraktikumController extends Controller
             'matkul_id.required' => 'Matkul Wajib Diisi',
             'jadwal_id.required' => 'Jadwal Wajib Diisi',
             'kelas_id.required' => 'Kelas Wajib Diisi',
-            'semester_id.required' => 'Semester Wajib Diisi',
+            'semester.required' => 'Semester Wajib Diisi',
         ]);
         
         $praktikums = Praktikum::find($id);
@@ -142,7 +138,7 @@ class DataPraktikumController extends Controller
         $praktikums->matkul_id = $request->input('matkul_id');
         $praktikums->jadwal_id = $request->input('jadwal_id');
         $praktikums->kelas_id = $request->input('kelas_id');
-        $praktikums->semester_id = $request->input('semester_id');
+        $praktikums->semester = $request->input('semester');
 
         $praktikums->update();
 
