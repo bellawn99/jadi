@@ -42,6 +42,10 @@ in: "Cari",
                         <input type="text" class="form-control" id="username" name="username" value="{{$users->username}}" readonly>
                       </div>
                       <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" name="email" value="{{$users->email}}">
+                      </div>
+                      <div class="form-group">
                         <label for="nama">Nama</label>
                         <input type="text" class="form-control" id="nama" name="nama" value="{{$users->nama}}">
                       </div>

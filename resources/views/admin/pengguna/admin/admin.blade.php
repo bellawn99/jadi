@@ -47,6 +47,7 @@ in: "Cari",
                         <tr>
                             <th>ID</th>  
                             <th>Nama</th>
+                            <th>Email</th>
                             <th>Username</th>
                             <th>No Telepon</th>
                             <th>Foto</th>
@@ -58,6 +59,7 @@ in: "Cari",
                           @foreach ($users as $item)
                             <td>{{ $item->id }}</td> 
                             <td>{{ $item->nama }}</td>
+                            <td>{{ $item->email }}</td>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->no_hp }}</td>
                             <td><a type="button" data-toggle="modal" data-target="#yourModal{{$item->id}}"><img src="{{ URL::to('/') }}/images/{{ $item->foto }}" class="img-thumbnail" width="100%" /></a></td>
@@ -113,6 +115,11 @@ in: "Cari",
           <td>NIP</td>
           <td>:</td>
           <td>{{ $item->nip }}</td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>:</td>
+          <td>{{ $item->email }}</td>
         </tr>
         <tr>
           <td>Username</td>
@@ -190,7 +197,11 @@ in: "Cari",
       <form class="forms-sample" style="{margin:0 auto;}" data-toggle="validator" action="{{ route('store.pengguna.admin') }}" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     {{ method_field('POST') }}
-                    <div class="form-group">
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="email" placeholder="Email" >
+                      </div>
+                      <div class="form-group">
                         <label for="nama">Nama</label>
                         <input type="text" class="form-control" name="nama" placeholder="Nama" >
                       </div>
@@ -331,7 +342,7 @@ $(document).ready(function(){
         
         $('#deleteuserForm').val(nama+' ?');
         
-        $('#delete_modal').attr('action', 'admin/delete/'+id);
+        $('#delete_modal').attr('action', 'user-admin/delete/'+id);
         $('#deletemodalpop').modal('show');
     });
 

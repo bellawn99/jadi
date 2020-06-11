@@ -21,7 +21,7 @@ class ProfilController extends Controller
     public function index()
     {
         $profils = User::leftJoin('mahasiswa','mahasiswa.user_id','=','user.id')
-        ->select('user.username','mahasiswa.id as mhs_id','mahasiswa.nik','mahasiswa.npwp','mahasiswa.jk','mahasiswa.alamat','mahasiswa.tempat','mahasiswa.nim','mahasiswa.tgl_lahir','mahasiswa.prodi','mahasiswa.krs','mahasiswa.semester','mahasiswa.nama_bank','mahasiswa.no_rekening','mahasiswa.nama_rekening','user.id','user.nama','user.username','user.password','user.no_hp','user.foto')
+        ->select('user.email','user.username','mahasiswa.id as mhs_id','mahasiswa.nik','mahasiswa.npwp','mahasiswa.jk','mahasiswa.alamat','mahasiswa.tempat','mahasiswa.nim','mahasiswa.tgl_lahir','mahasiswa.prodi','mahasiswa.krs','mahasiswa.semester','mahasiswa.nama_bank','mahasiswa.no_rekening','mahasiswa.nama_rekening','user.id','user.nama','user.username','user.password','user.no_hp','user.foto')
         ->where('mahasiswa.user_id',Auth::user()->id)
         ->get();
         
@@ -73,9 +73,10 @@ class ProfilController extends Controller
     {
 
         $this->validate($request,[
-            'nama' => 'required',
-            'nim' => 'required',
-            'no_hp' => 'required',
+            'nama' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:50'],
+            'nip' => ['required', 'string', 'max:10','min:6'],
+            'no_hp' => ['required', 'string', 'max:15'],
             'jk' => 'required',
             'nik' => 'required',
             'tempat' => 'required',
@@ -84,8 +85,14 @@ class ProfilController extends Controller
         ],
         [
             'nama.required' => 'Nama Wajib Diisi',
+            'nama.max' => 'Nama Terlalu Panjang!',
+            'email.required' => 'Email Wajib Diisi',
+            'email.max' => 'Email Terlalu Panjang!',
             'nim.required' => 'NIM Wajib Diisi',
-            'no_hp.required' => 'No Hp Wajib Diisi',
+            'nim.max' => 'NIM Terlalu Panjang!',
+            'nim.min' => 'NIM Terlalu Pendek!',
+            'no_hp.required' => 'No HP Wajib Diisi',
+            'no_hp.max' => 'No HP Terlalu Panjang!',
             'jk.required' => 'Jenis Kelamin Wajib Diisi',
             'nik.required' => 'NIK Wajib Diisi',
             'tempat.required' => 'Tempat Lahir Wajib Diisi',
@@ -96,6 +103,7 @@ class ProfilController extends Controller
         $users = User::find($id);
         $users = User::where('id',$id)->first();
         $users->nama = $request->input('nama');
+        $users->email = $request->input('email');
         $users->no_hp = $request->input('no_hp');
 
         if($users->update()){

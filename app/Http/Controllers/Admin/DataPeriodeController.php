@@ -24,14 +24,12 @@ class DataPeriodeController extends Controller
     public function store(Request $request){
         $this->validate($request,[
             'tgl_mulai' => 'required',
-            'tgl_selesai' => 'required',
             'thn_ajaran' => 'required',
             'status' => 'required',
             'semester' => 'required'
         ],
         [
             'tgl_mulai.required' => 'Tanggal Mulai Wajib Diisi',
-            'tgl_selesai.required' => 'Tanggal Selesai Wajib Diisi',
             'thn_ajaran.required' => 'Tahun Ajaran Wajib Diisi',
             'status.required' => 'Status Wajib Diisi',
             'semester.required' => 'Semester Wajib Diisi',
@@ -111,14 +109,12 @@ Kami dari Admin Asistensi memberitahukan kepada seluruh calon Asisten Praktikum 
 
         $this->validate($request,[
             'tgl_mulai' => 'required',
-            'tgl_selesai' => 'required',
             'thn_ajaran' => 'required',
             'status' => 'required',
             'semester' => 'required'            
         ],
         [
             'tgl_mulai.required' => 'Tanggal Mulai Wajib Diisi',
-            'tgl_selesai.required' => 'Tanggal Selesai Wajib Diisi',
             'thn_ajaran.required' => 'Tahun Ajaran Wajib Diisi',
             'status.required' => 'Status Wajib Diisi',
             'semester.required' => 'Semester Wajib Diisi',

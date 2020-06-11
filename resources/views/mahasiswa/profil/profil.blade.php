@@ -104,6 +104,14 @@ h3 > span {
                                     </div>
                                     <div class="profile-user-details clearfix">
                                         <div class="profile-user-details-label">
+                                            Email 
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->email }}
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
                                             Nama 
                                         </div>
                                         <div class="profile-user-details-value">

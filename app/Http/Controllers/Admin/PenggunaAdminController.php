@@ -23,7 +23,7 @@ class PenggunaAdminController extends Controller
     public function index()
     {
         $users = Admin::leftJoin('user','admin.user_id','=','user.id')->leftJoin('role','user.role_id','=','role.id')
-        ->select('admin.nip','user.nama','user.id', 'user.foto', 'user.no_hp', 'user.role_id', 'user.nama', 'user.username', 'role.role')
+        ->select('admin.nip','user.email','user.nama','user.id', 'user.foto', 'user.no_hp', 'user.role_id', 'user.nama', 'user.username', 'role.role')
         ->distinct()->get();
         return view('admin.pengguna.admin.admin')->with('users',$users);        
         // return $users;
@@ -40,7 +40,7 @@ class PenggunaAdminController extends Controller
     public function store(Request $request){
         $this->validate($request,[
             'nama' => ['required', 'string', 'max:255'],
-            'nip' => ['required', 'string', 'max:10','min:6'],
+            'nip' => ['required', 'string', 'max:20','min:6'],
             'password' => ['required', 'string', 'max:255']
         ],
         [
@@ -48,6 +48,7 @@ class PenggunaAdminController extends Controller
             'nama.max' => 'Nama Terlalu Panjang!',
             'nip.required' => 'NIP Wajib Diisi',
             'nip.max' => 'NIP Terlalu Panjang!',
+            'nip.min' => 'NIP Terlalu Pendek!',
             'password.required' => 'Password Wajib Diisi',
             'password.max' => 'Password Terlalu Panjang!',
         ]);    
@@ -66,6 +67,7 @@ class PenggunaAdminController extends Controller
         $users = new User;
         $users->id = $b;
         $users->role_id = $a->id;
+        $users->email = $request->input('email');
         $users->nama = $request->input('nama');
        
 

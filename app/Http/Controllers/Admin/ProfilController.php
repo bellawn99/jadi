@@ -21,7 +21,7 @@ class ProfilController extends Controller
     public function index()
     {
         $profils = User::leftJoin('admin','admin.user_id','=','user.id')
-        ->select('user.username','admin.id as admin_id','admin.nip','user.id','user.nama','user.username','user.password','user.no_hp','user.foto')
+        ->select('user.email','user.username','admin.id as admin_id','admin.nip','user.id','user.nama','user.username','user.password','user.no_hp','user.foto')
         ->where('admin.user_id',Auth::user()->id)
         ->get();
         
@@ -73,19 +73,27 @@ class ProfilController extends Controller
     {
 
         $this->validate($request,[
-            'nama' => 'required',
-            'nip' => 'required',
-            'no_hp' => 'required',
+            'nama' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:50'],
+            'nip' => ['required', 'string', 'max:10','min:6'],
+            'no_hp' => ['required', 'string', 'max:15'],
         ],
         [
             'nama.required' => 'Nama Wajib Diisi',
+            'nama.max' => 'Nama Terlalu Panjang!',
+            'email.required' => 'Email Wajib Diisi',
+            'email.max' => 'Email Terlalu Panjang!',
             'nip.required' => 'NIP Wajib Diisi',
-            'no_hp.required' => 'No Hp Wajib Diisi',
+            'nip.max' => 'NIP Terlalu Panjang!',
+            'nip.min' => 'NIP Terlalu Pendek!',
+            'no_hp.required' => 'No HP Wajib Diisi',
+            'no_hp.max' => 'No HP Terlalu Panjang!',
         ]);
 
         $users = User::find($id);
         $users = User::where('id',$id)->first();
         $users->nama = $request->input('nama');
+        $users->email = $request->input('email');
         $users->no_hp = $request->input('no_hp');
 
         if($users->update()){

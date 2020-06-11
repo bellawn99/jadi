@@ -69,25 +69,7 @@
                         @endforeach
                         </select>
                       </div>
-                      <div class="form-group col-md-4">
-                        <label for="bulan">Bulan</label>
-                        <select name='bulan' class='form-control'>
-                                <option value=01>Januari</option>
-                                <option value=02>Februari</option>
-                                <option value=03>Maret</option>
-                                <option value=04>April</option>
-                                <option value=05>Mei</option>
-                                <option value=06>Juni</option>
-                                <option value=07>Juli</option>
-                                <option value=08>Agustus</option>
-                                <option value=09>September</option>
-                                <option value=10>Oktober</option>
-                                <option value=11>November</option>
-                                <option value=12>Desember</option>
-                        </select>
-                      </div>
                     </div>
-                      <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Filter</button>
                       </form>
                       <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
                     </div>
@@ -180,10 +162,10 @@
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: day,
+            labels: blnArr,
             datasets: [
               {
-                label: "Pengajuan Asistensi Bulan "+blnArr[{{ $bulan-1 }}],
+                label: "Pengajuan Asistensi Tahun Ajaran "+blnArr[{{ $bulan-1 }}],
                 borderColor: gradientStrokeViolet,
                 backgroundColor: gradientStrokeViolet,
                 hoverBackgroundColor: gradientStrokeViolet,

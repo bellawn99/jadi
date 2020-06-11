@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Charts;
+use Notification;
+use App\Notifications\PengumumanNotification;
 
 class AdminController extends Controller
 {
@@ -26,6 +28,35 @@ class AdminController extends Controller
         $data['prak']=Praktikum::all();
         $data['jml_prak']=$data['prak']->count();
 
+        $cek = Carbon::now()->subday(14);
+
+        $cek2 = Periode::select('tgl_mulai')
+        ->where('status','=','pengumuman')
+        ->whereDate('tgl_mulai', '>=', $cek->toDateString())
+        ->get();
+        if($cek2){
+        $user = User::where('role_id',2)->select('id','role_id','nama','email')->get();
+
+        // return $user;
+        $nama = json_decode(json_encode($user));
+        
+        $collection = [];
+
+        foreach($user as $iki){
+            $collection[] = $iki;
+        }
+
+        $details = [
+            'greeting' => 'Hallo!',
+            'body' => 'Kami ingin memberitahukan bahwa data nama asistensi sudah dapat diakses di akun masing-masing',
+            'thanks' => 'Terimakasih',
+            'actionText' => 'Cek Pengumuman',
+            'actionURL' => url('/login'),
+            'id' => $cek2
+        ];
+
+        Notification::send($collection, new PengumumanNotification($details));
+        }
         $data['matkul']=Daftar::all()->count();
         $grap=Daftar::join('praktikum','daftar.praktikum_id','=','praktikum.id')
         ->join('matkul','praktikum.matkul_id','=','matkul.id')

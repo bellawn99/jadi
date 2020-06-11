@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'id' => \Carbon\Carbon::now()->format('ymd').rand(1000,9999),
             'role_id' => $admin->id,
+            'email' => 'admin@mail.com',
             'nama' => 'Admin',
             'username' => '123456',
             'password' => bcrypt('123456'),
@@ -30,6 +31,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'id' => \Carbon\Carbon::now()->format('ymd').rand(1000,9999),
             'role_id' => $mhs->id,
+            'email' => 'bwulan99@gmail.com',
             'nama' => 'Bella Wulan N',
             'username' => '410828',
             'password' => bcrypt('410828'),

@@ -22,7 +22,7 @@ class PenggunaMahasiswaController extends Controller
     public function index()
     {
         $users = Mahasiswa::leftJoin('user','mahasiswa.user_id','=','user.id')->leftJoin('role','user.role_id','=','role.id')
-        ->select('mahasiswa.nim','user.nama','user.id', 'user.foto', 'user.no_hp', 'user.role_id', 'user.nama', 'user.username', 'role.role')
+        ->select('mahasiswa.nim','user.email','user.nama','user.id', 'user.foto', 'user.no_hp', 'user.role_id', 'user.nama', 'user.username', 'role.role')
         ->distinct()->get();
         return view('admin.pengguna.mahasiswa.mahasiswa')->with('users',$users);        
         // return $users;
@@ -39,7 +39,7 @@ class PenggunaMahasiswaController extends Controller
     public function store(Request $request){
         $this->validate($request,[
             'nama' => ['required', 'string', 'max:255'],
-            'nim' => ['required', 'string', 'max:15','min:6'],
+            'nim' => ['required', 'string', 'max:20','min:6'],
             'password' => ['required', 'string', 'max:255']
         ],
         [
@@ -47,6 +47,7 @@ class PenggunaMahasiswaController extends Controller
             'nama.max' => 'Nama Terlalu Panjang!',
             'nim.required' => 'NIM Wajib Diisi',
             'nim.max' => 'NIM Terlalu Panjang!',
+            'nim.min' => 'NIM Terlalu Pendek!',
             'password.required' => 'Password Wajib Diisi',
             'password.max' => 'Password Terlalu Panjang!',
         ]);    
@@ -66,6 +67,7 @@ class PenggunaMahasiswaController extends Controller
         $users->id = $b;
         $users->role_id = $a->id;
         $users->nama = $request->input('nama');
+        $users->email = $request->input('email');
        
 
         $mahasiswas->user_id = $b;
@@ -95,7 +97,7 @@ class PenggunaMahasiswaController extends Controller
         if(strcmp($request->get('nim'), $request->get('username')) == 0){
             $users->username = $request->input('nim');
         }else{
-            $users->username = substr ($request->input('nim'), 0, 6);
+            $users->username = substr ($request->input('nim'), 3, 6);
         }        
             $users->save();
             $mahasiswas->save();
