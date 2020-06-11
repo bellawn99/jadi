@@ -34,11 +34,8 @@ class AdminController extends Controller
         ->where('status','=','pengumuman')
         ->whereDate('tgl_mulai', '>=', $cek->toDateString())
         ->get();
-        if($cek2){
+        if(count($cek2)>0){
         $user = User::where('role_id',2)->select('id','role_id','nama','email')->get();
-
-        // return $user;
-        $nama = json_decode(json_encode($user));
         
         $collection = [];
 
