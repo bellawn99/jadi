@@ -65,6 +65,7 @@ in: "Cari",
                             <td><a type="button" data-toggle="modal" data-target="#yourModal{{$item->id}}"><img src="{{ URL::to('/') }}/images/{{ $item->foto }}" class="img-thumbnail" width="100%" /></a></td>
                             <td>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#lihat{{$item->id}}" ><i class=" mdi mdi-eye "></i></button>
+                            <button type="button" class="btn btn-warning btn-sm" data-id="{{ $item->id }}" data-username="{{ $item->username }}" data-nama="{{ $item->nama }}" data-toggle="modal" data-target="#ubah{{$item->id}}"><i class=" mdi mdi-autorenew "></i></button>
                             <a data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
@@ -144,8 +145,35 @@ in: "Cari",
     </div>
   </div>
 </div>
-@endforeach
 <!-- End Detail Selengkapnya Modal -->
+
+
+<!-- Reset Mahasiswa Modal -->
+<div class="modal fade" id="ubah{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Reset Password</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+      <form class="forms-sample" style="{margin:0 auto;}" data-toggle="validator" action="{{ route('reset.mahasiswa') }}" method="post">
+        {{csrf_field()}}
+        {{ method_field('POST') }}
+      <input type="hidden" value="{{ $item->id }}" id="id" name="id">
+      <input type="hidden" value="{{ $item->username }}" id="username" name="username">
+      Yakin akan reset password akun {{ $item->nama }}?
+      </div>
+      <div class="modal-footer">
+      <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Reset</button>
+      <button class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
+<!-- End Reset Mahasiswa Modal -->
 
 <!-- Import Modal -->
 <div class="modal fade" id="importMhs" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

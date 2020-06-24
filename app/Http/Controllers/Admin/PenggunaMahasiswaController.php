@@ -108,6 +108,20 @@ class PenggunaMahasiswaController extends Controller
         return redirect('admin/pengguna/user-mahasiswa')->with('status', 'Berhasil Menambahkan Data Mahasiswa');
     }
 
+    public function reset(Request $request,$id=0){
+
+        $id = $request->id;
+               
+        $users = User::find($id);
+        $users = User::where('id',$id)->first();
+
+        $users->password = Hash::make($request->get('username'));
+        $users->save();
+        
+        Session::flash('statuscode','success');
+        return redirect('admin/pengguna/user-mahasiswa')->with('status', 'Berhasil Reset Password Mahasiswa');
+    }
+
     public function delete($id)
     {
         $users = User::findOrFail($id);

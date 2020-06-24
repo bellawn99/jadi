@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix'=> 'admin'], function()
             Route::get('/', 'Admin\PenggunaAdminController@index');
             Route::post('/import','Admin\PenggunaAdminController@csv_import')->name('import.pengguna.admin');
             Route::post('/', 'Admin\PenggunaAdminController@store')->name('store.pengguna.admin');
+            Route::post('/reset', 'Admin\PenggunaAdminController@reset')->name('reset.admin');
             Route::delete('/delete/{id}', 'Admin\PenggunaAdminController@delete');
         });
 
@@ -37,6 +38,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix'=> 'admin'], function()
             Route::get('/', 'Admin\PenggunaMahasiswaController@index');
             Route::post('/import','Admin\PenggunaMahasiswaController@csv_import')->name('import.pengguna.mhs');
             Route::post('/', 'Admin\PenggunaMahasiswaController@store')->name('store.pengguna.mhs');
+            Route::post('/reset', 'Admin\PenggunaMahasiswaController@reset')->name('reset.mahasiswa');
             Route::delete('/delete/{id}', 'Admin\PenggunaMahasiswaController@delete');
         });
 

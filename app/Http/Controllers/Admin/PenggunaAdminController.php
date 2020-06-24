@@ -109,6 +109,20 @@ class PenggunaAdminController extends Controller
         return redirect('admin/pengguna/user-admin')->with('status', 'Berhasil Menambahkan Data Admin');
     }
 
+    public function reset(Request $request,$id=0){
+
+        $id = $request->id;
+               
+        $users = User::find($id);
+        $users = User::where('id',$id)->first();
+
+        $users->password = Hash::make($request->get('username'));
+        $users->save();
+        
+        Session::flash('statuscode','success');
+        return redirect('admin/pengguna/user-admin')->with('status', 'Berhasil Reset Password Admin');
+    }
+
     public function delete($id)
     {
         $users = User::findOrFail($id);
