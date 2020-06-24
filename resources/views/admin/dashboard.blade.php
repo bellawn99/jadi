@@ -49,13 +49,13 @@
                   <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
                     <div class="clearfix">
                       <h4 class="card-title float-left">Grafik Pengajuan</h4><br><br>
-                      <form class="forms-sample" style="{margin:0 auto;}" data-toggle="validator" action=" {{ route('search') }} " method="POST">
+                      <form class="forms-sample" style="{margin:0 auto;}" data-toggle="validator" action=" {{ route('search') }} " method="GET">
                     {{csrf_field()}}
-                    {{ method_field('POST') }}
+                    {{ method_field('GET') }}
                     <div class="row">
                       <div class="form-group col-md-4">
                         <label for="thn_ajaran">Tahun Ajaran</label>
-                        <select name='thn_ajaran' class='form-control'>
+                        <select onchange="sort()" name='thn_ajaran' id="tahunAjaran" class='form-control thnAjaran'>
                         @foreach ($thn_ajaran as $value)
                                 <option value="{{ $value->thn_ajaran }}">{{ $value->thn_ajaran }}</option>
                         @endforeach
@@ -63,9 +63,14 @@
                       </div>
                       <div class="form-group col-md-4">
                         <label for="semester">Semester</label>
-                        <select name='semester' class='form-control'>
+                        <select name='semester' onchange="sort()" id="semesterFilter" class='form-control semesteR'>
                         @foreach ($thn_ajaran as $value)
-                                <option value="{{ $value->semester }}">{{ $value->semester }}</option>
+                                <option value="{{ $value->semester }}">@if($value->semester === 'genap')
+                                Genap
+                                @else
+                                Ganjil
+                                @endif
+                                </option>
                         @endforeach
                         </select>
                       </div>
@@ -73,7 +78,10 @@
                       </form>
                       <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
                     </div>
+                    <div>
                     <canvas id="visit-sale-chart" class="mt-4 chartjs-render-monitor" style="display: block; width: 497px; height: 248px;" width="497" height="248"></canvas>
+                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -140,6 +148,117 @@
 @push('js')
 <!-- <script src="{{url('assets/js/dashboard.js')}}"></script> -->
 <script>
+
+function sort(){
+  var thn = $("#semesterFilter option:selected").val()
+  var def = $("#tahunAjaran option:selected").val()
+  // console.log(thn + def);
+
+  $.ajax({
+      type : 'GET',
+      url : "{{ route('search') }}" + ( !thn ? "?v=all" : "?v="+thn ) + (!def ? "" : "&z="+def),
+      dataType : "JSON",
+      success : function(response){
+        Chart.defaults.global.legend.labels.usePointStyle = true;
+    
+    //if ($("#visit-sale-chart").length) {
+      Chart.defaults.global.legend.labels.usePointStyle = true;
+      var ctx = document.getElementById('visit-sale-chart').getContext("2d");
+
+      var gradientStrokeViolet = ctx.createLinearGradient(0, 0, 0, 181);
+      gradientStrokeViolet.addColorStop(0, 'rgba(218, 140, 255, 1)');
+      gradientStrokeViolet.addColorStop(1, 'rgba(154, 85, 255, 1)');
+      var gradientLegendViolet = 'linear-gradient(to right, rgba(218, 140, 255, 1), rgba(154, 85, 255, 1))';
+    
+      var day = [@for($i=1;$i<=$tgl;$i++) {{$i}}, @endfor];
+      var data_click = response.grafik;
+      var thnn = $('#tahunAjaran').find(":selected").text();
+      var semester = $('#semesterFilter').find(":selected").text();
+      const blnArr = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: blnArr,
+            datasets: [
+              {
+                label: "Pengajuan Asistensi Tahun Ajaran "+thnn,
+                borderColor: gradientStrokeViolet,
+                backgroundColor: gradientStrokeViolet,
+                hoverBackgroundColor: gradientStrokeViolet,
+                legendColor: gradientLegendViolet,
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: data_click
+              }
+          ]
+        },
+        options: {
+          responsive: true,
+          legend: false,
+          legendCallback: function(chart) {
+            var text = []; 
+            text.push('<ul>'); 
+            for (var i = 0; i < chart.data.datasets.length; i++) { 
+                text.push('<li><span class="legend-dots" style="background:' + 
+                           chart.data.datasets[i].legendColor + 
+                           '"></span>'); 
+                if (chart.data.datasets[i].label) { 
+                    text.push(chart.data.datasets[i].label); 
+                } 
+                text.push('</li>'); 
+            } 
+            text.push('</ul>'); 
+            return text.join('');
+          },
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      display: false,
+                      min: 0,
+                      stepSize: 20,
+                      max: 80
+                  },
+                  gridLines: {
+                    drawBorder: false,
+                    color: 'rgba(235,237,242,1)',
+                    zeroLineColor: 'rgba(235,237,242,1)'
+                  }
+              }],
+              xAxes: [{
+                  gridLines: {
+                    display:false,
+                    drawBorder: false,
+                    color: 'rgba(0,0,0,1)',
+                    zeroLineColor: 'rgba(235,237,242,1)'
+                  },
+                  ticks: {
+                      padding: 20,
+                      fontColor: "#9c9fa6",
+                      autoSkip: true,
+                  },
+                  categoryPercentage: 0.5,
+                  barPercentage: 0.5
+              }]
+            }
+          },
+          elements: {
+            point: {
+              radius: 0
+            }
+          }
+      })
+      $("#visit-sale-chart-legend").html(myChart.generateLegend());
+   // }
+      }
+  }).done(res=>{
+    console.log(res.grafik);
+    
+  })
+  
+}
+
     (function($) {
   'use strict';
   $(function() {
@@ -158,6 +277,8 @@
     
       var day = [@for($i=1;$i<=$tgl;$i++) {{$i}}, @endfor];
       var data_click = [{{$grafik}}];
+      var thnn = $('#tahunAjaran').find(":selected").text();
+      var semester = $('#semesterFilter').find(":selected").text();
       const blnArr = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
       var myChart = new Chart(ctx, {
         type: 'bar',
@@ -165,7 +286,7 @@
             labels: blnArr,
             datasets: [
               {
-                label: "Pengajuan Asistensi Tahun Ajaran "+blnArr[{{ $bulan-1 }}],
+                label: "Pengajuan Asistensi Tahun Ajaran "+thnn,
                 borderColor: gradientStrokeViolet,
                 backgroundColor: gradientStrokeViolet,
                 hoverBackgroundColor: gradientStrokeViolet,

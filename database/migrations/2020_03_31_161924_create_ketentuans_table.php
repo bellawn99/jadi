@@ -15,7 +15,7 @@ class CreateKetentuansTable extends Migration
     {
         Schema::create('ketentuan', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ketentuan');
+            $table->text('ketentuan');
             $table->timestamps();
         });
     }

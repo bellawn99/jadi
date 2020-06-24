@@ -43,8 +43,6 @@
                             <th>ID</th>
                             <th>NIDN</th>    
                             <th>Nama</th>
-                            <th>No Telepon</th>
-                            <th>Alamat</th>
                             <th>Action</th>
                         </tr>
                       </thead>
@@ -54,8 +52,6 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->nidn }}</td>  
                             <td>{{ $item->nama }}</td>
-                            <td>{{ $item->no_hp }}</td>
-                            <td>{{ $item->alamat }}</td>
                             <td>
                             <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/master/dosen/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
                             <a data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>

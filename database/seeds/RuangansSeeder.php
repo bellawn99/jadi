@@ -16,11 +16,13 @@ class RuangansTableSeeder extends Seeder
 
         Ruangan::create([
             'id' => 'R'.Carbon::now()->format('ymdHi').rand(100,999),
-            'nama_ruangan' => 'HY Labkom 5'
+            'nama_ruangan' => 'HY Labkom 5',
+            'created_at' => Carbon::now()
         ]);
         Ruangan::create([
             'id' => 'R'.Carbon::now()->format('ymdHi').rand(100,999),
-            'nama_ruangan' => 'HY RPL 1'
+            'nama_ruangan' => 'HY RPL 1',
+            'created_at' => Carbon::now()
             ]);
     }
 }

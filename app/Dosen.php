@@ -11,7 +11,7 @@ class Dosen extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id', 'nidn', 'nama', 'no_hp', 'alamat',
+        'id', 'nidn', 'nama'
     ];
 
     protected $casts = ['id' => 'string'];
@@ -19,6 +19,6 @@ class Dosen extends Model
     public $timestamps = false;
 
     public function praktikum(){
-        return $this->belongsTo(Kelas::class);
+        return $this->hasMany(Kelas::class);
     }
 }

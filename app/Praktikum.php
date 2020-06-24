@@ -11,33 +11,29 @@ class Praktikum extends Model
     public $incrementing = true;
 
     protected $fillable = [
-        'id', 'ruangan_id','dosen_id','matkul_id','jadwal_id', 'semester_id'
+        'id', 'ruangan_id','dosen_id','matkul_id','jadwal_id', 'semester'
     ];
 
     public $timestamps = false;
 
     public function jadwal(){
-        return $this->hasMany(Jadwal::class);
+        return $this->belongsTo(Jadwal::class);
     }
 
     public function matkul(){
-        return $this->hasMany(Matkul::class);
+        return $this->belongsTo(Matkul::class);
     }
 
     public function dosen(){
-        return $this->hasMany(Dosen::class);
+        return $this->belongsTo(Dosen::class);
     }
 
     public function ruangan(){
-        return $this->hasMany(Ruangan::class);
+        return $this->belongsTo(Ruangan::class);
     }
 
     public function kelas(){
-        return $this->hasMany(Kelas::class);
-    }
-
-    public function semester(){
-        return $this->hasMany(Semester::class);
+        return $this->belongsTo(Kelas::class);
     }
 
     public function daftar(){

@@ -28,14 +28,13 @@ class MahasiswasTableSeeder extends Seeder
             'tgl_lahir' => '1999-11-03',
             'alamat' => 'Bantul',
             'prodi' => 'Komsi',
-            'krs' => 'ini.pdf',
+            'khs' => 'ini.pdf',
+            'ipk' => 3.99,
             'semester' => 6,
             'nama_bank' => 'BNI',
             'no_rekening' => '00123',
-            'nama_rekening' => 'Mahasiswa'
-
-
-
+            'nama_rekening' => 'Mahasiswa',
+            'created_at' => Carbon::now()
         ]);
     }
 }

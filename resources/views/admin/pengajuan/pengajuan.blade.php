@@ -36,7 +36,8 @@
                             <th>Kelas</th>    
                             <th>Semester</th>
                             <th>Matakuliah</th>
-                            <th>KRS</th>
+                            <th>KHS</th>
+                            <th>IPK</th>
                             <th>Action</th>
                         </tr>
                       </thead>
@@ -48,7 +49,8 @@
                             <td>{{ $item->nama }}</td>  
                             <td>{{ $item->semester }}</td>
                             <td>{{ str_limit($item->nama_matkul, 15) }}</td>
-                            <td><a type="button" data-toggle="modal" data-target="#yourModal{{$item->id}}">{{ $item->krs }}</a></td>
+                            <td><a type="button" data-toggle="modal" data-target="#yourModal{{$item->id}}">{{ $item->khs }}</a></td>
+                            <td>{{ $item->ipk }}</td>
                             <td>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#detail{{$item->id}}" ><i class=" mdi mdi-eye "></i></button>
                             @if($item->status === 'daftar' || $item->status === 'ditolak') 

@@ -15,9 +15,9 @@ class CreateKontaksTable extends Migration
     {
         Schema::create('kontak', function (Blueprint $table) {
             $table->increments('id'); 
-	        $table->string('nama'); 
-	        $table->string('email'); 
-            $table->string('no_hp')->nullable(); 
+	        $table->string('nama',30); 
+	        $table->string('email',50); 
+            $table->string('no_hp',15)->nullable(); 
 	        $table->text('pesan'); 
 	        $table->timestamps(); 
         });

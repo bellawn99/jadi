@@ -12,6 +12,7 @@ use App\Dosen;
 use App\Ruangan;
 use App\Praktikum;
 use App\Semester;
+use App\Mahasiswa;
 use App\Daftar;
 use Session;
 use Auth;
@@ -21,16 +22,15 @@ class PengajuanController extends Controller
 {
     public function index()
     {
-        $pengajuans = Daftar::leftJoin('user','daftar.user_id','=','user.id')
-        ->leftJoin('mahasiswa','user.id','=','mahasiswa.user_id')
+        $pengajuans = Daftar::leftJoin('mahasiswa','daftar.mahasiswa_id','=','mahasiswa.id')
+        ->leftJoin('user','mahasiswa.user_id','=','user.id')
         ->leftJoin('praktikum','daftar.praktikum_id','=','praktikum.id')
         ->leftJoin('dosen','praktikum.dosen_id','=','dosen.id')
         ->leftJoin('matkul','praktikum.matkul_id','=','matkul.id')
         ->leftJoin('jadwal','praktikum.jadwal_id','=','jadwal.id')
         ->leftJoin('ruangan','praktikum.ruangan_id','=','ruangan.id')
         ->join('kelas','praktikum.kelas_id','=','kelas.id')
-        ->join('semester','praktikum.semester_id','=','semester.id')
-        ->select('user.nama as user','mahasiswa.krs','daftar.id as noDaftar','daftar.status','praktikum.id','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','semester.semester','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
+        ->select('user.nama as user','mahasiswa.khs','mahasiswa.ipk','daftar.id as noDaftar','daftar.status','praktikum.id','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
         ->get();  
         
        // $status = Praktikum::leftJoint()->leftJoin('daftar','daftar.praktikum_id','=','praktikum.id')

@@ -29,19 +29,13 @@ class DataDosenController extends Controller
     public function store(Request $request){
         $this->validate($request,[
             'nidn' => ['required', 'string', 'max:255'],
-            'nama' => ['required', 'string', 'max:255'],
-            'no_hp' => ['required', 'string', 'max:15'],
-            'alamat' => ['required', 'string', 'max:255']
+            'nama' => ['required', 'string', 'max:255']
         ],
         [
             'nidn.required' => 'NIDN Wajib Diisi',
             'nidn.max' => 'NIDN Terlalu Panjang!',
             'nama.required' => 'Nama Wajib Diisi',
             'nama.max' => 'Nama Terlalu Panjang!',
-            'no_hp.required' => 'No Hp Wajib Diisi',
-            'no_hp.max' => 'NIDN Terlalu Panjang!',
-            'alamat.required' => 'Alamat Wajib Diisi',
-            'alamat.max' => 'Alamat Terlalu Panjang!',
         ]);
 
     
@@ -55,8 +49,6 @@ class DataDosenController extends Controller
         $dosens->id = $b;
         $dosens->nidn = $request->input('nidn');
         $dosens->nama = $request->input('nama');
-        $dosens->no_hp = $request->input('no_hp');
-        $dosens->alamat = $request->input('alamat');
 
         $dosens->save();
         
@@ -75,26 +67,18 @@ class DataDosenController extends Controller
 
         $this->validate($request,[
             'nidn' => ['required', 'string', 'max:255'],
-            'nama' => ['required', 'string', 'max:255'],
-            'no_hp' => ['required', 'string', 'max:15'],
-            'alamat' => ['required', 'string', 'max:255']
+            'nama' => ['required', 'string', 'max:255']
         ],
         [
             'nidn.required' => 'NIDN Wajib Diisi',
             'nidn.max' => 'NIDN Terlalu Panjang!',
             'nama.required' => 'Nama Wajib Diisi',
             'nama.max' => 'Nama Terlalu Panjang!',
-            'no_hp.required' => 'No Hp Wajib Diisi',
-            'no_hp.max' => 'NIDN Terlalu Panjang!',
-            'alamat.required' => 'Alamat Wajib Diisi',
-            'alamat.max' => 'Alamat Terlalu Panjang!',
         ]);
         
         $dosens = Dosen::find($id);
         $dosens->nidn = $request->input('nidn');
         $dosens->nama = $request->input('nama');
-        $dosens->no_hp = $request->input('no_hp');
-        $dosens->alamat = $request->input('alamat');
 
         $dosens->update();
 

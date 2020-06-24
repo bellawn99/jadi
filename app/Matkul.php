@@ -12,7 +12,7 @@ class Matkul extends Model
     
 
     protected $fillable = [
-        'id', 'dosen_id', 'kode_vmk', 'nama_matkul', 'sks',
+        'id', 'kode_vmk', 'nama_matkul', 'sks',
     ];
 
     public $timestamps = false;
@@ -20,6 +20,6 @@ class Matkul extends Model
     protected $casts = ['id' => 'string'];
 
     public function praktikum(){
-        return $this->belongsTo(Kelas::class);
+        return $this->hasMany(Kelas::class);
     }
 }

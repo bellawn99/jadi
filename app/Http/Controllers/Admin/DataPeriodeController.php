@@ -35,21 +35,15 @@ class DataPeriodeController extends Controller
             'semester.required' => 'Semester Wajib Diisi',
         ]);
 
-        $periodes = new Periode;
+        // $periodes = new Periode;
         
         $b = 'P'.Carbon::now()->format('ymdHi').rand(100,999);
 
-        $periodes->id = $b;
-        $periodes->berita_id = 'B'.Carbon::now()->format('ymdHi').rand(100,999);
-        $periodes->tgl_mulai = $request->input('tgl_mulai');
-        $periodes->thn_ajaran = $request->input('thn_ajaran');
-        $periodes->status = $request->input('status');
-        $periodes->semester = $request->input('semester');
-        $periodes->created_at = Carbon::now();
+        // return $request->input('tgl_selesai');
+
         if($request->get('status')=='Daftar'){
-            $periodes->tgl_selesai = $request->input('tgl_selesai');
             $beritas = new Berita;
-            $beritas->id = $periodes->berita_id;
+            $beritas->id = 'B'.Carbon::now()->format('ymdHi').rand(100,999);
             $beritas->user_id = Auth()->user()->id;
             $judul = "Pendaftaran Asistensi Semester ".$request->input('semester')." TA ".$request->input('thn_ajaran');
             $isi = "PERSIAPKAN DIRIMU !
@@ -68,12 +62,29 @@ Daftarkan segera dan jadilah bagian dari kami.";
             $beritas->isi = $isi;
             $beritas->foto = "daftar.png";
             $beritas->created_at = Carbon::now();
-            $beritas->save();
+            if($beritas->save()){
+                $periodes = new Periode;
+        
+              $periodes->id = $b;
+              $periodes->berita_id = $beritas->id;
+              $periodes->tgl_mulai = $request->input('tgl_mulai');
+              $periodes->tgl_selesai = $request->input('tgl_selesai');
+              $periodes->thn_ajaran = $request->input('thn_ajaran');
+              $periodes->status = $request->input('status');
+              $periodes->semester = $request->input('semester');
+              $periodes->created_at = Carbon::now();
+                if($periodes->save()){
+                    $beritas->save();
+                }
+                
             }
-        }else{
-            $periodes->tgl_selesai = null;
+            }else{
+                Session::flash('statuscode','error');
+                return redirect('admin/periode')->with('status', 'Gagal Menambahkan Data Periode!'); 
+            }
+      }else{
             $beritas = new Berita;
-            $beritas->id = $periodes->berita_id;
+            $beritas->id = 'B'.Carbon::now()->format('ymdHi').rand(100,999);
             $beritas->user_id = Auth()->user()->id;
             $judul2 = "Pengumuman Penerimaan Asisten Praktikum Semester ".$request->input('semester')." TA ".$request->input('thn_ajaran');
             $isi2 = "Assalamualaikum Wr Wb
@@ -86,14 +97,32 @@ Kami dari Admin Asistensi memberitahukan kepada seluruh calon Asisten Praktikum 
             $beritas->isi = $isi2;
             $beritas->foto = "terima.png";
             $beritas->created_at = Carbon::now();
-            $beritas->save();
+            if($beritas->save()){
+                $periodes = new Periode;
+        
+              $periodes->id = $b;
+              $periodes->berita_id = $beritas->id;
+              $periodes->tgl_mulai = $request->input('tgl_mulai');
+              $periodes->tgl_selesai = $request->input('tgl_selesai');
+              $periodes->thn_ajaran = $request->input('thn_ajaran');
+              $periodes->status = $request->input('status');
+              $periodes->semester = $request->input('semester');
+              $periodes->created_at = Carbon::now();
+                if($periodes->save()){
+                    $beritas->save();
+                }
+                    
+                } 
+            }else{
+                Session::flash('statuscode','error');
+                return redirect('admin/periode')->with('status', 'Gagal Menambahkan Data Periode!'); 
             }
-        }
+      }
 
-        $periodes->save();
+        
        
         
-        Session::flash('statuscode','success');
+    Session::flash('statuscode','success');
         return redirect('admin/periode')->with('status', 'Berhasil Menambahkan Data Periode');
     }
 
@@ -135,7 +164,7 @@ CP : 088-888-888-888
 Daftarkan segera dan jadilah bagian dari kami.";
         
         $beritas = Berita::where('id','=',$id)->first();
-        if($beritas->judul != $judul){
+        if($beritas->judul != $judul || $beritas->judul == $judul){
             $beritas->user_id = Auth()->user()->id;
             $beritas->judul = $judul;
             $beritas->isi = $isi;
@@ -155,6 +184,9 @@ Daftarkan segera dan jadilah bagian dari kami.";
                 }
                 
             } 
+        }else{
+            Session::flash('statuscode','error');
+            return redirect('admin/periode')->with('status', 'Gagal Merubah Data Periode!'); 
         }
               
 
@@ -166,7 +198,7 @@ Salam sejahtera bagi kita semua.
 Kami dari Admin Asistensi memberitahukan kepada seluruh calon Asisten Praktikum Semester Genap Tahun Akademik".$request->input('thn_ajaran').", ingin menginformasikan bahwa sudah ada daftar nama Asisten Praktikum Tahun Ajaran ini. Untuk lebih lengkapnya silahkan login dengan akun masing-masing.";
             
             $beritas = Berita::where('id','=',$id)->first();
-            if($beritas->judul != $judul2){
+            if($beritas->judul != $judul2 || $beritas->judul == $judul){
                 $beritas->user_id = Auth()->user()->id;
                 $beritas->judul = $judul2;
                 $beritas->isi = $isi2;
@@ -177,7 +209,6 @@ Kami dari Admin Asistensi memberitahukan kepada seluruh calon Asisten Praktikum 
             
     
                     $periodes->tgl_mulai = $request->input('tgl_mulai');
-                    $periodes->tgl_selesai = null;
                     $periodes->thn_ajaran = $request->input('thn_ajaran');
                     $periodes->status = $request->input('status');
                     $periodes->semester = $request->input('semester');
@@ -186,6 +217,9 @@ Kami dari Admin Asistensi memberitahukan kepada seluruh calon Asisten Praktikum 
                     }
                     
                 } 
+            }else{
+                Session::flash('statuscode','error');
+                return redirect('admin/periode')->with('status', 'Gagal Merubah Data Periode!'); 
             }
         }
         
@@ -197,6 +231,8 @@ Kami dari Admin Asistensi memberitahukan kepada seluruh calon Asisten Praktikum 
     public function delete($id){
 
         $periodes = Periode::findOrFail($id);
+        $beritas = Berita::where('id',$id);
+        $beritas->delete();
         $periodes->delete();
 
         Session::flash('statuscode','success');

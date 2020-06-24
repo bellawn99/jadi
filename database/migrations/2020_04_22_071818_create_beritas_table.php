@@ -14,13 +14,13 @@ class CreateBeritasTable extends Migration
     public function up()
     {
         Schema::create('berita', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->string('user_id',20)->nullable();
-            $table->string('judul')->unique();
+            $table->string('id',20)->primary();
+            $table->string('admin_id',20)->nullable();
+            $table->string('judul',50)->unique();
             $table->text('isi');
-            $table->string('foto');
+            $table->string('foto',30);
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('admin_id')->references('id')->on('admin');
         });
     }
 

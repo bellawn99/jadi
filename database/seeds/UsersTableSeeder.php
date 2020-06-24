@@ -25,7 +25,9 @@ class UsersTableSeeder extends Seeder
             'nama' => 'Admin',
             'username' => '123456',
             'password' => bcrypt('123456'),
-            'no_hp' => '0877380088068'
+            'no_hp' => '0877380088068',
+            'foto' => 'avatar.png',
+            'created_at' => Carbon::now()
         ]);
 
         User::create([
@@ -35,7 +37,9 @@ class UsersTableSeeder extends Seeder
             'nama' => 'Bella Wulan N',
             'username' => '410828',
             'password' => bcrypt('410828'),
-            'no_hp' => '081804007078'
+            'no_hp' => '081804007078',
+            'foto' => 'avatar.png',
+            'created_at' => Carbon::now()
         ]);
 
     }

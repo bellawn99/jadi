@@ -20,7 +20,7 @@ class AdminsTableSeeder extends Seeder
             'id' => 'A'.Carbon::now()->format('ymdHi').rand(100,999),
             'user_id' => $a->id,
             'nip' => '001100000',
-
+            'created_at' => Carbon::now()
         ]);
     }
 }

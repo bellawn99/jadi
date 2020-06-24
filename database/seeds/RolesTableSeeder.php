@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Role;
+use Carbon\Carbon;
 
 class RolesTableSeeder extends Seeder
 {
@@ -15,11 +16,13 @@ class RolesTableSeeder extends Seeder
 
         Role::create([
             'id' => 1,
-            'role' => 'admin'
+            'role' => 'admin',
+            'created_at' => Carbon::now()
         ]);
         Role::create([
             'id' => 2,
-            'role' => 'mahasiswa'
+            'role' => 'mahasiswa',
+            'created_at' => Carbon::now()
             ]);
     }
 }

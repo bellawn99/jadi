@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Berita;
-use App\User;
+use App\Admin;
 use Carbon\Carbon;
 
 class BeritasTableSeeder extends Seeder
@@ -14,7 +14,7 @@ class BeritasTableSeeder extends Seeder
      */
     public function run()
     {
-        $a = User::select('id')->where('role_id', 1 )->get()->first();
+        $a = Admin::select('id')->where('nip', '001100000' )->get()->first();
 
         Berita::create([
             'id' => 'B'.Carbon::now()->format('ymdHi').rand(100,999),
@@ -31,7 +31,7 @@ CP : 088-888-888-888
 Daftarkan segera dan jadilah bagian dari kami.',
             'foto' => 'daftar.png',
             'created_at' => '2020-01-15',
-            'user_id' => $a->id
+            'admin_id' => $a->id
         ]);
     }
 }

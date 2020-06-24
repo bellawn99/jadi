@@ -11,7 +11,7 @@ class Kelas extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id', 'nama', 'semester',
+        'id', 'nama'
     ];
 
     protected $casts = ['id' => 'string'];
@@ -19,6 +19,6 @@ class Kelas extends Model
     public $timestamps = false;
 
     public function praktikum(){
-        return $this->belongsTo(Jadwal::class);
+        return $this->hasMany(Jadwal::class);
     }
 }

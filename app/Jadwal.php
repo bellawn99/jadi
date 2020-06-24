@@ -19,6 +19,6 @@ class Jadwal extends Model
     public $timestamps = false;
 
     public function praktikum(){
-        return $this->belongsTo(Kelas::class);
+        return $this->hasMany(Kelas::class);
     }
 }

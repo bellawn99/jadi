@@ -11,7 +11,7 @@ class Daftar extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id', 'user_id','praktikum_id','status'
+        'id', 'mahasiswa_id','praktikum_id','status'
     ];
 
     public $timestamps = false;
@@ -19,10 +19,10 @@ class Daftar extends Model
     protected $casts = ['id' => 'string'];
 
     public function praktikum(){
-        return $this->hasMany(Praktikum::class);
+        return $this->belongsTo(Praktikum::class);
     }
 
-    public function user(){
-        return $this->hasMany(User::class);
+    public function mahasiswa(){
+        return $this->belongsTo(Mahasiswa::class);
     }
 }

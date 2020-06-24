@@ -17,16 +17,13 @@ class DosensTableSeeder extends Seeder
             'id' => 'D'.Carbon::now()->format('ymdHi').rand(100,999),
             'nidn' => '0005058902',
             'nama' => 'Irkham Huda',
-            'no_hp' => '081804030301',
-            'alamat' => 'Yogyakarta'
-
+            'created_at' => Carbon::now()
         ]);
         Dosen::create([
             'id' => 'D'.Carbon::now()->format('ymdHi').rand(100,999),
             'nidn' => '0012018803',
             'nama' => 'Imam Fahrurrozi',
-            'no_hp' => '087738838888',
-            'alamat' => 'Yogyakarta'
+            'created_at' => Carbon::now()
             ]);
     }
 }

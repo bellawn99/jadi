@@ -11,7 +11,7 @@ class Berita extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id', 'judul', 'isi', 'foto'
+        'id', 'judul', 'isi', 'foto', 'admin_id'
     ];
 
     protected $casts = ['id' => 'string'];
@@ -22,7 +22,7 @@ class Berita extends Model
         return $this->belongsTo(Periode::class);
     }
 
-    public function user(){
+    public function admin(){
         return $this->belongsTo(User::class);
     }
 }

@@ -30,6 +30,15 @@ class AdminController extends Controller
 
         $cek = Carbon::now()->subday(14);
 
+        // $batas = DB::table('daftar')->where('periode_id','P2006111647507')->get();
+
+        // foreach($batas as $iki){
+        //     $thn = date("Y", strtotime($iki->created_at));
+        //     $bulan = date("m", strtotime($iki->created_at));
+        //     }
+
+        // return $bulan;
+
         $cek2 = Periode::select('tgl_mulai')
         ->where('status','=','pengumuman')
         ->whereDate('tgl_mulai', '>=', $cek->toDateString())
@@ -80,7 +89,8 @@ class AdminController extends Controller
         ->join('jadwal','praktikum.jadwal_id','=','jadwal.id')
         ->leftJoin('daftar','daftar.praktikum_id','=','praktikum.id')
         ->join('periode','daftar.periode_id','=','periode.id')
-        ->join('user','daftar.user_id','=','user.id')
+        ->join('mahasiswa','daftar.mahasiswa_id','=','mahasiswa.id')
+        ->join('user','mahasiswa.user_id','=','user.id')
         ->join('kelas','praktikum.kelas_id','=','kelas.id')
         ->select('praktikum.semester','user.nama as pengguna','user.foto','matkul.sks','daftar.status','kelas.nama as kelas','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','matkul.nama_matkul')
         ->where('daftar.created_at','=',$now)
@@ -88,10 +98,10 @@ class AdminController extends Controller
 
         //$bulan =  Carbon::now();
           
-        $click = Daftar::select(DB::raw("SUM(status) as jumlah"),(DB::raw("DAY(created_at) as created_at")))
+        $click = Daftar::select(DB::raw("SUM(status) as jumlah"),(DB::raw("MONTH(created_at) as created_at")))
         ->where(DB::raw("MONTH(created_at)"),'>=',$now->month)
         ->groupBy('created_at')
-        ->orderBy(DB::raw("DAY(created_at)"))
+        ->orderBy(DB::raw("MONTH(created_at)"))
         ->get();
         //->toArray();
         foreach($click as $key=>$val){
@@ -104,7 +114,7 @@ class AdminController extends Controller
         $bulan = $z->month;
 
         $dim=cal_days_in_month(CAL_GREGORIAN,$bulan,date('Y'));
-        for($i=1;$i<=$dim;$i++){
+        for($i=1;$i<=12;$i++){
             //$tgl[]="$i;
             if(isset($dtgrfk[$i])){
                 $grfk[$i]=$dtgrfk[$i];
@@ -188,7 +198,8 @@ class AdminController extends Controller
         ->join('jadwal','praktikum.jadwal_id','=','jadwal.id')
         ->leftJoin('daftar','daftar.praktikum_id','=','praktikum.id')
         ->join('periode','daftar.periode_id','=','periode.id')
-        ->join('user','daftar.user_id','=','user.id')
+        ->join('mahasiswa','daftar.mahasiswa_id','=','user.mahasiswa_id')
+        ->join('user','mahasiswa.user_id','=','user.id')
         ->join('kelas','praktikum.kelas_id','=','kelas.id')
         ->select('praktikum.semester','user.nama as pengguna','user.foto','matkul.sks','daftar.status','kelas.nama as kelas','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','matkul.nama_matkul')
         ->where('daftar.created_at','=',$now)
@@ -208,11 +219,11 @@ class AdminController extends Controller
         $data['periode'] = Daftar::where('periode_id',$periode->id)->get();
         // dd($data);
 
-        $click = Daftar::select(DB::raw("SUM(status) as jumlah"),(DB::raw("DAY(created_at) as created_at")))
+        $click = Daftar::select(DB::raw("SUM(status) as jumlah"),(DB::raw("MONTH(created_at) as created_at")))
         ->where('periode_id',$periode->id)
         ->whereMonth('created_at',$bulan)
         ->groupBy('created_at')
-        ->orderBy(DB::raw("DAY(created_at)"))
+        ->orderBy(DB::raw("MONTH(created_at)"))
         ->get();
         
         foreach($click as $key=>$val){
@@ -228,7 +239,7 @@ class AdminController extends Controller
            $click='';
             $dim=cal_days_in_month(CAL_GREGORIAN,$bulan,date('Y'));
         }
-        for($i=1;$i<=$dim;$i++){
+        for($i=1;$i<=12;$i++){
             
             if(isset($dtgrfk[$i])){
                 $grfk[$i]=$dtgrfk[$i];
@@ -251,4 +262,53 @@ class AdminController extends Controller
         ->with('bln',json_encode($click,JSON_NUMERIC_CHECK));
         
     }
+
+    public function get_data(Request $request)   {
+
+        $get_thn = $_GET['z'];
+        $gett_ex = $_GET['v'];
+
+        $periode = DB::table('periode')->where('thn_ajaran', $get_thn)->where('semester', $gett_ex)->first();
+
+        $batas = DB::table('daftar')->where('periode_id',$periode->id)->get();
+
+        if (count($batas)>0){
+        $click = Daftar::select(DB::raw("SUM(status) as jumlah"),(DB::raw("MONTH(created_at) as created_at")))
+        ->where('periode_id',$periode->id)
+        ->groupBy('created_at')
+        ->orderBy(DB::raw("MONTH(created_at)"))
+        ->get();
+        
+        foreach($click as $key=>$val){
+            $dtgrfk[$val->created_at]=$val->jumlah;
+        }
+
+        
+        
+        foreach($batas as $iki){
+            $thn = date("Y", strtotime($iki->created_at));
+            $bulan = date("m", strtotime($iki->created_at));
+            }
+
+        $dim=cal_days_in_month(CAL_GREGORIAN,$bulan,$thn);
+        }else{
+
+           $click='';
+            $dim=cal_days_in_month(CAL_GREGORIAN,date('m'),date('Y'));
+        }
+        for($i=1;$i<=12;$i++){
+            
+            if(isset($dtgrfk[$i])){
+                $grfk[$i]=$dtgrfk[$i];
+            }else{
+                $grfk[$i]=0;
+            }
+        }
+        
+        $arrgrfk=implode(",",$grfk);
+
+        return response()->json(['grafik' => $arrgrfk]);
+
+    }
+
 }

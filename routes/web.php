@@ -21,7 +21,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth', 'admin'], 'prefix'=> 'admin'], function() {
     Route::get('/dashboard', 'Admin\AdminController@home')->name('admin.dashboard');
-    Route::post('/dashboard', 'Admin\AdminController@search')->name('search');
+    Route::get('/dashboard/stat', 'Admin\AdminController@get_data')->name('search');
+    // Route::get('/dashboard/', 'Admin\AdminController@search')->name('search');
+    
     
     Route::group(['prefix' => '/pengguna'],function(){
         Route::group(['prefix' => '/user-admin'],function(){

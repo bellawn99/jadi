@@ -45,14 +45,6 @@
                         <label for="nama">Nama</label>
                         <input type="text" class="form-control" id="nama" name="nama" value="{{$dosens->nama}}">
                       </div>
-                      <div class="form-group">
-                        <label for="no_hp">No Telepon</label>
-                        <input type="text" class="form-control" id="no_hp" name="no_hp" value="{{$dosens->no_hp}}">
-                      </div>
-                      <div class="form-group">
-                        <label for="alamat">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" value="{{$dosens->alamat}}">
-                      </div>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
                       <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">

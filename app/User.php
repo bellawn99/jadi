@@ -25,15 +25,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -64,13 +55,5 @@ class User extends Authenticatable
 
     public function admin(){
         return $this->belongsTo(Admin::class);
-    }
-
-    public function daftar(){
-        return $this->belongsTo(Daftar::class);
-    }
-
-    public function berita(){
-        return $this->belongsTo(Berita::class);
     }
 }

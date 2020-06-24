@@ -42,7 +42,8 @@ class PraktikumsTableSeeder extends Seeder
             'jadwal_id' => $e->id,
             'ruangan_id' => $g->id,
             'kelas_id' => $i->id,
-            'semester' => 1
+            'semester' => 1,
+            'created_at' => Carbon::now()
         ]);
         Praktikum::create([
             'id' => 2,
@@ -51,7 +52,8 @@ class PraktikumsTableSeeder extends Seeder
             'jadwal_id' => $f->id,
             'ruangan_id' => $h->id,
             'kelas_id' => $j->id,
-            'semester' => 3
+            'semester' => 3,
+            'created_at' => Carbon::now()
             ]);
     }
 }

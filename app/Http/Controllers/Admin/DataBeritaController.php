@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Berita;
 use App\User;
+use App\Admin;
 use Carbon\Carbon;
 use Session;
 use Maatwebsite\Excel\Facades\Excel;
@@ -15,7 +16,8 @@ class DataBeritaController extends Controller
 {
     public function index()
     {
-        $beritas = Berita::join('user','berita.user_id','=','user.id')
+        $beritas = Berita::join('admin','berita.admin_id','=','admin.id')
+        ->join('user','admin.user_id','=','user.id')
         ->where('user.id',Auth()->user()->id)
         ->select('berita.id','berita.judul','berita.isi','berita.foto','user.nama')
         ->get();
@@ -39,10 +41,12 @@ class DataBeritaController extends Controller
         $now = Carbon::now();
         $id = 'B'.Carbon::now()->format('ymdHi').rand(100,999);
 
+        $a = Admin::where(['user_id'=>Auth::user()->id])->get();
+
         $beritas = new Berita;
 
         $beritas->id = $id;
-        $beritas->user_id = Auth()->user()->id;
+        $beritas->admin_id = $a->id;
         $beritas->judul = $request->input('judul');
         $beritas->isi = nl2br($request->input('isi'));
         $beritas->foto = $request->input('foto');

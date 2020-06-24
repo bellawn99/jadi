@@ -16,12 +16,12 @@ class CreateDaftarsTable extends Migration
         Schema::create('daftar', function (Blueprint $table) {
             $table->string('id',20)->primary();
             $table->string('periode_id',20)->nullable();
-            $table->string('user_id',20)->nullable();
+            $table->string('mahasiswa_id',20)->nullable();
             $table->integer('praktikum_id')->nullable()->unsigned();
-            $table->enum('status',['daftar','batal','diterima','ditolak'])->nullable();
+            $table->enum('status',['daftar','diterima','ditolak'])->nullable();
             $table->timestamps();
             $table->foreign('periode_id')->references('id')->on('periode');
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
             $table->foreign('praktikum_id')->references('id')->on('praktikum');
         });
     }

@@ -15,8 +15,8 @@ class CreateMatkulsTable extends Migration
     {
         Schema::create('matkul', function (Blueprint $table) {
             $table->string('id',20)->primary();
-            $table->string('kode_vmk')->unique();
-            $table->string('nama_matkul')->unique();
+            $table->string('kode_vmk',20)->unique();
+            $table->string('nama_matkul',100)->unique();
             $table->integer('sks');
             $table->timestamps();
         });

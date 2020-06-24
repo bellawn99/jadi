@@ -13,6 +13,7 @@ use App\Ruangan;
 use App\User;
 use App\Praktikum;
 use App\Semester;
+use App\Mahasiswa;
 use App\Daftar;
 use App\Periode;
 use Session;
@@ -24,14 +25,12 @@ class DaftarController extends Controller
 {
     public function index()
     {        
-        $daftars = Praktikum::
-        join('dosen','praktikum.dosen_id','=','dosen.id')
+        $daftars = Praktikum::join('dosen','praktikum.dosen_id','=','dosen.id')
         ->join('matkul','praktikum.matkul_id','=','matkul.id')
         ->join('jadwal','praktikum.jadwal_id','=','jadwal.id')
         ->join('ruangan','praktikum.ruangan_id','=','ruangan.id')
         ->join('kelas','praktikum.kelas_id','=','kelas.id')
-        ->join('semester','praktikum.semester_id','=','semester.id')
-        ->select('praktikum.id','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','semester.semester','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
+        ->select('praktikum.id','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
         ->get();
 
 
@@ -47,7 +46,8 @@ class DaftarController extends Controller
         ->where('status','=','daftar')
         ->get();
 
-        $usr = Daftar::where('daftar.user_id',Auth::user()->id)->get();
+        $usr = Daftar::join('mahasiswa','daftar.mahasiswa_id','=','mahasiswa.id')
+        ->where('mahasiswa.user_id',Auth::user()->id)->get();
         foreach($usr as $key=>$val){
             $users[$val->praktikum_id]=$val->id;
         }
@@ -90,8 +90,10 @@ class DaftarController extends Controller
         ->where('status','=','daftar')
         ->first();
 
+        $mahasiswa_id = Mahasiswa::where(['user_id'=>Auth::user()->id])->get();
+
         $daftars->id = $b;
-        $daftars->user_id = Auth::user()->id;
+        $daftars->mahasiswa_id = $mahasiswa_id->id;
         $daftars->periode_id = $awals->id;
         $daftars->praktikum_id = $request->id;
         $daftars->status = 'daftar';

@@ -63,7 +63,7 @@ class DataPraktikumController extends Controller
             'semester.required' => 'Semester Wajib Diisi',
         ]);
         
-        $a = Praktikum::where(['ruangan_id'=>$request->ruangan_id,'dosen_id'=>$request->dosen_id,'matkul_id'=>$request->matkul_id,'jadwal_id'=>$request->jadwal_id,'kelas_id'=>$request->kelas_id,'semester_id'=>$request->semester_id])->get();
+        $a = Praktikum::where(['ruangan_id'=>$request->ruangan_id,'dosen_id'=>$request->dosen_id,'matkul_id'=>$request->matkul_id,'jadwal_id'=>$request->jadwal_id,'kelas_id'=>$request->kelas_id,'semester'=>$request->semester])->get();
 
         //return $a[1];
 
