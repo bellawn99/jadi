@@ -11,6 +11,7 @@ use App\Matkul;
 use App\Dosen;
 use App\Ruangan;
 use App\Praktikum;
+use Carbon\Carbon;
 use Session;
 
 class DataPraktikumController extends Controller
@@ -80,6 +81,7 @@ class DataPraktikumController extends Controller
         $praktikums->ruangan_id = $request->input('ruangan_id');
         $praktikums->kelas_id = $request->input('kelas_id');
         $praktikums->semester = $request->input('semester');
+        $praktikums->created_at = Carbon::now();
 
         $praktikums->save();
         
@@ -139,6 +141,7 @@ class DataPraktikumController extends Controller
         $praktikums->jadwal_id = $request->input('jadwal_id');
         $praktikums->kelas_id = $request->input('kelas_id');
         $praktikums->semester = $request->input('semester');
+        $praktikums->updated_at = Carbon::now();
 
         $praktikums->update();
 

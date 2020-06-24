@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\User;
 
-class PengumumanNotification extends Notification
+class Pengumuman extends Notification
 {
     use Queueable;
 

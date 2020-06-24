@@ -69,6 +69,8 @@ class PenggunaAdminController extends Controller
         $users->role_id = $a->id;
         $users->email = $request->input('email');
         $users->nama = $request->input('nama');
+        $users->created_at = Carbon::now();
+        $admins->created_at = Carbon::now();
        
 
         $admins->user_id = $b;

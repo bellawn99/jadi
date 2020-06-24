@@ -68,6 +68,8 @@ class PenggunaMahasiswaController extends Controller
         $users->role_id = $a->id;
         $users->nama = $request->input('nama');
         $users->email = $request->input('email');
+        $users->created_at = Carbon::now();
+        $mahasiswas->created_at = Carbon::now();
        
 
         $mahasiswas->user_id = $b;

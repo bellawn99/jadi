@@ -41,7 +41,7 @@ class DataBeritaController extends Controller
         $now = Carbon::now();
         $id = 'B'.Carbon::now()->format('ymdHi').rand(100,999);
 
-        $a = Admin::where(['user_id'=>Auth::user()->id])->get();
+        $a = Admin::where('user_id',Auth::user()->id)->first();
 
         $beritas = new Berita;
 

@@ -90,14 +90,14 @@ class DaftarController extends Controller
         ->where('status','=','daftar')
         ->first();
 
-        $mahasiswa_id = Mahasiswa::where(['user_id'=>Auth::user()->id])->get();
+        $mahasiswa_id = Mahasiswa::where('user_id',Auth::user()->id)->first();
 
         $daftars->id = $b;
         $daftars->mahasiswa_id = $mahasiswa_id->id;
         $daftars->periode_id = $awals->id;
         $daftars->praktikum_id = $request->id;
         $daftars->status = 'daftar';
-        $daftars->created_at = Carbon::today();
+        $daftars->created_at = Carbon::now();
 
         $daftars->save();
         

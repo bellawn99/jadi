@@ -49,6 +49,7 @@ class DataDosenController extends Controller
         $dosens->id = $b;
         $dosens->nidn = $request->input('nidn');
         $dosens->nama = $request->input('nama');
+        $dosens->created_at = Carbon::now();
 
         $dosens->save();
         
@@ -79,6 +80,7 @@ class DataDosenController extends Controller
         $dosens = Dosen::find($id);
         $dosens->nidn = $request->input('nidn');
         $dosens->nama = $request->input('nama');
+        $dosens->updated_at = Carbon::now();
 
         $dosens->update();
 

@@ -53,6 +53,7 @@ class DataKelasController extends Controller
 
         $kelass->id = $b;
         $kelass->nama = $request->input('nama');
+        $kelass->created_at = Carbon::now();
 
         $kelass->save();
         
@@ -82,6 +83,7 @@ class DataKelasController extends Controller
         $kelass = Kelas::find($id);
 
         $kelass->nama = $request->input('nama');
+        $kelass->updated_at = Carbon::now();
 
         $kelass->update();
 

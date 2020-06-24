@@ -53,6 +53,7 @@ class DataMatkulController extends Controller
         $matkuls->kode_vmk = $request->input('kode_vmk');
         $matkuls->nama_matkul = $request->input('nama_matkul');
         $matkuls->sks = $request->input('sks');
+        $matkuls->created_at = Carbon::now();
 
         $matkuls->save();
         
@@ -89,6 +90,7 @@ class DataMatkulController extends Controller
         $matkuls->kode_vmk = $request->input('kode_vmk');
         $matkuls->nama_matkul = $request->input('nama_matkul');
         $matkuls->sks = $request->input('sks');
+        $matkuls->updated_at = Carbon::now();
 
         $matkuls->update();
 

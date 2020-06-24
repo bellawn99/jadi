@@ -53,6 +53,7 @@ class ProfilController extends Controller
         $new_name = $users->username . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('images'), $new_name);
         $users->foto = $new_name;
+        $users->updated_at = Carbon::now();
 
         $users->update();
 
@@ -100,10 +101,12 @@ class ProfilController extends Controller
             $admins = Admin::find($id);
             $admins = Admin::where('user_id',$id)->first();
             $admins->nip = $request->input('nip');
+            $admin->updated_at = Carbon::now();
 
             if($admins->update()){
                 $users = User::find($id);
                 $users = User::where('id',$id)->first();
+                $users->updated_at = Carbon::now();
                 if(strcmp($request->get('nip'), $request->get('username')) == 0){
                     $users->username = $request->input('nip');
                 }else{

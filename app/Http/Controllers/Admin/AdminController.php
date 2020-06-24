@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Charts;
 use Notification;
-use App\Notifications\PengumumanNotification;
+use App\Notifications\Pengumuman;
 
 class AdminController extends Controller
 {
@@ -61,7 +61,7 @@ class AdminController extends Controller
             'id' => $cek2
         ];
 
-        Notification::send($collection, new PengumumanNotification($details));
+        Notification::send($collection, new Pengumuman($details));
         }
         $data['matkul']=Daftar::all()->count();
         $grap=Daftar::join('praktikum','daftar.praktikum_id','=','praktikum.id')

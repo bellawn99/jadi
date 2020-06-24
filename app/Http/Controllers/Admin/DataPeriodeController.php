@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Periode;
 use App\Berita;
+use App\Admin;
 use Auth;
 use Carbon\Carbon;
 use Session;
@@ -44,7 +45,8 @@ class DataPeriodeController extends Controller
         if($request->get('status')=='Daftar'){
             $beritas = new Berita;
             $beritas->id = 'B'.Carbon::now()->format('ymdHi').rand(100,999);
-            $beritas->user_id = Auth()->user()->id;
+            $admin = Admin::where('user_id',Auth::user()->id)->first();
+            $beritas->admin_id = $admin->id;
             $judul = "Pendaftaran Asistensi Semester ".$request->input('semester')." TA ".$request->input('thn_ajaran');
             $isi = "PERSIAPKAN DIRIMU !
             
@@ -85,7 +87,8 @@ Daftarkan segera dan jadilah bagian dari kami.";
       }else{
             $beritas = new Berita;
             $beritas->id = 'B'.Carbon::now()->format('ymdHi').rand(100,999);
-            $beritas->user_id = Auth()->user()->id;
+            $admin = Admin::where('user_id',Auth::user()->id)->first();
+            $beritas->admin_id = $admin->id;
             $judul2 = "Pengumuman Penerimaan Asisten Praktikum Semester ".$request->input('semester')." TA ".$request->input('thn_ajaran');
             $isi2 = "Assalamualaikum Wr Wb
 Salam sejahtera bagi kita semua.
@@ -164,8 +167,9 @@ CP : 088-888-888-888
 Daftarkan segera dan jadilah bagian dari kami.";
         
         $beritas = Berita::where('id','=',$id)->first();
+        $admin = Admin::where('user_id',Auth::user()->id)->first();
         if($beritas->judul != $judul || $beritas->judul == $judul){
-            $beritas->user_id = Auth()->user()->id;
+            $beritas->admin_id = $admin->id;
             $beritas->judul = $judul;
             $beritas->isi = $isi;
             $beritas->foto = "daftar.png";
@@ -198,8 +202,9 @@ Salam sejahtera bagi kita semua.
 Kami dari Admin Asistensi memberitahukan kepada seluruh calon Asisten Praktikum Semester Genap Tahun Akademik".$request->input('thn_ajaran').", ingin menginformasikan bahwa sudah ada daftar nama Asisten Praktikum Tahun Ajaran ini. Untuk lebih lengkapnya silahkan login dengan akun masing-masing.";
             
             $beritas = Berita::where('id','=',$id)->first();
+            $admin = Admin::where('user_id',Auth::user()->id)->first();
             if($beritas->judul != $judul2 || $beritas->judul == $judul){
-                $beritas->user_id = Auth()->user()->id;
+                $beritas->admin_id = $admin->id;
                 $beritas->judul = $judul2;
                 $beritas->isi = $isi2;
                 $beritas->foto = "daftar.png";

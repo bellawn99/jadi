@@ -57,6 +57,7 @@ class PengajuanController extends Controller
         if($daftars->status === "daftar" || $daftars->status === "ditolak"){
             
             $daftars->status = 'diterima';
+            $daftars->updated_at = Carbon::now();
 
             $daftars->save();
         
@@ -74,6 +75,7 @@ class PengajuanController extends Controller
             // Session::flash('statuscode','success');
             // return redirect('admin/pengajuan')->with('status', 'Berhasil Menolak Asistensi');
             $daftars->status = 'ditolak';
+            $daftars->updated_at = Carbon::now();
 
             $daftars->save();
 

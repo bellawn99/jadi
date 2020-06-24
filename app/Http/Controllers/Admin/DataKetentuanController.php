@@ -33,6 +33,7 @@ class DataKetentuanController extends Controller
         $ketentuans = new Ketentuan;
 
         $ketentuans->ketentuan = $request->input('ketentuan');
+        $ketentuans->created_at = Carbon::now();
 
         $ketentuans->save();
         
@@ -60,6 +61,7 @@ class DataKetentuanController extends Controller
         $ketentuans = Ketentuan::find($id);
 
         $ketentuans->ketentuan = $request->input('ketentuan');
+        $ketentuans->updated_at = Carbon::now();
 
         $ketentuans->update();
 
