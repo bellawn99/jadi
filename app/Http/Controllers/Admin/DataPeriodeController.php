@@ -36,8 +36,10 @@ class DataPeriodeController extends Controller
         ->orderBy('created_at','desc')
         ->get()->toArray();
         
-        if(count($cek2)>0){
-            if(count($test)<0){
+        // return count($test);
+
+        if(count($cek2)>0  && count($test) == 0){
+            
         $user = User::where('role_id',2)->select('id','role_id','nama','email')->get();
         
         $collection = [];
@@ -59,7 +61,7 @@ class DataPeriodeController extends Controller
         
         
        return view('admin.periode.periode',compact('periodes','beritas'));     
-        }    
+          
         }else{
             return view('admin.periode.periode',compact('periodes','beritas'));         
         }
