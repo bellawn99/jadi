@@ -51,7 +51,8 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->nama_ruangan }}</td>  
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/master/ruangan/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <a href="{{route('master.editRuangan',$item['id'])}}">
+                            <button type="button" class="btn btn-warning btn-sm" ><i class=" mdi mdi-border-color "></i></button></a>
                             <a class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
@@ -79,14 +80,15 @@
                     {{csrf_field()}}
                     {{ method_field('POST') }}
                     <div class="form-group">
-                        <label for="nama_ruangan">Nama Ruangan</label>
+                        <label for="nama_ruangan">Nama Ruangan</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" name="nama_ruangan" placeholder="Nama Ruangan" >
-                      </div>
+                    </div>
+                    <span>(*) Wajib Diisi</span>
                     
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-gradient-primary mr-2">Tambah</button>
-        <button class="btn btn-light" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-sm btn-gradient-primary mr-2">Tambah</button>
+        <button class="btn btn-sm btn-light" data-dismiss="modal">Batal</button>
         </form>
       </div>
     </div>
@@ -99,7 +101,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Ruangan</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Import Data Ruangan</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -134,7 +136,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Ruangan</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Hapus Data Ruangan</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

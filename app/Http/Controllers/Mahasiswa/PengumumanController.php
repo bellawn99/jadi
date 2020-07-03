@@ -11,6 +11,7 @@ use App\Matkul;
 use App\Semester;
 use App\Ruangan;
 use App\Praktikum;
+use App\Mahasiswa;
 use App\User;
 use App\Periode;
 use Session;
@@ -23,14 +24,16 @@ class PengumumanController extends Controller
     {
         $pengumumans = Daftar::join('praktikum','praktikum.id','=','daftar.praktikum_id')
         ->join('mahasiswa','daftar.mahasiswa_id','=','mahasiswa.id')
-        ->join('user','mahasiswa.user_id','=','mahasiswa.id')
+        ->join('user','mahasiswa.user_id','=','user.id')
         ->join('matkul','praktikum.matkul_id','=','matkul.id')
         ->join('jadwal','praktikum.jadwal_id','=','jadwal.id')
         ->join('ruangan','praktikum.ruangan_id','=','ruangan.id')
         ->join('dosen','praktikum.dosen_id','=','dosen.id')
         ->join('kelas','praktikum.kelas_id','=','kelas.id')
         ->where('user.id',Auth::user()->id)
-        ->select('daftar.id as noDaftar','daftar.status','praktikum.id','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
+        ->select('daftar.id as noDaftar','daftar.status','praktikum.id',
+        'kelas.nama','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir',
+        'matkul.nama_matkul','dosen.nama as nama_dosen', 'ruangan.nama_ruangan')
         ->get();  
         
         $now = Carbon::now()->subday(14);

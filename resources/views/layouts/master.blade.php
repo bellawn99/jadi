@@ -208,11 +208,11 @@
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
         @if (Auth::user()->role_id == 1)
-          <a class="navbar-brand brand-logo" href="{{ url('admin/dashboard') }}"><img src="{{url('assets/images/logo.svg')}}" alt="logo" /></a>
-          <a class="navbar-brand brand-logo-mini" href="{{ url('admin/dashboard') }}"><img src="{{url('assets/images/logo-mini.svg')}}" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href="{{ route('admin.dashboard') }}"><img src="{{url('assets/images/logo.svg')}}" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="{{ route('admin.dashboard') }}"><img src="{{url('assets/images/logo-mini.svg')}}" alt="logo" /></a>
         @else
-          <a class="navbar-brand brand-logo" href="{{ url('mahasiswa/dashboard') }}"><img src="{{url('assets/images/logo.svg')}}" alt="logo" /></a>
-          <a class="navbar-brand brand-logo-mini" href="{{ url('mahasiswa/dashboard') }}"><img src="{{url('assets/images/logo-mini.svg')}}" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href="{{ route('mahasiswa.beranda') }}"><img src="{{url('assets/images/logo.svg')}}" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="{{ route('mahasiswa.beranda') }}"><img src="{{url('assets/images/logo-mini.svg')}}" alt="logo" /></a>
         @endif
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -232,11 +232,11 @@
               </a>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
               @if (Auth::user()->role_id == 1)
-                <a class="dropdown-item" href="{{ url('admin/ubah-password') }}">
+                <a class="dropdown-item" href="{{ route('admin.ubahPass') }}">
                   <i class="mdi mdi-lock-open mr-2 text-success"></i> Ubah Password </a>
                 <div class="dropdown-divider"></div>
               @else
-                <a class="dropdown-item" href="{{ url('mahasiswa/ubah-password') }}">
+                <a class="dropdown-item" href="{{ route('mhs.ubahPass') }}">
                   <i class="mdi mdi-lock-open mr-2 text-success"></i> Ubah Password </a>
                 <div class="dropdown-divider"></div>
               @endif
@@ -259,19 +259,18 @@
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
-        
+        <?php $a = Route::current()->getName(); !empty($a)&&isset($a)?$rut=$a:$rut=''; ?>
         @if (Auth::user()->role_id == 1)
-
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/dashboard') }}">
+              <a href="{{ route('admin.dashboard') }}" class="nav-link {{$rut == 'admin.dashboard' ? 'active' : ''}}">
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/pengajuan') }}">
+              <a href="{{ route('pengajuan') }} " class="nav-link {{$rut == 'pengajuan' ? 'active' : ''}}">
                 <span class="menu-title">Pengajuan</span>
                 <i class="mdi mdi-file-multiple menu-icon"></i>
               </a>
@@ -284,8 +283,8 @@
               </a>
               <div class="collapse" id="general-page">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/pengguna/user-admin') }}"> Admin </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/pengguna/user-mahasiswa') }}"> Mahasiswa </a></li>
+                  <li class="nav-item"> <a class="nav-link {{$rut == 'pengguna.admin' ? 'active' : ''}}" href="{{ route('pengguna.admin') }}"> Admin </a></li>
+                  <li class="nav-item"> <a class="nav-link {{$rut == 'pengguna.mhs' ? 'active' : ''}}" href="{{ route('pengguna.mhs') }}"> Mahasiswa </a></li>
                 </ul>
               </div>
             </li>
@@ -297,40 +296,40 @@
               </a>
               <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/dosen') }}"> Dosen </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/matkul') }}"> Matakuliah </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/ruangan') }}"> Ruangan </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/jadwal') }}"> Jadwal </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/master/kelas') }}"> Kelas </a></li>
+                  <li class="nav-item"> <a class="nav-link {{$rut == 'master.dosen' ? 'active' : ''}}" href="{{ route('master.dosen') }}"> Dosen </a></li>
+                  <li class="nav-item"> <a class="nav-link {{$rut == 'master.matkul' ? 'active' : ''}}" href="{{ route('master.matkul') }}"> Matakuliah </a></li>
+                  <li class="nav-item"> <a class="nav-link {{$rut == 'master.ruangan' ? 'active' : ''}}" href="{{ route('master.ruangan') }}"> Ruangan </a></li>
+                  <li class="nav-item"> <a class="nav-link {{$rut == 'master.jadwal' ? 'active' : ''}}" href="{{ route('master.jadwal') }}"> Jadwal </a></li>
+                  <li class="nav-item"> <a class="nav-link {{$rut == 'master.kelas' ? 'active' : ''}}" href="{{ route('master.kelas') }}"> Kelas </a></li>
                 </ul>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/praktikum') }}">
+              <a class="nav-link {{$rut == 'praktikum' ? 'active' : ''}}" href="{{ route('praktikum') }}">
                 <span class="menu-title">Praktikum</span>
                 <i class="mdi mdi-book menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/periode') }}">
+              <a class="nav-link {{$rut == 'periode' ? 'active' : ''}}" href="{{ route('periode') }}">
                 <span class="menu-title">Periode</span>
                 <i class="mdi mdi-av-timer menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/ketentuan') }}">
+              <a class="nav-link {{$rut == 'ketentuan' ? 'active' : ''}}" href="{{ route('ketentuan') }}">
                 <span class="menu-title">Ketentuan</span>
                 <i class="mdi mdi-book-open-page-variant menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/berita') }}">
+              <a class="nav-link {{$rut == 'berita' ? 'active' : ''}}" href="{{ route('berita') }}">
                 <span class="menu-title">Berita</span>
                 <i class="mdi mdi-newspaper menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/profil') }}">
+              <a class="nav-link {{$rut == 'admin.profil' ? 'active' : ''}}" href="{{ route('admin.profil') }}">
                 <span class="menu-title">Profil</span>
                 <i class="mdi mdi-account menu-icon"></i>
               </a>
@@ -343,25 +342,25 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/mahasiswa/dashboard') }}">
+              <a class="nav-link {{$rut == 'mahasiswa.beranda' ? 'active' : ''}}" href="{{ route('mahasiswa.beranda') }}">
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/mahasiswa/daftar') }}">
+              <a class="nav-link {{$rut == 'daftar' ? 'active' : ''}}" href="{{ route('daftar') }}">
                 <span class="menu-title">Daftar</span>
                 <i class=" mdi mdi-file-multiple menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/mahasiswa/pengumuman') }}">
+              <a class="nav-link {{$rut == 'pengumuman' ? 'active' : ''}}" href="{{ route('pengumuman') }}">
                 <span class="menu-title">Pengumuman</span>
                 <i class=" mdi mdi-format-list-bulleted menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/mahasiswa/profil') }}">
+              <a class="nav-link {{$rut == 'mhs.profil' ? 'active' : ''}}" href="{{ route('mhs.profil') }}">
                 <span class="menu-title">Profil</span>
                 <i class="mdi mdi-account menu-icon"></i>
               </a>

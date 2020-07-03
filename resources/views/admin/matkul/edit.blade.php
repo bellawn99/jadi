@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<a href="{{url('admin/master/matkul')}}" style="color:black; text-decoration:none">Master Matakuliah</a> / <a style="color:grey; text-decoration:none">Edit Matakuliah</a>
+<a href="{{url('admin/master/matkul')}}" style="color:black; text-decoration:none">Master Matakuliah</a> / <a style="color:grey; text-decoration:none">Ubah Matakuliah</a>
 @endsection
 
 @push('css')
@@ -17,7 +17,7 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Edit Data Matakuliah</h4>
+                    <h4 class="card-title">Ubah Data Matakuliah</h4>
                     
                   @if (count($errors)>0)
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
@@ -38,20 +38,21 @@
                         <input type="text" class="form-control" id="id" name="id" value="{{$matkuls->id}}" readonly>
                       </div>
                       <div class="form-group">
-                        <label for="kode_vmk">Kode VMK</label>
+                        <label for="kode_vmk">Kode VMK</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" id="kode_vmk" name="kode_vmk" value="{{$matkuls->kode_vmk}}">
                       </div>
                       <div class="form-group">
-                        <label for="nama_matkul">Nama Matakuliah</label>
+                        <label for="nama_matkul">Nama Matakuliah</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" id="nama_matkul" name="nama_matkul" value="{{$matkuls->nama_matkul}}">
                       </div>
                       <div class="form-group">
-                        <label for="sks">SKS</label>
+                        <label for="sks">SKS</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" id="sks" name="sks" value="{{$matkuls->sks}}">
                       </div>
+                      <span>(*) Wajib Diisi</span><br><br>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
-                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">
+                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Ubah">
                       <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('admin/master/matkul')}}'">Batal</button>
                     </form>
                   </div>

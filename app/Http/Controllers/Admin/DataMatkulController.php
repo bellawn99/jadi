@@ -44,7 +44,14 @@ class DataMatkulController extends Controller
     
         
         
+        $a = Matkul::where(['kode_vmk'=>$request->kode_vmk,'nama_matkul'=>$request->nama_matkul, 'sks'=>$request->sks])->get();
 
+        // return $a[1];
+
+        if($a->count() > 0){
+            Session::flash('statuscode','error');
+        return redirect('admin/master/matkul')->with('status', 'Gagal Menambahkan Data Matakuliah');
+        }else{
         $matkuls = new Matkul;
         
         $b = 'M'.Carbon::now()->format('ymdHi').rand(100,999);
@@ -53,12 +60,13 @@ class DataMatkulController extends Controller
         $matkuls->kode_vmk = $request->input('kode_vmk');
         $matkuls->nama_matkul = $request->input('nama_matkul');
         $matkuls->sks = $request->input('sks');
-        $matkuls->created_at = Carbon::now();
+        $matkuls->created_at = Carbon::today();
 
         $matkuls->save();
         
         Session::flash('statuscode','success');
         return redirect('admin/master/matkul')->with('status', 'Berhasil Menambahkan Data Matakuliah');
+        }
     }
 
     public function edit(Request $request, $id)

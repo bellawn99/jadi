@@ -52,7 +52,8 @@
                             <td>{{ str_limit($item->isi, 20) }} </td>
                             <td><a type="button" data-toggle="modal" data-target="#yourModal{{$item->id}}"><img src="{{ url('landing/images/'.$item->foto.'')}}" class="img-thumbnail" width="100%" /></a></td>
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/berita/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <a href="{{route('edit.berita',$item['id'])}}">
+                            <button type="button" class="btn btn-warning btn-sm" ><i class=" mdi mdi-border-color "></i></button></a>
                             <a data-id="{{ $item->id }}" data-nama="{{ $item->judul }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
@@ -101,20 +102,21 @@
                     {{csrf_field()}}
                     {{ method_field('POST') }}
                     <div class="form-group">
-                        <label for="ketentuan">Judul</label>
+                        <label for="ketentuan">Judul</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" name="judul" placeholder="Judul" >
                     </div>
                     <div class="form-group">
-                        <label for="ketentuan">Isi</label>
+                        <label for="ketentuan">Isi</label>&nbsp;<span>*</span>
                         <textarea class="form-control message" id="isi" name="isi" ></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="foto">Foto</label>
+                        <label for="foto">Foto</label>&nbsp;<span>*</span>
                         <div class="col-md-12">
                           <input type="file" class="custom-file-input" name="foto" id="kolomTambahFoto" lang="in">
                           <label class="custom-file-label" for="kolomTambahFoto" data-browse="Cari">Foto</label>                         
                         </div>
                     </div>
+                    <span>(*) Wajib Diisi</span>
                     
       </div>
       <div class="modal-footer">
@@ -132,7 +134,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Berita</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Hapus Data Berita</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

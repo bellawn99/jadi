@@ -37,7 +37,7 @@
                     <table class="table table-hover" id="tabel-user">
                       <thead>
                         <tr>
-                            <th width="5%">ID</th>
+                            <th width="5%">NO</th>
                             <th width="5%">Kelas</th>    
                             <th width="10%">Semester</th>
                             <th width="10%">Matakuliah</th>
@@ -49,8 +49,8 @@
                       </thead>
                       <tbody>
                         <tr>
-                          @foreach ($praktikums as $item)
-                            <td>{{ $item->id }}</td>
+                          @foreach ($praktikums as $index => $item)
+                            <td>{{ $index+1 }}</td>
                             <td>{{ $item->nama }}</td>  
                             <td>{{ $item->semester }}</td>
                             <td>{{ str_limit($item->nama_matkul, 15) }}</td>
@@ -59,7 +59,8 @@
                             <td>{{ $item->jam_akhir }}</td>
                             <td>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#yourModal{{$item->id}}" ><i class=" mdi mdi-eye "></i></button>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/praktikum/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <a href="{{route('edit.praktikum',$item['id'])}}">
+                            <button type="button" class="btn btn-warning btn-sm" ><i class=" mdi mdi-border-color "></i></button></a>
                             <a data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" data-matkul="{{ $item->nama_matkul }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
@@ -153,7 +154,7 @@
                     {{csrf_field()}}
                     {{ method_field('POST') }}
                       <div class="form-group">
-                        <label for="matkul_id">Matakuliah</label>
+                        <label for="matkul_id">Matakuliah</label>&nbsp;<span>*</span>
                         <select name='matkul_id' class='form-control'>
                         @foreach ($matkuls as $value)
                                 <option value="{{ $value->id }}">{{ $value->nama_matkul }}</option>
@@ -161,7 +162,7 @@
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="dosen_id">Dosen</label>
+                        <label for="dosen_id">Dosen</label>&nbsp;<span>*</span>
                         <select name='dosen_id' class='form-control'>
                         @foreach ($dosens as $value)
                                 <option value="{{ $value->id }}">{{ $value->nama }}</option>
@@ -169,7 +170,7 @@
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="jadwal_id">Jadwal</label>
+                        <label for="jadwal_id">Jadwal</label>&nbsp;<span>*</span>
                         <select name='jadwal_id' class='form-control'>
                         @foreach ($jadwals as $value)
                                 <option value="{{ $value->id }}">{{ $value->hari }} , {{ $value->jam_mulai }}-{{ $value->jam_akhir }}</option>
@@ -177,7 +178,7 @@
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="ruangan_id">Ruangan</label>
+                        <label for="ruangan_id">Ruangan</label>&nbsp;<span>*</span>
                         <select name='ruangan_id' class='form-control'>
                         @foreach ($ruangans as $value)
                                 <option value="{{ $value->id }}">{{ $value->nama_ruangan }}</option>
@@ -185,7 +186,7 @@
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="kelas_id">Kelas</label>
+                        <label for="kelas_id">Kelas</label>&nbsp;<span>*</span>
                         <select name='kelas_id' class='form-control'>
                         @foreach ($kelass as $value)
                                 <option value="{{ $value->id }}">{{ $value->nama }}</option>
@@ -193,7 +194,7 @@
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="semester">Semester</label>
+                        <label for="semester">Semester</label>&nbsp;<span>*</span>
                         <select name='semester' class='form-control'>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -203,6 +204,7 @@
                                 <option value="6">6</option>
                         </select>
                       </div>
+                      <span>(*) Wajib Diisi</span>
                     
       </div>
       <div class="modal-footer">
@@ -220,7 +222,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Praktikum</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Hapus Data Praktikum</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -229,7 +231,7 @@
       {{ csrf_field() }}
       {{ method_field('DELETE') }} 
       <div class="modal-body"> 
-      <p>Apakah anda yakin menghapus data praktikum <input size="50" style="border:0" id="deletePraktikumForm" readonly></input> </p>
+      <p>Apakah anda yakin menghapus data praktikum kelas<input size="50" style="border:0" id="deletePraktikumForm" readonly></input> </p>
       
       </div>
       <div class="modal-footer">

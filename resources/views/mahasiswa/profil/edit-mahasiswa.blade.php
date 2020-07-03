@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<a href="{{url('mahasiswa/profil')}}" style="color:black; text-decoration:none">Profil</a> / <a style="color:grey; text-decoration:none">Edit Data Mahasiswa</a>
+<a href="{{url('mahasiswa/profil')}}" style="color:black; text-decoration:none">Profil Mahasiswa</a> / <a style="color:grey; text-decoration:none">Ubah Data Mahasiswa</a>
 @endsection
 
 @push('css')
@@ -21,7 +21,7 @@ in: "Cari",
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Edit Data Mahasiswa</h4>
+                    <h4 class="card-title">Ubah Data Mahasiswa</h4>
                     
                   @if (count($errors)>0)
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
@@ -38,22 +38,24 @@ in: "Cari",
                     {{ csrf_field() }} 
                     {{ method_field('PUT') }}
                       <div class="form-group">
-                        <label for="prodi">Program Studi</label>
+                        <label for="prodi">Program Studi</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" id="prodi" name="prodi" value="{{$mahasiswas->prodi}}">
                       </div>
                       <div class="form-group">
-                        <label for="semester">Semester</label>
+                        <label for="semester">Semester</label>&nbsp;<span>*</span>
                         <input type="semester" class="form-control" id="semester" name="semester" value="{{$mahasiswas->semester}}">
                       </div>                          
                       <div class="form-group">
+                          <label for="khs">KHS</label>&nbsp;<span>*</span>
                         <div class="col-md-12">
-                          <input type="file" class="custom-file-input" name="krs" id="kolomEditKrs" lang="in" value="{{ $mahasiswas->krs }}">
-                          <label class="custom-file-label" for="kolomEditFoto" data-browse="Cari" value="{{$mahasiswas->krs}}">{{$mahasiswas->krs}}</label>                         
+                          <input type="file" class="custom-file-input" name="khs" id="kolomEditKrs" lang="in" value="{{ $mahasiswas->khs }}">
+                          <label class="custom-file-label" for="kolomEditFoto" data-browse="Cari" value="{{$mahasiswas->khs}}">{{$mahasiswas->khs}}</label>                         
                         </div>
-                      </div>                      
+                      </div>   
+                      <span>(*) Wajib Diisi</span><br><br>                   
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
-                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">
+                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Ubah">
                       <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('mahasiswa/profil')}}'">Batal</button>
                     </form>
                   </div>

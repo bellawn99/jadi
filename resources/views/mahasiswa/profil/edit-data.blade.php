@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<a href="{{url('mahasiswa/profil')}}" style="color:black; text-decoration:none">Profil</a> / <a style="color:grey; text-decoration:none">Edit Data Diri</a>
+<a href="{{url('mahasiswa/profil')}}" style="color:black; text-decoration:none">Profil Mahasiswa</a> / <a style="color:grey; text-decoration:none">Ubah Data Diri</a>
 @endsection
 
 @push('css')
@@ -21,7 +21,7 @@ in: "Cari",
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Edit Data</h4>
+                    <h4 class="card-title">Ubah Data Diri</h4>
                     
                   @if (count($errors)>0)
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
@@ -42,30 +42,30 @@ in: "Cari",
                         <input type="text" class="form-control" id="username" name="username" value="{{$users->username}}" readonly>
                       </div>
                       <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Email</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" id="email" name="email" value="{{$users->email}}">
                       </div>
                       <div class="form-group">
-                        <label for="nama">Nama</label>
+                        <label for="nama">Nama</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" id="nama" name="nama" value="{{$users->nama}}">
                       </div>
                       <div class="form-group">
-                        <label for="nim">NIM</label>
+                        <label for="nim">NIM</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" id="nim" name="nim" value="{{$mahasiswas->nim}}">
                       </div>
                       <div class="form-group">
-                        <label for="no_hp">No Telepon</label>
+                        <label for="no_hp">No Telepon</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" id="no_hp" name="no_hp" value="{{$users->no_hp}}">
                       </div>
                       <div class="form-group">
-                        <label for="jk">Jenis Kelamin</label>
+                        <label for="jk">Jenis Kelamin</label>&nbsp;<span>*</span>
                         <select name="jk" class="form-control">
                                 <option value="P" @if($mahasiswas->jk == "P") selected @endif>Perempuan</option>
                                 <option value="L" @if($mahasiswas->jk == "L") selected @endif>Laki-laki</option>
                             </select>
                       </div>
                       <div class="form-group">
-                        <label for="nik">NIK</label>
+                        <label for="nik">NIK</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" id="nik" name="nik" value="{{$mahasiswas->nik}}">
                       </div>
                       <div class="form-group">
@@ -73,20 +73,21 @@ in: "Cari",
                         <input type="text" class="form-control" id="npwp" name="npwp" value="{{$mahasiswas->npwp}}">
                       </div>
                       <div class="form-group">
-                        <label for="tempat">Tempat Lahir</label>
+                        <label for="tempat">Tempat Lahir</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" id="tempat" name="tempat" value="{{$mahasiswas->tempat}}">
                       </div>
                       <div class="form-group">
-                        <label for="tgl_lahir">Tanggal Lahir</label>
+                        <label for="tgl_lahir">Tanggal Lahir</label>&nbsp;<span>*</span>
                         <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="{{$mahasiswas->tgl_lahir}}">
                       </div>
                       <div class="form-group">
-                        <label for="alamat">Alamat</label>
+                        <label for="alamat">Alamat</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" id="alamat" name="alamat" value="{{$mahasiswas->alamat}}">
                       </div>
+                      <span>(*) Wajib Diisi</span><br><br>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
-                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">
+                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Ubah">
                       <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('mahasiswa/profil')}}'">Batal</button>
                     </form>
                   </div>

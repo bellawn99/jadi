@@ -64,14 +64,9 @@
                       <div class="form-group col-md-4">
                         <label for="semester">Semester</label>
                         <select name='semester' onchange="sort()" id="semesterFilter" class='form-control semesteR'>
-                        @foreach ($thn_ajaran as $value)
-                                <option value="{{ $value->semester }}">@if($value->semester === 'genap')
-                                Genap
-                                @else
-                                Ganjil
-                                @endif
-                                </option>
-                        @endforeach
+                        
+                        <option value="ganjil" @if($semester->semester =="ganjil") selected @endif>Ganjil</option>
+                        <option value="genap" @if($semester->semester =="genap") selected @endif>Genap</option>
                         </select>
                       </div>
                     </div>
@@ -101,6 +96,9 @@
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
+                  @if(count($daftars) == 0)
+                  <h3><center>Tidak Ada Pengajuan Hari Ini</center></h3>
+                  @else
                     <h4 class="card-title">Pengajuan Hari Ini</h4>
                     <div class="table-responsive">
                       <table class="table">
@@ -138,7 +136,8 @@
                         </tbody>
                       </table>
                     </div>
-                  </div>
+                    @endif
+                  </div> 
                 </div>
               </div>
             </div>
@@ -170,8 +169,8 @@ function sort(){
       gradientStrokeViolet.addColorStop(1, 'rgba(154, 85, 255, 1)');
       var gradientLegendViolet = 'linear-gradient(to right, rgba(218, 140, 255, 1), rgba(154, 85, 255, 1))';
     
-      var day = [@for($i=1;$i<=$tgl;$i++) {{$i}}, @endfor];
-      var data_click = response.grafik;
+     
+     
       var thnn = $('#tahunAjaran').find(":selected").text();
       var semester = $('#semesterFilter').find(":selected").text();
       const blnArr = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
@@ -190,7 +189,7 @@ function sort(){
                 fill: false,
                 borderWidth: 1,
                 fill: 'origin',
-                data: data_click
+                data: response.grafik
               }
           ]
         },
@@ -251,112 +250,7 @@ function sort(){
       })
       $("#visit-sale-chart-legend").html(myChart.generateLegend());
    // }
-      }
-  }).done(res=>{
-    console.log(res.grafik);
-    
-  })
-  
-}
-
-    (function($) {
-  'use strict';
-  $(function() {
-
-    
-    Chart.defaults.global.legend.labels.usePointStyle = true;
-    
-    //if ($("#visit-sale-chart").length) {
-      Chart.defaults.global.legend.labels.usePointStyle = true;
-      var ctx = document.getElementById('visit-sale-chart').getContext("2d");
-
-      var gradientStrokeViolet = ctx.createLinearGradient(0, 0, 0, 181);
-      gradientStrokeViolet.addColorStop(0, 'rgba(218, 140, 255, 1)');
-      gradientStrokeViolet.addColorStop(1, 'rgba(154, 85, 255, 1)');
-      var gradientLegendViolet = 'linear-gradient(to right, rgba(218, 140, 255, 1), rgba(154, 85, 255, 1))';
-    
-      var day = [@for($i=1;$i<=$tgl;$i++) {{$i}}, @endfor];
-      var data_click = [{{$grafik}}];
-      var thnn = $('#tahunAjaran').find(":selected").text();
-      var semester = $('#semesterFilter').find(":selected").text();
-      const blnArr = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-      var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: blnArr,
-            datasets: [
-              {
-                label: "Pengajuan Asistensi Tahun Ajaran "+thnn,
-                borderColor: gradientStrokeViolet,
-                backgroundColor: gradientStrokeViolet,
-                hoverBackgroundColor: gradientStrokeViolet,
-                legendColor: gradientLegendViolet,
-                pointRadius: 0,
-                fill: false,
-                borderWidth: 1,
-                fill: 'origin',
-                data: data_click
-              }
-          ]
-        },
-        options: {
-          responsive: true,
-          legend: false,
-          legendCallback: function(chart) {
-            var text = []; 
-            text.push('<ul>'); 
-            for (var i = 0; i < chart.data.datasets.length; i++) { 
-                text.push('<li><span class="legend-dots" style="background:' + 
-                           chart.data.datasets[i].legendColor + 
-                           '"></span>'); 
-                if (chart.data.datasets[i].label) { 
-                    text.push(chart.data.datasets[i].label); 
-                } 
-                text.push('</li>'); 
-            } 
-            text.push('</ul>'); 
-            return text.join('');
-          },
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      display: false,
-                      min: 0,
-                      stepSize: 20,
-                      max: 80
-                  },
-                  gridLines: {
-                    drawBorder: false,
-                    color: 'rgba(235,237,242,1)',
-                    zeroLineColor: 'rgba(235,237,242,1)'
-                  }
-              }],
-              xAxes: [{
-                  gridLines: {
-                    display:false,
-                    drawBorder: false,
-                    color: 'rgba(0,0,0,1)',
-                    zeroLineColor: 'rgba(235,237,242,1)'
-                  },
-                  ticks: {
-                      padding: 20,
-                      fontColor: "#9c9fa6",
-                      autoSkip: true,
-                  },
-                  categoryPercentage: 0.5,
-                  barPercentage: 0.5
-              }]
-            }
-          },
-          elements: {
-            point: {
-              radius: 0
-            }
-          }
-      })
-      $("#visit-sale-chart-legend").html(myChart.generateLegend());
-   // }
-    if ($("#traffic-chart").length) {
+   if ($("#traffic-chart").length) {
       var gradientStrokeBlue = ctx.createLinearGradient(0, 0, 0, 181);
       gradientStrokeBlue.addColorStop(0, 'rgba(54, 215, 232, 1)');
       gradientStrokeBlue.addColorStop(1, 'rgba(177, 148, 250, 1)');
@@ -371,7 +265,7 @@ function sort(){
       gradientStrokeGreen.addColorStop(0, 'rgba(6, 185, 157, 1)');
       gradientStrokeGreen.addColorStop(1, 'rgba(132, 217, 210, 1)');
       var gradientLegendGreen = 'linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))';      
-      var cData = JSON.parse('<?php echo $chart_data; ?>');
+      var cData = response.donut;
       var trafficChartData = { 
         datasets: [{ 
           data: cData.jml.slice(0,3), 
@@ -438,7 +332,16 @@ function sort(){
         todayHighlight: true,
       });
     }
-  });
-})(jQuery);
+      
+      }
+  }).done(res=>{
+    console.log(res.grafik);
+    
+  })
+  
+}
+
+sort();
+
 </script>
 @endpush

@@ -22,8 +22,10 @@ class PenggunaAdminController extends Controller
 {
     public function index()
     {
-        $users = Admin::leftJoin('user','admin.user_id','=','user.id')->leftJoin('role','user.role_id','=','role.id')
-        ->select('admin.nip','user.email','user.nama','user.id', 'user.foto', 'user.no_hp', 'user.role_id', 'user.nama', 'user.username', 'role.role')
+        $users = Admin::join('user','admin.user_id','=','user.id')
+        ->join('role','user.role_id','=','role.id')
+        ->select('admin.nip','user.email','user.nama','user.id', 'user.foto',
+        'user.no_hp', 'user.role_id', 'user.nama', 'user.username', 'role.role')
         ->distinct()->get();
         return view('admin.pengguna.admin.admin')->with('users',$users);        
         // return $users;
@@ -116,11 +118,18 @@ class PenggunaAdminController extends Controller
         $users = User::find($id);
         $users = User::where('id',$id)->first();
 
+        if($id == Auth()->user()->id){
+            Session::flash('statuscode','error');
+            return redirect('admin/pengguna/user-admin')->with('status','Tidak dapat reset password diri sendiri!');
+        }
+        else{
+
         $users->password = Hash::make($request->get('username'));
         $users->save();
         
         Session::flash('statuscode','success');
         return redirect('admin/pengguna/user-admin')->with('status', 'Berhasil Reset Password Admin');
+        }
     }
 
     public function delete($id)

@@ -36,20 +36,21 @@ in: "Cari",
                     {{ method_field('PUT') }}
                     {{ csrf_field() }} 
                       <div class="form-group">
-                        <label for="password">Password Saat Ini</label>
+                        <label for="password">Password Saat Ini</label>&nbsp;<span>*</span>
                         <input type="password" class="form-control" id="password" name="password">
                       </div>
                       <div class="form-group">
-                        <label for="new-password">Password Baru</label>
+                        <label for="new-password">Password Baru</label>&nbsp;<span>*</span>
                         <input type="password" class="form-control" id="new-password" name="new-password">
                       </div>
                       <div class="form-group">
-                        <label for="new-password-confirm">Password Baru (Ulangi)</label>
+                        <label for="new-password-confirm">Password Baru (Ulangi)</label>&nbsp;<span>*</span>
                         <input type="password" class="form-control" id="new-password-confirm" name="new-password-confirm">
                       </div>
+                      <span>(*) Wajib Diisi</span><br><br>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
-                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Simpan">
+                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Ubah">
                     </form>
                   </div>
                 </div>

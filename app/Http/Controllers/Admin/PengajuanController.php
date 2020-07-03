@@ -30,7 +30,9 @@ class PengajuanController extends Controller
         ->leftJoin('jadwal','praktikum.jadwal_id','=','jadwal.id')
         ->leftJoin('ruangan','praktikum.ruangan_id','=','ruangan.id')
         ->join('kelas','praktikum.kelas_id','=','kelas.id')
-        ->select('user.nama as user','mahasiswa.khs','mahasiswa.ipk','daftar.id as noDaftar','daftar.status','praktikum.id','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
+        ->select('daftar.praktikum_id as praktikum','daftar.id as noDaftar','user.nama as user','praktikum.semester','mahasiswa.khs',
+        'mahasiswa.ipk','daftar.status','kelas.nama','jadwal.hari','jadwal.jam_mulai',
+        'jadwal.jam_akhir','matkul.nama_matkul','dosen.nama as nama_dosen','ruangan.nama_ruangan')
         ->get();  
         
        // $status = Praktikum::leftJoint()->leftJoin('daftar','daftar.praktikum_id','=','praktikum.id')
@@ -48,16 +50,21 @@ class PengajuanController extends Controller
 
     public function statusUpdate(Request $request,$id=0){    
 
-        $a = Daftar::where('status','=','daftar')->first();
-        $b = Daftar::where('status','=','diterima')->first();
-
         $id = $request->noDaftar;
             $daftars = Daftar::find($id);
             $daftars = Daftar::where('id',$id)->first();
+            $praktikum = $request->praktikum;
+        
+            $a = Daftar::where('praktikum_id','=',$praktikum)->get();
+            
+        if(count($a)>2){
+            Session::flash('statuscode','error');
+            return redirect('admin/pengajuan')->with('status', 'Asisten Praktikum Sudah Cukup!');
+        }else{
         if($daftars->status === "daftar" || $daftars->status === "ditolak"){
             
             $daftars->status = 'diterima';
-            $daftars->updated_at = Carbon::now();
+            $daftars->updated_at = Carbon::today();
 
             $daftars->save();
         
@@ -75,12 +82,13 @@ class PengajuanController extends Controller
             // Session::flash('statuscode','success');
             // return redirect('admin/pengajuan')->with('status', 'Berhasil Menolak Asistensi');
             $daftars->status = 'ditolak';
-            $daftars->updated_at = Carbon::now();
+            $daftars->updated_at = Carbon::today();
 
             $daftars->save();
 
             Session::flash('statuscode','success');
             return redirect('admin/pengajuan')->with('status', 'Berhasil Menolak Asistensi');
         }
+    }
     }
 }

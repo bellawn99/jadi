@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<a href="{{url('admin/berita')}}" style="color:black; text-decoration:none">Berita</a> / <a style="color:grey; text-decoration:none">Edit Berita</a>
+<a href="{{url('admin/berita')}}" style="color:black; text-decoration:none">Berita</a> / <a style="color:grey; text-decoration:none">Ubah Berita</a>
 @endsection
 
 @push('css')
@@ -17,7 +17,7 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Edit Data Berita</h4>
+                    <h4 class="card-title">Ubah Data Berita</h4>
                     
                   @if (count($errors)>0)
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
@@ -38,23 +38,24 @@
                         <input type="text" class="form-control" id="id" name="id" value="{{$beritas->id}}" readonly>
                       </div>
                       <div class="form-group">
-                        <label for="judul">Judul</label>
+                        <label for="judul">Judul</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" id="judul" name="judul" value="{{$beritas->judul}}">
                       </div>
                       <div class="form-group">
-                        <label for="isi">Isi</label>
+                        <label for="isi">Isi</label>&nbsp;<span>*</span>
                         <textarea class="form-control message" id="isi" name="isi" value="{{$beritas->isi}}">{{ $beritas->isi }}</textarea>
                       </div>
                       <div class="form-group">
-                        <label for="foto">Foto</label>
+                        <label for="foto">Foto</label>&nbsp;<span>*</span>
                         <div class="col-md-12">
                           <input type="file" class="custom-file-input" name="foto" id="kolomEditFoto" lang="in">
-                          <label class="custom-file-label" for="kolomEditFoto" data-browse="Cari">Foto</label>                         
+                          <label class="custom-file-label" for="kolomEditFoto" data-browse="Cari"value="{{$beritas->foto}}">{{$beritas->foto}}</label>                         
                         </div>
                         </div>
+                      <span>(*) Wajib Diisi</span><br><br>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
-                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">
+                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Ubah">
                       <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('admin/berita')}}'">Batal</button>
                     </form>
                   </div>

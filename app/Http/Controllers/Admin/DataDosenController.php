@@ -41,7 +41,14 @@ class DataDosenController extends Controller
     
         
         
+        $a = Dosen::where(['nidn'=>$request->nidn,'nama'=>$request->nama])->get();
 
+        // return $a[1];
+
+        if($a->count() > 0){
+            Session::flash('statuscode','error');
+        return redirect('admin/master/dosen')->with('status', 'Gagal Menambahkan Data Dosen');
+        }else{
         $dosens = new Dosen;
         
         $b = 'D'.Carbon::now()->format('ymdHi').rand(100,999);
@@ -49,12 +56,13 @@ class DataDosenController extends Controller
         $dosens->id = $b;
         $dosens->nidn = $request->input('nidn');
         $dosens->nama = $request->input('nama');
-        $dosens->created_at = Carbon::now();
+        $dosens->created_at = Carbon::today();
 
         $dosens->save();
         
         Session::flash('statuscode','success');
         return redirect('admin/master/dosen')->with('status', 'Berhasil Menambahkan Data Dosen');
+        }
     }
 
     public function edit(Request $request, $id)
@@ -76,7 +84,7 @@ class DataDosenController extends Controller
             'nama.required' => 'Nama Wajib Diisi',
             'nama.max' => 'Nama Terlalu Panjang!',
         ]);
-        
+     
         $dosens = Dosen::find($id);
         $dosens->nidn = $request->input('nidn');
         $dosens->nama = $request->input('nama');

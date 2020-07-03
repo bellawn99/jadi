@@ -68,7 +68,8 @@
                             @endif
                             </td>
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/periode/edit/'.$item['berita_id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <a href="{{route('edit.periode',$item['id'])}}">
+                            <button type="button" class="btn btn-warning btn-sm" ><i class=" mdi mdi-border-color "></i></button></a>
                             <input type="hidden" id="berita_id" name="berita_id">
                             <a data-id="{{ $item->id }}" data-tgl_m="{{ $item->tgl_mulai }}" data-tgl_s="{{ $item->tgl_selesai }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
@@ -96,7 +97,7 @@
                     {{csrf_field()}}
                     {{ method_field('POST') }}
                     <div class="form-group">
-                        <label for="tgl_mulai" class="col-form-label">Tanggal Mulai</label>
+                        <label for="tgl_mulai" class="col-form-label">Tanggal Mulai</label>&nbsp;<span>*</span>
                         <input class="form-control" type="date" name="tgl_mulai">
                     </div>
                     <div class="form-group">
@@ -104,23 +105,24 @@
                         <input class="form-control" type="date" name="tgl_selesai">
                     </div>
                       <div class="form-group">
-                        <label for="thn_ajaran">Tahun Ajaran</label>
+                        <label for="thn_ajaran">Tahun Ajaran</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" name="thn_ajaran" placeholder="Tahun Ajaran" >
                       </div>
                       <div class="form-group">
-                        <label for="semester">Semester</label>
+                        <label for="semester">Semester</label>&nbsp;<span>*</span>
                         <select name="semester" class="form-control">
                                 <option value="Genap" name="genap" id="genap">Genap</option>
                                 <option value="Ganjil" name="ganjil" id="ganjil">Ganjil</option>
                             </select>
                       </div>
                       <div class="form-group">
-                        <label for="status">Status</label>
+                        <label for="status">Status</label>&nbsp;<span>*</span>
                         <select name="status" class="form-control">
                                 <option value="Daftar" name="daftar" id="daftar">Daftar</option>
                                 <option value="Pengumuman" name="pengumuman" id="pengumuman">Pengumuman</option>
                             </select>
                       </div>
+                      <span>(*) Wajib Diisi</span>
                     
       </div>
       <div class="modal-footer">
@@ -138,7 +140,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Periode</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Hapus Data Periode</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

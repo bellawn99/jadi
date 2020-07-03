@@ -52,7 +52,7 @@ class DataRuanganController extends Controller
 
         $ruangans->id = $b;
         $ruangans->nama_ruangan = $request->input('nama_ruangan');
-        $ruangans->created_at = Carbon::now();
+        $ruangans->created_at = Carbon::today();
 
         $ruangans->save();
         

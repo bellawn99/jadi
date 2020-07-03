@@ -38,9 +38,7 @@ class DosenImport implements ToCollection
                     Dosen::create([    
                         'id' => $b,
                         'nidn' => $row[0],
-                        'nama' =>  $row[1],
-                        'no_hp' =>  $row[2],
-                        'alamat' => $row[3],
+                        'nama' =>  $row[1]
                     ]);
             }
         }

@@ -51,7 +51,8 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->nama }}</td>  
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/master/kelas/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <a href="{{route('master.editKelas',$item['id'])}}">
+                            <button type="button" class="btn btn-warning btn-sm" ><i class=" mdi mdi-border-color "></i></button></a>
                             <a data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
@@ -78,9 +79,10 @@
                     {{csrf_field()}}
                     {{ method_field('POST') }}
                     <div class="form-group">
-                        <label for="nama">Nama</label>
+                        <label for="nama">Nama</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" name="nama" placeholder="Nama" >
-                      </div>
+                    </div>
+                    <span>(*) Wajib Diisi</span>
                     
       </div>
       <div class="modal-footer">
@@ -98,7 +100,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Kelas</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Import Data Kelas</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -133,7 +135,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Kelas</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Hapus Data Kelas</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

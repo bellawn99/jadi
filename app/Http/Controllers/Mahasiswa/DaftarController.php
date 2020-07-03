@@ -30,14 +30,16 @@ class DaftarController extends Controller
         ->join('jadwal','praktikum.jadwal_id','=','jadwal.id')
         ->join('ruangan','praktikum.ruangan_id','=','ruangan.id')
         ->join('kelas','praktikum.kelas_id','=','kelas.id')
-        ->select('praktikum.id','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
+        ->select('praktikum.id as praktikum','praktikum.semester','praktikum.id', 'kelas.nama',
+        'jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir',
+        'matkul.nama_matkul','dosen.nama as nama_dosen','ruangan.nama_ruangan')
         ->get();
 
 
         $now = Carbon::now();
 
         $awals = Periode::select('tgl_mulai')
-        ->whereDate('tgl_mulai', '>=', $now->toDateString())
+        ->whereDate('tgl_mulai', '<=', $now->toDateString())
         ->where('status','=','daftar')
         ->get();
 
@@ -61,10 +63,12 @@ class DaftarController extends Controller
     }
 
     public function store(Request $request){
-    
-        $a = Daftar::where(['user_id'=>Auth::user()->id])->get();
 
-        $ngecek = Daftar::where(['user_id'=>Auth::user()->id, 'praktikum_id'=>$request->id])->get();
+        $z = Mahasiswa::where('user_id',Auth::user()->id)->first();
+    
+        $a = Daftar::where('mahasiswa_id',$z->id)->get();
+
+        $ngecek = Daftar::where(['mahasiswa_id'=>$z->id, 'praktikum_id'=>$request->id])->get();
 
         //return $a[1];
 
@@ -75,7 +79,7 @@ class DaftarController extends Controller
             $tes = User::join('mahasiswa','user.id','=','mahasiswa.user_id')
             ->where('mahasiswa.user_id',Auth::user()->id)->first()->toArray();
 
-        if(is_null($tes['nama']) || is_null($tes['username']) || is_null($tes['foto']) || is_null($tes['nim']) || is_null($tes['nik']) || is_null($tes['jk']) || is_null($tes['tempat']) || is_null($tes['tgl_lahir']) || is_null($tes['alamat']) || is_null($tes['prodi']) || is_null($tes['krs']) || is_null($tes['semester']) || is_null($tes['nama_bank']) || is_null($tes['no_rekening']) || is_null($tes['nama_rekening'])){
+        if(is_null($tes['nama']) || is_null($tes['username']) || is_null($tes['foto']) || is_null($tes['nim']) || is_null($tes['nik']) || is_null($tes['jk']) || is_null($tes['tempat']) || is_null($tes['tgl_lahir']) || is_null($tes['alamat']) || is_null($tes['prodi']) || is_null($tes['khs']) || is_null($tes['semester']) || is_null($tes['nama_bank']) || is_null($tes['no_rekening']) || is_null($tes['nama_rekening'])){
             Session::flash('statuscode','error');
         return redirect('mahasiswa/daftar')->with('status', 'Silahkan Melengkapi Profil Terlebih Dahulu!');
         }else{
@@ -86,7 +90,7 @@ class DaftarController extends Controller
         $now = Carbon::now();
 
         $awals = Periode::select('id','tgl_mulai')
-        ->whereDate('tgl_mulai', '>=', $now->toDateString())
+        ->whereDate('tgl_mulai', '<=', $now->toDateString())
         ->where('status','=','daftar')
         ->first();
 
@@ -97,7 +101,7 @@ class DaftarController extends Controller
         $daftars->periode_id = $awals->id;
         $daftars->praktikum_id = $request->id;
         $daftars->status = 'daftar';
-        $daftars->created_at = Carbon::now();
+        $daftars->created_at = Carbon::today();
 
         $daftars->save();
         
@@ -112,7 +116,7 @@ class DaftarController extends Controller
 
     public function delete($id){
 
-        $daftars = Daftar::findOrFail($id);
+        $daftars = Daftar::where('mahasiswa_id',$id);
         $daftars->delete();
 
         Session::flash('statuscode','success');

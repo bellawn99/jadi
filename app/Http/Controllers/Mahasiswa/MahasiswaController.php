@@ -13,9 +13,6 @@ class MahasiswaController extends Controller
 {
     public function index()
     {
-        $tes = User::leftJoin('mahasiswa','user.id','=','mahasiswa.user_id')
-        ->where('mahasiswa.user_id',Auth::user()->id)->get();
-
-        return view('mahasiswa.beranda',compact('tes'));
+        return view('mahasiswa.beranda');
     }
 }

@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<a href="{{url('admin/periode')}}" style="color:black; text-decoration:none">Periode</a> / <a style="color:grey; text-decoration:none">Edit Periode</a>
+<a href="{{url('admin/periode')}}" style="color:black; text-decoration:none">Periode</a> / <a style="color:grey; text-decoration:none">Ubah Periode</a>
 @endsection
 
 @push('css')
@@ -17,7 +17,7 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Edit Data Periode</h4>
+                    <h4 class="card-title">Ubah Data Periode</h4>
                     
                   @if (count($errors)>0)
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
@@ -38,7 +38,7 @@
                         <input type="text" class="form-control" id="id" name="id" value="{{$periodes->id}}" readonly>
                       </div>
                       <div class="form-group">
-                        <label for="tgl_mulai" class="col-form-label">Tanggal Mulai</label>
+                        <label for="tgl_mulai" class="col-form-label">Tanggal Mulai</label>&nbsp;<span>*</span>
                         <input class="form-control" type="date" id="tgl_mulai" name="tgl_mulai" value="{{$periodes->tgl_mulai}}">
                     </div>
                     <div class="form-group">
@@ -46,26 +46,27 @@
                         <input class="form-control" type="date" id="tgl_selesai" name="tgl_selesai" value="{{$periodes->tgl_selesai}}">
                     </div>
                       <div class="form-group">
-                        <label for="thn_ajaran">Tahun Ajaran</label>
+                        <label for="thn_ajaran">Tahun Ajaran</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" id="thn_ajaran" name="thn_ajaran" value="{{$periodes->thn_ajaran}}">
                       </div>
                       <div class="form-group">
-                        <label for="semester">Semester</label>
+                        <label for="semester">Semester</label>&nbsp;<span>*</span>
                         <select name="semester" class="form-control">
                                 <option value="Genap" @if($periodes->semester == "genap") selected @endif>Genap</option>
                                 <option value="Ganjil" @if($periodes->semester == "ganjil") selected @endif>Ganjil</option>
                             </select>
                       </div>
                       <div class="form-group">
-                        <label for="status">Status</label>
+                        <label for="status">Status</label>&nbsp;<span>*</span>
                         <select name="status" class="form-control">
                                 <option value="Daftar" @if($periodes->status == "daftar") selected @endif>Daftar</option>
                                 <option value="Pengumuman" @if($periodes->status == "pengumuman") selected @endif>Pengumuman</option>
                             </select>
                       </div>
+                      <span>(*) Wajib Diisi</span><br><br>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
-                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">
+                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Ubah">
                       <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('admin/periode')}}'">Batal</button>
                     </form>
                   </div>

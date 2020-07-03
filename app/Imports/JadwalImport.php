@@ -38,8 +38,8 @@ class JadwalImport implements ToCollection
                     Jadwal::create([    
                         'id' => $b,
                         'hari' => $row[0],
-                        'jam_mulai' =>  $row[1],
-                        'jam_akhir' =>  $row[2]
+                        'jam_mulai' =>  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['1'])->format('H:i:s'),
+                        'jam_akhir' =>  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['2'])->format('H:i:s'),
                     ]);
             }
         }

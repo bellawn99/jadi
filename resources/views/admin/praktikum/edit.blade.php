@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<a href="{{url('admin/praktikum')}}" style="color:black; text-decoration:none">Praktikum</a> / <a style="color:grey; text-decoration:none">Edit Praktikum</a>
+<a href="{{url('admin/praktikum')}}" style="color:black; text-decoration:none">Praktikum</a> / <a style="color:grey; text-decoration:none">Ubah Praktikum</a>
 @endsection
 
 @push('css')
@@ -17,7 +17,7 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Edit Data Praktikum</h4>
+                    <h4 class="card-title">Ubah Data Praktikum</h4>
                     
                   @if (count($errors)>0)
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
@@ -38,47 +38,47 @@
                         <input type="text" class="form-control" id="id" name="id" value="{{$praktikums->id}}" readonly>
                       </div>
                       <div class="form-group">
-                        <label for="matkul_id">Matakuliah</label>
+                        <label for="matkul_id">Matakuliah</label>&nbsp;<span>*</span>
                         <select name='matkul_id' class='form-control'>
                         @foreach ($matkuls as $value)
-                                <option value="{{ $value->id }}" {{ $idMatkul->contains($value->id) ? 'selected' : '' }}>{{ $value->nama_matkul }}</option>
+                                <option value="{{ $value->id }}" {{ $praktikums->matkul_id == $value->id ? 'selected' : '' }}>{{ $value->nama_matkul }}</option>
                         @endforeach
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="dosen_id">Dosen</label>
+                        <label for="dosen_id">Dosen</label>&nbsp;<span>*</span>
                         <select name='dosen_id' class='form-control'>
                         @foreach ($dosens as $value)
-                                <option value="{{ $value->id }}" {{ $idDosen->contains($value->id) ? 'selected' : '' }}>{{ $value->nama }}</option>
+                                <option value="{{ $value->id }}" {{ $praktikums->dosen_id == $value->id ? 'selected' : '' }}>{{ $value->nama }}</option>
                         @endforeach
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="jadwal_id">Jadwal</label>
+                        <label for="jadwal_id">Jadwal</label>&nbsp;<span>*</span>
                         <select name='jadwal_id' class='form-control'>
                         @foreach ($jadwals as $value)
-                                <option value="{{ $value->id }}" {{ $idJadwal->contains($value->id) ? 'selected' : '' }}>{{ $value->hari }} , {{ $value->jam_mulai }}-{{ $value->jam_akhir }}</option>
+                                <option value="{{ $value->id }}" {{ $praktikums->jadwal_id == $value->id ? 'selected' : '' }}>{{ $value->hari }} , {{ $value->jam_mulai }}-{{ $value->jam_akhir }}</option>
                         @endforeach
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="ruangan_id">Ruangan</label>
+                        <label for="ruangan_id">Ruangan</label>&nbsp;<span>*</span>
                         <select name='ruangan_id' class='form-control'>
                         @foreach ($ruangans as $value)
-                                <option value="{{ $value->id }}" {{ $idRuangan->contains($value->id) ? 'selected' : '' }}>{{ $value->nama_ruangan }}</option>
+                                <option value="{{ $value->id }}" {{ $praktikums->ruangan_id == $value->id ? 'selected' : '' }}>{{ $value->nama_ruangan }}</option>
                         @endforeach
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="kelas_id">Kelas</label>
+                        <label for="kelas_id">Kelas</label>&nbsp;<span>*</span>
                         <select name='kelas_id' class='form-control'>
                         @foreach ($kelass as $value)
-                                <option value="{{ $value->id }}" {{ $idKelas->contains($value->id) ? 'selected' : '' }}>{{ $value->nama }}</option>
+                                <option value="{{ $value->id }}" {{ $praktikums->kelas_id == $value->id ? 'selected' : '' }}>{{ $value->nama }}</option>
                         @endforeach
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="semester">Semester</label>
+                        <label for="semester">Semester</label>&nbsp;<span>*</span>
                         <select name="semester" class="form-control">
                                 <option value="1" @if($semesters->semester == "1") selected @endif>1</option>
                                 <option value="2" @if($semesters->semester == "2") selected @endif>2</option>
@@ -88,9 +88,10 @@
                                 <option value="6" @if($semesters->semester == "6") selected @endif>6</option>
                             </select>
                       </div>
+                      <span>(*) Wajib Diisi</span><br><br>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
-                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">
+                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Ubah">
                       <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('admin/praktikum')}}'">Batal</button>
                     </form>
                   </div>

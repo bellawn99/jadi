@@ -55,7 +55,8 @@
                             <td>{{ $item->jam_mulai }}</td>
                             <td>{{ $item->jam_akhir }}</td>
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/master/jadwal/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <a href="{{route('master.editJadwal',$item['id'])}}">
+                            <button type="button" class="btn btn-warning btn-sm" ><i class=" mdi mdi-border-color "></i></button></a>
                             <a data-id="{{ $item->id }}" data-hari="{{ $item->hari }}" data-jam_m="{{ $item->jam_mulai }}" data-jam_a="{{ $item->jam_akhir }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
@@ -83,19 +84,20 @@
                     {{csrf_field()}}
                     {{ method_field('POST') }}
                     <div class="form-group">
-                        <label for="hari">Hari</label>
+                        <label for="hari">Hari</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" name="hari" placeholder="Hari" >
                       </div>
                       <div class="form-group">
-                        <label for="jam_mulai">Jam Mulai</label>
+                        <label for="jam_mulai">Jam Mulai</label>&nbsp;<span>*</span>
                         <input type="time" class="form-control" name="jam_mulai" placeholder="Jam Mulai" >
                         <small>contoh : 08.00 AM</small>
                       </div>
                       <div class="form-group">
-                        <label for="jam_akhir">Jam Akhir</label>
+                        <label for="jam_akhir">Jam Akhir</label>&nbsp;<span>*</span>
                         <input type="time" class="form-control" name="jam_akhir" placeholder="Jam Akhir">
                         <small>contoh : 02.00 PM</small>
                       </div>
+                      <span>(*) Wajib Diisi</span>
                     
       </div>
       <div class="modal-footer">
@@ -113,7 +115,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Jadwal</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Import Data Jadwal</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -148,7 +150,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Jadwal</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Hapus Data Jadwal</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

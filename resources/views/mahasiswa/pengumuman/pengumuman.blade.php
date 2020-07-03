@@ -87,11 +87,6 @@
       <div class="modal-body">
         <table style="border:0">
         <tr>
-          <td>ID</td>
-          <td>:</td>
-          <td>{{ $item->id }}</td>
-        </tr>
-        <tr>
           <td>Nama Kelas</td>
           <td>:</td>
           <td>{{ $item->nama }}</td>

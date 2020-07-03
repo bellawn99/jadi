@@ -55,7 +55,8 @@
                             <td>{{ $item->nama_matkul }}</td>
                             <td>{{ $item->sks }}</td>
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/master/matkul/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <a href="{{route('master.editMatkul',$item['id'])}}">
+                            <button type="button" class="btn btn-warning btn-sm" ><i class=" mdi mdi-border-color "></i></button></a>
                             <a data-id="{{ $item->id }}" data-nama="{{ $item->nama_matkul }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
@@ -83,25 +84,18 @@
                     {{csrf_field()}}
                     {{ method_field('POST') }}
                     <div class="form-group">
-                        <label for="kode_vmk">Kode VMK</label>
+                        <label for="kode_vmk">Kode VMK</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" name="kode_vmk" placeholder="Kode VMK" >
                       </div>
                       <div class="form-group">
-                        <label for="nama_matkul">Nama Matakuliah</label>
+                        <label for="nama_matkul">Nama Matakuliah</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" name="nama_matkul" placeholder="Nama Matakuliah" >
                       </div>
                       <div class="form-group">
-                        <label for="sks">SKS</label>
+                        <label for="sks">SKS</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" name="sks" placeholder="SKS">
                       </div>
-                      <div class="form-group">
-                        <label for="dosen_id">Nama Dosen</label>
-                        <select name='dosen_id' class='form-control'>
-                        @foreach ($matkuls as $value)
-                                <option value="{{ $value->nomor }}">{{ $value->nama }}</option>
-                        @endforeach
-                        </select>
-                      </div>
+                      <span>(*) Wajib Diisi</span>
                     
       </div>
       <div class="modal-footer">
@@ -119,7 +113,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Matakuliah</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Import Data Matakuliah</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -154,7 +148,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Matakuliah</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Hapus Data Matakuliah</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

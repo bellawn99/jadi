@@ -83,7 +83,7 @@ h3 > span {
                                 <img style="margin-left:auto;margin-right:auto;" class="img-responsive img-circle avatar-view" src="{{asset('images/'.$item->foto.'')}}" alt="Avatar" title="Change the avatar">
                                 <br><br>
                             <div class="profile-message-btn center-block text-center">
-                            <a href="{{url('mahasiswa/profil/edit-foto/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Edit Foto</a>
+                            <a href="{{url('mahasiswa/profil/edit-foto/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Ubah Foto</a>
                           @endforeach
                             </div>
                     </div>
@@ -188,7 +188,7 @@ h3 > span {
                                     </div>
                                     @endforeach
                                     <div class="text-center">
-                                    <a href="{{url('mahasiswa/profil/edit-data/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Edit Data Diri</a>
+                                    <a href="{{url('mahasiswa/profil/edit-data/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Ubah Data Diri</a>
                                     </div>
                                     <br>
                                 </div>
@@ -231,12 +231,12 @@ h3 > span {
                                             Kartu Rencana Studi
                                         </div>
                                         <div class="profile-user-details-value">
-                                            {{ $item->krs }}
+                                            {{ $item->khs }}
                                         </div>
                                     </div>
                                     @endforeach
                                     <div class="text-center">
-                                    <a href="{{url('mahasiswa/profil/edit-mahasiswa/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Edit Data Mahasiswa</a>
+                                    <a href="{{url('mahasiswa/profil/edit-mahasiswa/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Ubah Data Mahasiswa</a>
                                     </div>
                                 </div>
                             </div>
@@ -279,7 +279,7 @@ h3 > span {
                                     </div>
                                     @endforeach
                                     <div class="text-center">
-                                    <a href="{{url('mahasiswa/profil/edit-bank/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Edit Data Bank</a>
+                                    <a href="{{url('mahasiswa/profil/edit-bank/'.Auth::user()->id)}}" type="button" class="btn btn-gradient-primary mr-2 btn-sm" style="color:white">Ubah Data Bank</a>
                                     </div>
                                 </div>
                             </div>

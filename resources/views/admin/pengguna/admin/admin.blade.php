@@ -179,7 +179,7 @@ in: "Cari",
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Admin</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Import Data Admin</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -225,19 +225,19 @@ in: "Cari",
                     {{csrf_field()}}
                     {{ method_field('POST') }}
                       <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Email</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" name="email" placeholder="Email" >
                       </div>
                       <div class="form-group">
-                        <label for="nama">Nama</label>
+                        <label for="nama">Nama</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" name="nama" placeholder="Nama" >
                       </div>
                       <div class="form-group">
-                        <label for="nip">NIP</label>
+                        <label for="nip">NIP</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" name="nip" placeholder="NIP" >
                       </div>
                       <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="password">Password</label>&nbsp;<span>*</span>
                         <input type="password" class="form-control" name="password" placeholder="Password">
                       </div>
                       <div class="form-group">
@@ -251,9 +251,11 @@ in: "Cari",
                           <label class="custom-file-label" for="kolomTambahAdmin" data-browse="Cari">Foto</label>                         
                         </div>
                       </div>
+                      <span>(*) Wajib Diisi</span>
                     
       </div>
       <div class="modal-footer">
+      
         <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Tambah</button>
         <button class="btn btn-light btn-sm" data-dismiss="modal">Batal</button>
         </form>
@@ -268,7 +270,7 @@ in: "Cari",
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Admin</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Hapus Data Admin</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

@@ -53,7 +53,8 @@
                             <td>{{ $item->nidn }}</td>  
                             <td>{{ $item->nama }}</td>
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="location.href='{{url('admin/master/dosen/edit/'.$item['id'])}}'"><i class=" mdi mdi-border-color "></i></button>
+                            <a href="{{route('master.editDosen',$item['id'])}}">
+                            <button type="button" class="btn btn-warning btn-sm" ><i class=" mdi mdi-border-color "></i></button></a>
                             <a data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
@@ -79,21 +80,14 @@
                     {{csrf_field()}}
                     {{ method_field('POST') }}
                     <div class="form-group">
-                        <label for="nidn">NIDN</label>
+                        <label for="nidn">NIDN</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" name="nidn" placeholder="NIDN" >
                       </div>
                       <div class="form-group">
-                        <label for="nama">Nama</label>
+                        <label for="nama">Nama</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" name="nama" placeholder="Nama" >
                       </div>
-                      <div class="form-group">
-                        <label for="no_hp">No Telepon</label>
-                        <input type="text" class="form-control" name="no_hp" placeholder="No Telepon">
-                      </div>
-                      <div class="form-group">
-                        <label for="alamat">Alamat</label>
-                        <input type="text" class="form-control" name="alamat" placeholder="Alamat" >
-                      </div>
+                    <span>(*) Wajib Diisi</span>
                     
       </div>
       <div class="modal-footer">
@@ -111,7 +105,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Dosen</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Import Data Dosen</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -146,7 +140,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Dosen</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Hapus Data Dosen</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

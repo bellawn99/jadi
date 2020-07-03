@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<a href="{{url('admin/master/ruangan')}}" style="color:black; text-decoration:none">Master Jadwal</a> / <a style="color:grey; text-decoration:none">Edit Ruangan</a>
+<a href="{{url('admin/master/ruangan')}}" style="color:black; text-decoration:none">Master Jadwal</a> / <a style="color:grey; text-decoration:none">Ubah Ruangan</a>
 @endsection
 
 @push('css')
@@ -17,7 +17,7 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Edit Data Ruangan</h4>
+                    <h4 class="card-title">Ubah Data Ruangan</h4>
                     
                   @if (count($errors)>0)
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
@@ -38,12 +38,13 @@
                         <input type="text" class="form-control" id="id" name="id" value="{{$ruangans->id}}" readonly>
                       </div>
                       <div class="form-group">
-                        <label for="nama_ruangan">Nama Ruangan</label>
+                        <label for="nama_ruangan">Nama Ruangan</label>&nbsp;<span>*</span>
                         <input type="text" class="form-control" id="nama_ruangan" name="nama_ruangan" value="{{$ruangans->nama_ruangan}}">
                       </div>
+                      <span>(*) Wajib Diisi</span><br><br>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
-                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Edit">
+                      <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Ubah">
                       <button type="button" class="btn btn-light btn-sm"  onclick="location.href='{{url('admin/master/ruangan')}}'">Batal</button>
                     </form>
                   </div>

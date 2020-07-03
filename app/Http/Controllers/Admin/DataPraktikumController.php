@@ -18,25 +18,27 @@ class DataPraktikumController extends Controller
 {
     public function index()
     {
-        $praktikums = Praktikum::leftJoin('dosen','praktikum.dosen_id','=','dosen.id')
-        ->leftJoin('matkul','praktikum.matkul_id','=','matkul.id')
-        ->leftJoin('jadwal','praktikum.jadwal_id','=','jadwal.id')
-        ->leftJoin('ruangan','praktikum.ruangan_id','=','ruangan.id')
+        $praktikums = Praktikum::join('dosen','praktikum.dosen_id','=','dosen.id')
+        ->join('matkul','praktikum.matkul_id','=','matkul.id')
+        ->join('jadwal','praktikum.jadwal_id','=','jadwal.id')
+        ->join('ruangan','praktikum.ruangan_id','=','ruangan.id')
         ->join('kelas','praktikum.kelas_id','=','kelas.id')
-        ->select('praktikum.semester','praktikum.id','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
+        ->select('praktikum.matkul_id','praktikum.semester','praktikum.id','kelas.nama',
+        'jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','matkul.nama_matkul',
+        'dosen.nama as nama_dosen','ruangan.nama_ruangan')
         ->get();
 
         $matkuls = Matkul::all();
-        $idMatkul = $praktikums->pluck('matkul_id');
+        $idMatkul = $matkuls->pluck('matkul_id');
 
         $dosens = Dosen::all();
-        $idDosen = $praktikums->pluck('dosen_id');
+        $idDosen = $dosens->pluck('dosen_id');
 
         $jadwals = Jadwal::all();
-        $idJadwal = $praktikums->pluck('jadwal_id');
+        $idJadwal = $jadwals->pluck('jadwal_id');
 
         $ruangans = Ruangan::all();
-        $idRuangan = $praktikums->pluck('ruangan_id');
+        $idRuangan = $ruangans->pluck('ruangan_id');
 
         $kelass = Kelas::all();
         $idKelas = $kelass->pluck('kelas_id');
@@ -65,14 +67,14 @@ class DataPraktikumController extends Controller
         ]);
         
         $a = Praktikum::where(['ruangan_id'=>$request->ruangan_id,'dosen_id'=>$request->dosen_id,'matkul_id'=>$request->matkul_id,'jadwal_id'=>$request->jadwal_id,'kelas_id'=>$request->kelas_id,'semester'=>$request->semester])->get();
+        $b = Praktikum::where(['jadwal_id'=>$request->jadwal_id,'kelas_id'=>$request->kelas_id])->get();
 
         //return $a[1];
-
-        if($a->count() > 0){
+        if(count($b) > 0 || count($a) > 0){
             Session::flash('statuscode','error');
         return redirect('admin/praktikum')->with('status', 'Gagal Menambahkan Data Praktikum');
-        }else{
-
+        }
+        else{
         $praktikums = new Praktikum;
         
         $praktikums->jadwal_id = $request->input('jadwal_id');
@@ -81,7 +83,7 @@ class DataPraktikumController extends Controller
         $praktikums->ruangan_id = $request->input('ruangan_id');
         $praktikums->kelas_id = $request->input('kelas_id');
         $praktikums->semester = $request->input('semester');
-        $praktikums->created_at = Carbon::now();
+        $praktikums->created_at = Carbon::today();
 
         $praktikums->save();
         
@@ -95,19 +97,19 @@ class DataPraktikumController extends Controller
         $praktikums = Praktikum::findOrFail($id);
 
         $matkuls = Matkul::all();
-        $idMatkul = $praktikums->pluck('matkul_id');
+        $idMatkul = $matkuls->pluck('id');
 
         $dosens = Dosen::all();
-        $idDosen = $praktikums->pluck('dosen_id');
+        $idDosen = $dosens->pluck('id');
 
         $jadwals = Jadwal::all();
-        $idJadwal = $praktikums->pluck('jadwal_id');
+        $idJadwal = $jadwals->pluck('id');
 
         $ruangans = Ruangan::all();
-        $idRuangan = $praktikums->pluck('ruangan_id');
+        $idRuangan = $ruangans->pluck('id');
 
         $kelass = Kelas::all();
-        $idKelas = $kelass->pluck('kelas_id');
+        $idKelas = $kelass->pluck('id');
 
         $semesters = Praktikum::all()->where('id',$id)->first();
         return view('admin.praktikum.edit', compact('praktikums','kelass','idKelas','matkuls','idMatkul','dosens','idDosen','jadwals','idJadwal','ruangans','idRuangan','semesters'));
@@ -133,6 +135,15 @@ class DataPraktikumController extends Controller
             'semester.required' => 'Semester Wajib Diisi',
         ]);
         
+        $a = Praktikum::where(['ruangan_id'=>$request->ruangan_id,'dosen_id'=>$request->dosen_id,'matkul_id'=>$request->matkul_id,'jadwal_id'=>$request->jadwal_id,'kelas_id'=>$request->kelas_id,'semester'=>$request->semester])->get();
+        $b = Praktikum::where(['jadwal_id'=>$request->jadwal_id,'kelas_id'=>$request->kelas_id])->get();
+
+        //return $a[1];
+        if(count($b) > 0 || count($a) > 0){
+            Session::flash('statuscode','error');
+        return redirect('admin/praktikum')->with('status', 'Gagal Mengubah Data Praktikum');
+        }
+        else{
         $praktikums = Praktikum::find($id);
 
         $praktikums->ruangan_id = $request->input('ruangan_id');
@@ -147,6 +158,7 @@ class DataPraktikumController extends Controller
 
         Session::flash('statuscode','success');
         return redirect('admin/praktikum')->with('status','Data Praktikum Berhasil Diubah');
+        }
     }
 
     public function delete($id){

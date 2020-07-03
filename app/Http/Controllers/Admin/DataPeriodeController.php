@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 use App\Periode;
 use App\Berita;
 use App\Admin;
+use App\User;
+use Notification;
+use App\Notifications;
+use App\Notifications\Pengumuman;
 use Auth;
 use Carbon\Carbon;
 use Session;
@@ -18,8 +22,44 @@ class DataPeriodeController extends Controller
     {
         $periodes = Periode::all();
         $beritas = Berita::all();
+
+        $cek = Carbon::now();
+
+        $cek2 = Periode::select('tgl_mulai')
+        ->where('status','=','pengumuman')
+        ->whereDate('tgl_mulai', '<=', $cek)
+        ->get();
+
+        $test = DB::table('notifications')
+        ->select('created_at')
+        ->whereDate('created_at', '>=', Carbon::now())
+        ->orderBy('created_at','desc')
+        ->get()->toArray();
         
-       return view('admin.periode.periode',compact('periodes','beritas'));        
+        if(count($cek2)>0){
+            if(count($test)<0){
+        $user = User::where('role_id',2)->select('id','role_id','nama','email')->get();
+        
+        $collection = [];
+
+        foreach($user as $iki){
+            $collection[] = $iki;
+        }
+
+        $details = [
+            'greeting' => 'Hallo!',
+            'body' => 'Kami ingin memberitahukan bahwa data nama asistensi sudah dapat diakses di akun masing-masing',
+            'thanks' => 'Terimakasih',
+            'actionText' => 'Cek Pengumuman',
+            'actionURL' => url('/login'),
+            'id' => $cek2
+        ];
+
+        Notification::send($collection, new Pengumuman($details));
+        }
+        
+       return view('admin.periode.periode',compact('periodes','beritas'));     
+            }   
     }
 
     public function store(Request $request){

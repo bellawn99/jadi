@@ -57,7 +57,7 @@ class DataJadwalController extends Controller
         $jadwals->hari = $request->input('hari');
         $jadwals->jam_mulai = $request->input('jam_mulai');
         $jadwals->jam_akhir = $request->input('jam_akhir');
-        $jadwals->created_at = Carbon::now();
+        $jadwals->created_at = Carbon::today();
 
         $jadwals->save();
         

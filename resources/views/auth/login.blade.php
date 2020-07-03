@@ -29,6 +29,16 @@
                   <img src="{{url('assets/images/logo.svg')}}"><br><br>
                   Silahkan login terlebih dahulu.
                 </div>
+                  @if (count($errors)>0)
+                    <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show alert">
+                    @foreach($errors->all() as $error)
+                      <li>{{$error}}</li>
+                    @endforeach
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                  @endif           
                 <form class="pt-3" method="POST" action="{{ route('login') }}">
                   @csrf
                   <div class="form-group">
@@ -77,5 +87,10 @@
     <script src="{{url('assets/js/hoverable-collapse.js')}}"></script>
     <script src="{{url('assets/js/misc.js')}}"></script>
     <!-- endinject -->
+    <script>
+    $(".alert").delay(10000).slideUp(200, function() {
+    $(this).alert('close');
+    });
+    </script>
   </body>
 </html>

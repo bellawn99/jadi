@@ -9,6 +9,7 @@ use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class ProfilController extends Controller
 {
@@ -21,7 +22,13 @@ class ProfilController extends Controller
     public function index()
     {
         $profils = User::leftJoin('mahasiswa','mahasiswa.user_id','=','user.id')
-        ->select('user.email','user.username','mahasiswa.id as mhs_id','mahasiswa.nik','mahasiswa.npwp','mahasiswa.jk','mahasiswa.alamat','mahasiswa.tempat','mahasiswa.nim','mahasiswa.tgl_lahir','mahasiswa.prodi','mahasiswa.krs','mahasiswa.semester','mahasiswa.nama_bank','mahasiswa.no_rekening','mahasiswa.nama_rekening','user.id','user.nama','user.username','user.password','user.no_hp','user.foto')
+        ->select('user.email','user.username','mahasiswa.id as mhs_id',
+        'mahasiswa.nik','mahasiswa.npwp','mahasiswa.jk','mahasiswa.alamat',
+        'mahasiswa.tempat','mahasiswa.nim','mahasiswa.tgl_lahir',
+        'mahasiswa.prodi','mahasiswa.khs','mahasiswa.semester',
+        'mahasiswa.nama_bank','mahasiswa.no_rekening','mahasiswa.nama_rekening',
+        'user.id','user.nama','user.username','user.password','user.no_hp',
+        'user.foto')
         ->where('mahasiswa.user_id',Auth::user()->id)
         ->get();
         
@@ -76,7 +83,7 @@ class ProfilController extends Controller
         $this->validate($request,[
             'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'max:50'],
-            'nip' => ['required', 'string', 'max:10','min:6'],
+            'nim' => ['required', 'string', 'max:10','min:6'],
             'no_hp' => ['required', 'string', 'max:15'],
             'jk' => 'required',
             'nik' => 'required',
@@ -188,24 +195,25 @@ class ProfilController extends Controller
     {
             $this->validate($request,[
                 'prodi' => 'required',
-                'krs' => 'required:pdf',
+                'khs' => 'required|mimes:pdf',
                 'semester' => 'required',
             ],
             [
                 'prodi.required' => 'Prodi Wajib Diisi',
-                'krs.required' => 'KRS Wajib Diisi',
+                'khs.required' => 'KHS Wajib Diisi',
+                'khs.mimes' => 'KHS Harus Berupa File pdf',
                 'semester.required' => 'Semester Wajib Diisi',
             ]);
 
             $mahasiswas = Mahasiswa::find($id);
 
-            $kartu = $request->file('krs');
+            $kartu = $request->file('khs');
 
             $new_name = $mahasiswas->user_id . '.' . $kartu->getClientOriginalExtension();
-            $kartu->move(public_path('krs'), $new_name);
+            $kartu->move(public_path('khs'), $new_name);
 
             $mahasiswas->prodi = $request->prodi;
-            $mahasiswas->krs = $new_name;
+            $mahasiswas->khs = $new_name;
             $mahasiswas->semester = $request->semester;
 
             $mahasiswas->update();
