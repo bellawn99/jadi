@@ -97,11 +97,11 @@
                     {{csrf_field()}}
                     {{ method_field('POST') }}
                     <div class="form-group">
-                        <label for="tgl_mulai" class="col-form-label">Tanggal Mulai</label>&nbsp;<span>*</span>
+                        <label for="tgl_mulai">Tanggal Mulai</label>&nbsp;<span>*</span>
                         <input class="form-control" type="date" name="tgl_mulai">
                     </div>
                     <div class="form-group">
-                        <label for="tgl_selesai" class="col-form-label">Tanggal Selesai</label>
+                        <label for="tgl_selesai">Tanggal Selesai</label>
                         <input class="form-control" type="date" name="tgl_selesai">
                     </div>
                       <div class="form-group">
