@@ -56,10 +56,13 @@ class DataPeriodeController extends Controller
         ];
 
         Notification::send($collection, new Pengumuman($details));
-        }
+        
         
        return view('admin.periode.periode',compact('periodes','beritas'));     
-            }   
+        }    
+        }else{
+            return view('admin.periode.periode',compact('periodes','beritas'));         
+        }
     }
 
     public function store(Request $request){
