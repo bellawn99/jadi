@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Dosen;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Carbon\Carbon;
+use Session;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -34,12 +35,19 @@ class DosenImport implements ToCollection
     public function collection(Collection $collection){
         foreach($collection as $key => $row){
             if($key>=1){
+                if(Dosen::where(['nidn'=>$row[0],'nama'=>$row[1]])->exists()){
+                    Session::flash('statuscode','error');
+                    return redirect('admin/master/dosen')->with('status', 'Data Dosen Sudah Ada Dalam Sistem');
+                }else{
                 $b = 'D'.Carbon::now()->format('ymdHi').rand(100,999);
                     Dosen::create([    
                         'id' => $b,
                         'nidn' => $row[0],
                         'nama' =>  $row[1]
                     ]);
+                    Session::flash('statuscode','success');
+                    return redirect('admin/master/dosen')->with('status', 'Berhasil Menambahkan Data Dosen');
+                }
             }
         }
     }

@@ -19,11 +19,18 @@ class DataDosenController extends Controller
         return view('admin.dosen.dosen')->with('dosens',$dosens);  
     }
 
-    public function csv_import()
+    public function csv_import(Request $request)
     {
+        $this->validate($request,[
+            'file' => 'required|mimes:xlsx, xls',
+        ],
+        [
+            'file.required' => 'File Wajib Diisi',
+            'file.mimes' => 'File Harus Berupa File: xlsx, xls!',
+        ]);
+
         Excel::import(new DosenImport, request()->file('file'));
-        Session::flash('statuscode','success');
-            return redirect('admin/master/dosen')->with('status','Berhasil Menambahkan Data Dosen');
+        return back();
     }
 
     public function store(Request $request){

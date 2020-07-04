@@ -30,7 +30,7 @@
                     </div>
                   @endif
 
-                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('admin/berita/update/'.$beritas->id)}}">
+                    <form class="forms-sample" method="post" data-toggle="validator" action="{{url('admin/berita/update/'.$beritas->id)}}" enctype="multipart/form-data">
                     {{ csrf_field() }} 
                     {{ method_field('PUT') }}
                       <div class="form-group">

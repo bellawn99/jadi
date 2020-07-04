@@ -33,9 +33,9 @@
             <div class="d-flex align-items-center custom-icon-wrap mb-3">
             <table>  
               
-              @foreach ($ketentuans as $item)
+              @foreach ($ketentuans as $index => $item)
               <tr>
-              <td><span class="custom-icon-inner mr-3"><span class="icon">{{ $item->id }}</span></span></td>
+              <td><span class="custom-icon-inner mr-3"><span class="icon">{{ $index+1 }}</span></span></td>
 
               <td><div><h3 class="m-0">{{ $item->ketentuan }}</h3></div></td>
               </tr>

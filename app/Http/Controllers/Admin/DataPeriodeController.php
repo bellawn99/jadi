@@ -85,8 +85,12 @@ class DataPeriodeController extends Controller
         
         $b = 'P'.Carbon::now()->format('ymdHi').rand(100,999);
 
-        // return $request->input('tgl_selesai');
+        $a = Periode::where(['tgl_mulai'=>$request->tgl_mulai,'thn_ajaran'=>$request->thn_ajaran,'status'=>$request->status,'semester'=>$request->semester])->get();
 
+        if(count($a)>0){
+            Session::flash('statuscode','error');
+            return redirect('admin/periode')->with('status', 'Gagal Menambahkan Data Periode');
+        }else{
         if($request->get('status')=='Daftar'){
             $beritas = new Berita;
             $beritas->id = 'B'.Carbon::now()->format('ymdHi').rand(100,999);
@@ -165,13 +169,10 @@ Kami dari Admin Asistensi memberitahukan kepada seluruh calon Asisten Praktikum 
                 Session::flash('statuscode','error');
                 return redirect('admin/periode')->with('status', 'Gagal Menambahkan Data Periode!'); 
             }
-      }
-
-        
-       
-        
+      } 
     Session::flash('statuscode','success');
         return redirect('admin/periode')->with('status', 'Berhasil Menambahkan Data Periode');
+    }
     }
 
     public function edit(Request $request, $id)
@@ -280,10 +281,10 @@ Kami dari Admin Asistensi memberitahukan kepada seluruh calon Asisten Praktikum 
 
     public function delete($id){
 
-        $periodes = Periode::findOrFail($id);
-        $beritas = Berita::where('id',$id);
-        $beritas->delete();
+        $periodes = Periode::where('berita_id',$id);
         $periodes->delete();
+        $beritas = Berita::where('id',$id);
+        $beritas->delete();        
 
         Session::flash('statuscode','success');
         return redirect('admin/periode')->with('status', 'Berhasil Hapus Periode');

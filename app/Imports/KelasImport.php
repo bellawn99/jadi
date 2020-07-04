@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Kelas;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Carbon\Carbon;
+use Session;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -34,11 +35,18 @@ class KelasImport implements ToCollection
     public function collection(Collection $collection){
         foreach($collection as $key => $row){
             if($key>=1){
+                if(Kelas::where(['nama'=>$row[0]])->exists()){
+                    Session::flash('statuscode','error');
+                    return redirect('admin/master/kelas')->with('status', 'Data Kelas Sudah Ada Dalam Sistem');
+                }else{
                 $b = 'K'.Carbon::now()->format('ymdHi').rand(100,999);
                     Kelas::create([    
                         'id' => $b,
                         'nama' => $row[0]
                     ]);
+                    Session::flash('statuscode','success');
+                    return redirect('admin/master/kelas')->with('status', 'Berhasil Menambahkan Data Kelas');
+                }
             }
         }
     }

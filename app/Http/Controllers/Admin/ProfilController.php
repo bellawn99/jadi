@@ -9,6 +9,7 @@ use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class ProfilController extends Controller
 {
@@ -21,7 +22,9 @@ class ProfilController extends Controller
     public function index()
     {
         $profils = User::leftJoin('admin','admin.user_id','=','user.id')
-        ->select('user.email','user.username','admin.id as admin_id','admin.nip','user.id','user.nama','user.username','user.password','user.no_hp','user.foto')
+        ->select('user.email','user.username','admin.id as admin_id',
+        'admin.nip','user.id','user.nama','user.username','user.password',
+        'user.no_hp','user.foto')
         ->where('admin.user_id',Auth::user()->id)
         ->get();
         
@@ -45,6 +48,7 @@ class ProfilController extends Controller
         [
             'foto.required' => 'Foto Wajib Diisi',
             'foto.mimes' => 'Foto Harus Berupa File: jpeg, png, jpg, atau gif!',
+            'foto.max' => 'Ukuran Foto Terlalu Besar!'
         ]);
         
         $users = User::find($id);
@@ -101,7 +105,9 @@ class ProfilController extends Controller
             $admins = Admin::find($id);
             $admins = Admin::where('user_id',$id)->first();
             $admins->nip = $request->input('nip');
-            $admin->updated_at = Carbon::now();
+            $admins->updated_at = Carbon::now();
+
+            
 
             if($admins->update()){
                 $users = User::find($id);
@@ -117,10 +123,10 @@ class ProfilController extends Controller
                 Session::flash('statuscode','success');
                 return redirect('admin/profil')->with('status','Data diri berhasil di ubah');
             }
+        }else{
+            Session::flash('statuscode','error');
+            return redirect('admin/profil')->with('status','Data diri gagal di ubah');
         }
-
-        Session::flash('statuscode','error');
-        return redirect('admin/profil')->with('status','Data diri gagal di ubah');
     }
 
 }

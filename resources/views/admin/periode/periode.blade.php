@@ -71,7 +71,7 @@
                             <a href="{{route('edit.periode',$item['berita_id'])}}">
                             <button type="button" class="btn btn-warning btn-sm" ><i class=" mdi mdi-border-color "></i></button></a>
                             <input type="hidden" id="berita_id" name="berita_id">
-                            <a data-id="{{ $item->id }}" data-tgl_m="{{ $item->tgl_mulai }}" data-tgl_s="{{ $item->tgl_selesai }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
+                            <a data-id="{{ $item->berita_id }}" data-tgl_m="{{ $item->tgl_mulai }}" data-tgl_s="{{ $item->tgl_selesai }}" class="btn btn-danger btn-sm deletebtn" href="javascript:void(0)"><i class="mdi mdi-delete "></i></a>
                             </td>
                         </tr>
                         @endforeach

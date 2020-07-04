@@ -29,11 +29,18 @@ class PenggunaMahasiswaController extends Controller
         
     }
 
-    public function csv_import()
+    public function csv_import(Request $request)
     {
+        $this->validate($request,[
+            'file' => 'required|mimes:xlsx, xls',
+        ],
+        [
+            'file.required' => 'File Wajib Diisi',
+            'file.mimes' => 'File Harus Berupa File: xlsx, xls!',
+        ]);
+
         Excel::import(new MhsImport, request()->file('file'));
-        Session::flash('statuscode','success');
-            return redirect('admin/pengguna/user-mahasiswa')->with('status','Berhasil Menambahkan Data Mahasiswa!');
+        return back();
     }
 
     public function store(Request $request){

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Berita;
 use App\User;
 use App\Admin;
+use Auth;
 use Carbon\Carbon;
 use Session;
 use Maatwebsite\Excel\Facades\Excel;
@@ -16,12 +17,7 @@ class DataBeritaController extends Controller
 {
     public function index()
     {
-        $beritas = Berita::join('admin','berita.admin_id','=','admin.id')
-        ->join('user','admin.user_id','=','user.id')
-        ->where('user.id',Auth()->user()->id)
-        ->select('berita.id','berita.judul','berita.isi','berita.foto','user.nama')
-        ->get();
-        // return $beritas;
+        $beritas = Berita::all();
         return view('admin.berita.berita',compact('beritas'));        
     }
 
@@ -38,6 +34,14 @@ class DataBeritaController extends Controller
             'foto.mimes' => 'Foto Harus Berupa File: jpeg, png, jpg, atau gif!',
         ]);
 
+        // return $request->foto;
+
+        $a = Berita::where(['judul'=>$request->judul,'isi'=>$request->isi,'foto'=>$request->foto])->get();
+
+        if(count($a)>0){
+            Session::flash('statuscode','error');
+            return redirect('admin/berita')->with('status', 'Gagal Menambahkan Data Berita');
+        }else{
         $now = Carbon::now();
         $id = 'B'.Carbon::now()->format('ymdHi').rand(100,999);
 
@@ -45,17 +49,22 @@ class DataBeritaController extends Controller
 
         $beritas = new Berita;
 
+        $image = $request->file('foto');
+
+        $new_name = $id . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('landing/images'), $new_name);
         $beritas->id = $id;
         $beritas->admin_id = $a->id;
         $beritas->judul = $request->input('judul');
         $beritas->isi = nl2br($request->input('isi'));
-        $beritas->foto = $request->input('foto');
+        $beritas->foto = $new_name;
         $beritas->created_at = $now;
 
         $beritas->save();
         
         Session::flash('statuscode','success');
         return redirect('admin/berita')->with('status', 'Berhasil Menambahkan Data Berita');
+        }
     }
 
     public function edit(Request $request, $id)
@@ -83,9 +92,13 @@ class DataBeritaController extends Controller
         $beritas = Berita::find($id);
         $now = Carbon::now();
 
+        $image = $request->file('foto');
+
+        $new_name = $beritas->id . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('landing/images'), $new_name);
         $beritas->judul = $request->input('judul');
         $beritas->isi = nl2br($request->input('isi'));
-        $beritas->foto = $request->input('foto');
+        $beritas->foto = $new_name;
         $beritas->created_at = $now;
 
         $beritas->update();

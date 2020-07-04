@@ -19,11 +19,18 @@ class DataRuanganController extends Controller
         return view('admin.ruangan.ruangan',compact('ruangans'));        
     }
 
-    public function csv_import()
+    public function csv_import(Request $request)
     {
+        $this->validate($request,[
+            'file' => 'required|mimes:xlsx, xls',
+        ],
+        [
+            'file.required' => 'File Wajib Diisi',
+            'file.mimes' => 'File Harus Berupa File: xlsx, xls!',
+        ]);
+
         Excel::import(new RuanganImport, request()->file('file'));
-        Session::flash('statuscode','success');
-            return redirect('admin/master/ruangan')->with('status','Berhasil Menambahkan Data Ruangan');
+        return back();
     }
 
     public function store(Request $request){

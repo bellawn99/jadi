@@ -98,7 +98,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form class="forms-sample" style="{margin:0 auto;}" data-toggle="validator" action="{{ route('store.berita') }}" method="post">
+      <form class="forms-sample" style="{margin:0 auto;}" data-toggle="validator" action="{{ route('store.berita') }}" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     {{ method_field('POST') }}
                     <div class="form-group">
@@ -143,7 +143,7 @@
       {{ csrf_field() }}
       {{ method_field('DELETE') }} 
       <div class="modal-body"> 
-      <p>Apakah anda yakin menghapus data berita <input style="border:0" id="deleteBeritaForm" readonly></input> </p>
+      <p>Apakah anda yakin menghapus data berita <input size="50" style="border:0" id="deleteBeritaForm" readonly></input> </p>
       
       </div>
       <div class="modal-footer">

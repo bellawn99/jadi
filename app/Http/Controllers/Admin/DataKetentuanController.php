@@ -28,17 +28,22 @@ class DataKetentuanController extends Controller
 
     
         
-        
+        $a = Ketentuan::where(['ketentuan'=>$request->ketentuan])->get();
 
-        $ketentuans = new Ketentuan;
+        if(count($a)>0){
+            Session::flash('statuscode','error');
+            return redirect('admin/ketentuan')->with('status', 'Gagal Menambahkan Data Ketentuan');
+        }else{
+            $ketentuans = new Ketentuan;
 
-        $ketentuans->ketentuan = $request->input('ketentuan');
-        $ketentuans->created_at = Carbon::now();
-
-        $ketentuans->save();
-        
-        Session::flash('statuscode','success');
-        return redirect('admin/ketentuan')->with('status', 'Berhasil Menambahkan Data Ketentuan');
+            $ketentuans->ketentuan = $request->input('ketentuan');
+            $ketentuans->created_at = Carbon::now();
+    
+            $ketentuans->save();
+            
+            Session::flash('statuscode','success');
+            return redirect('admin/ketentuan')->with('status', 'Berhasil Menambahkan Data Ketentuan');
+        }
     }
 
     public function edit(Request $request, $id)

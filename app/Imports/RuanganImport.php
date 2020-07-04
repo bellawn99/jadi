@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Ruangan;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Carbon\Carbon;
+use Session;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -34,11 +35,18 @@ class RuanganImport implements ToCollection
     public function collection(Collection $collection){
         foreach($collection as $key => $row){
             if($key>=1){
+                if(Ruangan::where(['nama_ruangan'=>$row[0]])->exists()){
+                    Session::flash('statuscode','error');
+                    return redirect('admin/master/ruangan')->with('status', 'Data Ruangan Sudah Ada Dalam Sistem');
+                }else{
                 $b = 'R'.Carbon::now()->format('ymdHi').rand(100,999);
                     Ruangan::create([    
                         'id' => $b,
                         'nama_ruangan' => $row[0]
                     ]);
+                    Session::flash('statuscode','success');
+                    return redirect('admin/master/ruangan')->with('status', 'Berhasil Menambahkan Data Ruangan');
+                }
             }
         }
     }

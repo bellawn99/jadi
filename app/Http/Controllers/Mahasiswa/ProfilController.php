@@ -52,6 +52,7 @@ class ProfilController extends Controller
         [
             'foto.required' => 'Foto Wajib Diisi',
             'foto.mimes' => 'Foto Harus Berupa File: jpeg, png, jpg, atau gif!',
+            'foto.max' => 'Ukuran Foto Terlalu Besar!'
         ]);
         
         $users = User::find($id);
@@ -143,10 +144,10 @@ class ProfilController extends Controller
             }
 
             
+        }else{
+            Session::flash('statuscode','error');
+            return redirect('mahasiswa/profil')->with('status','Data diri gagal di ubah');
         }
-
-        Session::flash('statuscode','error');
-        return redirect('mahasiswa/profil')->with('status','Data diri gagal di ubah');
     }
 
     public function editBank(Request $request, $id)

@@ -19,11 +19,18 @@ class DataJadwalController extends Controller
         return view('admin.jadwal.jadwal',compact('jadwals'));        
     }
 
-    public function csv_import()
+    public function csv_import(Request $request)
     {
+        $this->validate($request,[
+            'file' => 'required|mimes:xlsx, xls',
+        ],
+        [
+            'file.required' => 'File Wajib Diisi',
+            'file.mimes' => 'File Harus Berupa File: xlsx, xls!',
+        ]);
+
         Excel::import(new JadwalImport, request()->file('file'));
-        Session::flash('statuscode','success');
-            return redirect('admin/master/jadwal')->with('status','Berhasil Menambahkan Data Jadwal');
+        return back();
     }
 
     public function store(Request $request){

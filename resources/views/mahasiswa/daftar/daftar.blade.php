@@ -144,7 +144,7 @@
       {{ csrf_field() }}
       {{ method_field('DELETE') }} 
       <div class="modal-body">
-      Yakin ingin membatalkan asistensi matakuliah {{ $item->nama_matkul }} {{ $item->hari }}, {{ $item->jam_mulai }}-{{ $item->jam_akhir }}?
+      Yakin ingin membatalkan asistensi matakuliah {{ $item->nama_matkul }} kelas {{$item->nama}}?
       <input type="hidden" id="noDaftar" name="noDaftar">
       </div>
       <div class="modal-footer">
@@ -170,7 +170,7 @@
         {{csrf_field()}}
         {{ method_field('POST') }}
       <input type="hidden" value="{{ $item->id }}" id="id" name="id">
-      Yakin ingin mendaftar asistensi matakuliah {{ $item->nama_matkul }} {{ $item->hari }}, {{ $item->jam_mulai }}-{{ $item->jam_akhir }}?
+      Yakin ingin mendaftar asistensi matakuliah {{ $item->nama_matkul }} kelas {{ $item->nama }}?
       </div>
       <div class="modal-footer">
       <button type="submit" class="btn btn-gradient-primary mr-2 btn-sm">Daftar</button>

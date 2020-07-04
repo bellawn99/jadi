@@ -107,7 +107,7 @@
       {{ csrf_field() }}
       {{ method_field('DELETE') }} 
       <div class="modal-body"> 
-      <p>Apakah anda yakin menghapus data ketentuan <input style="border:0" id="deleteKetentuanForm" readonly></input> </p>
+      <p>Apakah anda yakin menghapus data ketentuan <input size="50" style="border:0" id="deleteKetentuanForm" readonly></input> </p>
       
       </div>
       <div class="modal-footer">

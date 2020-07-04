@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Jadwal;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Carbon\Carbon;
+use Session;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -34,6 +35,10 @@ class JadwalImport implements ToCollection
     public function collection(Collection $collection){
         foreach($collection as $key => $row){
             if($key>=1){
+                if(Jadwal::where(['hari'=>$row[0],'jam_mulai'=>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['1'])->format('H:i:s'),'jam_akhir'=>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['2'])->format('H:i:s')])->exists()){
+                    Session::flash('statuscode','error');
+                    return redirect('admin/master/jadwal')->with('status', 'Data Jadwal Sudah Ada Dalam Sistem');
+                }else{
                 $b = 'J'.Carbon::now()->format('ymdHi').rand(100,999);
                     Jadwal::create([    
                         'id' => $b,
@@ -41,6 +46,9 @@ class JadwalImport implements ToCollection
                         'jam_mulai' =>  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['1'])->format('H:i:s'),
                         'jam_akhir' =>  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['2'])->format('H:i:s'),
                     ]);
+                    Session::flash('statuscode','success');
+                    return redirect('admin/master/jadwal')->with('status', 'Berhasil Menambahkan Data Jadwal');    
+                }
             }
         }
     }
