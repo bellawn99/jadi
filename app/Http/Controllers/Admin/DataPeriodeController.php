@@ -32,7 +32,7 @@ class DataPeriodeController extends Controller
 
         $test = DB::table('notifications')
         ->select('created_at')
-        ->whereDate('created_at', '>=', Carbon::now())
+        ->whereDate('created_at','>=',$cek2)
         ->orderBy('created_at','desc')
         ->get()->toArray();
         
