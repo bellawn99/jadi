@@ -31,7 +31,7 @@ class PengumumanController extends Controller
         ->join('dosen','praktikum.dosen_id','=','dosen.id')
         ->join('kelas','praktikum.kelas_id','=','kelas.id')
         ->where('user.id',Auth::user()->id)
-        ->select('daftar.id as noDaftar','daftar.status','praktikum.id',
+        ->select('praktikum.semester','daftar.id as noDaftar','daftar.status','praktikum.id',
         'kelas.nama','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir',
         'matkul.nama_matkul','dosen.nama as nama_dosen', 'ruangan.nama_ruangan')
         ->get();  
