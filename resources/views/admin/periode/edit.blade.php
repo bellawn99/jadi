@@ -38,11 +38,11 @@
                         <input type="text" class="form-control" id="id" name="id" value="{{$periodes->id}}" readonly>
                       </div>
                       <div class="form-group">
-                        <label for="tgl_mulai" class="col-form-label">Tanggal Mulai</label>&nbsp;<span>*</span>
+                        <label for="tgl_mulai">Tanggal Mulai</label>&nbsp;<span>*</span>
                         <input class="form-control" type="date" id="tgl_mulai" name="tgl_mulai" value="{{$periodes->tgl_mulai}}">
                     </div>
                     <div class="form-group">
-                        <label for="tgl_selesai" class="col-form-label">Tanggal Selesai</label>
+                        <label for="tgl_selesai">Tanggal Selesai</label>
                         <input class="form-control" type="date" id="tgl_selesai" name="tgl_selesai" value="{{$periodes->tgl_selesai}}">
                     </div>
                       <div class="form-group">
