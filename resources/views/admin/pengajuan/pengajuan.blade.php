@@ -49,7 +49,7 @@
                             <td>{{ $item->nama }}</td>  
                             <td>{{ $item->semester }}</td>
                             <td>{{ str_limit($item->nama_matkul, 15) }}</td>
-                            <td><a type="button" style="color:blue; text-decoration:underline" data-toggle="modal" data-target="#yourModal{{$item->id}}">{{ $item->khs }}</a></td>
+                            <td><a type="button" style="color:blue; text-decoration:underline" data-toggle="modal" data-target="#pdf{{$item->id}}">{{ $item->khs }}</a></td>
                             <td>{{ $item->ipk }}</td>
                             <td>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#detail{{$item->id}}" ><i class=" mdi mdi-eye "></i></button>
@@ -63,6 +63,28 @@
                         @endforeach
                       </tbody>
                     </table>
+
+<!-- Detail PDF Modal -->
+@foreach ($pengajuans as $item)
+<div class="modal fade" id="pdf{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Detail KHS</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        
+      <iframe id="myFrame" src="{{ URL::to('/') }}/khs/{{ $item->khs }}" width="100%"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gradient-primary mr-2 btn-sm" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
+<!-- End Detail PDF Modal -->
 
 @foreach($pengajuans as $item)
 <!-- Terima Praktikum Modal -->
@@ -119,29 +141,6 @@
 </div>
 @endforeach
 <!-- End Tolak Praktikum Modal -->
-
-
-
-<!-- Detail PDF Modal -->
-@foreach ($pengajuans as $item)
-<div class="modal fade" id="yourModal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Detail KHS</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
-      <iframe id="myFrame" src="{{ URL::to('/') }}/khs/{{ $item->khs }}" width="100%"></iframe>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-gradient-primary mr-2 btn-sm" data-dismiss="modal">OK</button>
-      </div>
-    </div>
-  </div>
-</div>
-@endforeach
-<!-- End Detail PDF Modal -->
 
 
 <!-- Detail Praktikum Modal -->

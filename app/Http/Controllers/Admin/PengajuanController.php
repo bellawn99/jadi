@@ -31,7 +31,7 @@ class PengajuanController extends Controller
         ->leftJoin('ruangan','praktikum.ruangan_id','=','ruangan.id')
         ->join('kelas','praktikum.kelas_id','=','kelas.id')
         ->select('daftar.praktikum_id as praktikum','daftar.id as noDaftar','user.nama as user','praktikum.semester','mahasiswa.khs',
-        'mahasiswa.ipk','daftar.status','kelas.nama','jadwal.hari','jadwal.jam_mulai',
+        'mahasiswa.id as id','mahasiswa.ipk','daftar.status','kelas.nama','jadwal.hari','jadwal.jam_mulai',
         'jadwal.jam_akhir','matkul.nama_matkul','dosen.nama as nama_dosen','ruangan.nama_ruangan')
         ->get();  
         

@@ -198,7 +198,7 @@ in: "Cari",
                       <b><li>Pastikan <u>Judul Kolom</u> yang ada pada file(.xlsx)/(.xls) berada di baris paling atas/pertama</li></b>
                       <b><li>Pastikan data mahasiswa yang ada di file (.xlsx)/(.xls) berada di baris kedua</li></b>
                       <b><li>Judul kolom tidak perlu sama persis dengan contoh diatas</li></b>
-                      <b><li><u>Password</u> untuk mahasiswa akan otomatis diambilkan dari NIU</li></b>
+                      <b><li><u>Username</u> dan <u>Password</u> untuk mahasiswa akan otomatis diambilkan dari NIU</li></b>
                     </ol>
       </div>
       <div class="modal-footer">
