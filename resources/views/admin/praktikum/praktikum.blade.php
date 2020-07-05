@@ -303,6 +303,7 @@ $(document).ready(function(){
     $('#tabel-user').DataTable({
       'responsive' : true,
       'autoWidth' : false,
+      "scrollX": true,
       'language' : {
                         'search' : "_INPUT_",
                         'searchPlaceholder' : "Search",
