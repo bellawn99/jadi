@@ -35,31 +35,57 @@ class MhsImport implements ToCollection
     // }
 
     public function collection(Collection $collection){
+		$total_data=0;
+		$berhasil=0;
+		$gagal=0;
+
+
+        $rules = ['0' => 'regex:/(^([a-zA-Z]+)(\d+)?$)/u',
+        '1'=>'string'];
+
+        $pesan = ['0' => 'Nama Harus String',
+        '1'=>'NIM Harus String'];
+
         foreach($collection as $key => $row){
             if($key>=1){
+                $validator = \Validator::make($row->toArray(),$rules,$pesan);
+                if($validator->fails()){ $gagal++; continue; }
                 if(User::where(['nama'=>$row[0],'username'=>substr ($row[1], 3, 6)])->exists()){
-                    Session::flash('statuscode','error');
-                    return redirect('admin/pengguna/user-mahasiswa')->with('status', 'Data Mahasiswa Sudah Ada Dalam Sistem');
-                }else{
-                $a = Role::select('id')->where('role','admin')->get()->first()->toArray();
-                $b = Carbon::now()->format('ymd').rand(1000,9999);
-                $c = 'M'.Carbon::now()->format('ymdHi').rand(100,999);
-                User::create([
-                    'id' => $b,
-                    'role_id' => $a['id'],
-                    'nama' =>  $row[0],
-                    'username' =>  substr ($row[1], 3, 6),
-                    'password' => \Hash::make($row[1]),
-                ]);
-                Mahasiswa::create([
-                    'id' => $c,
-                    'user_id' => $b,
-                    'nim' => $row[1]
-                ]);
-                Session::flash('statuscode','success');
-                return redirect('admin/pengguna/user-mahasiswa')->with('status', 'Berhasil Menambahkan Data Mahasiswa');
+                    $gagal++;
                 }
+				else{
+					$a = Role::select('id')->where('role','mahasiswa')->get()->first()->toArray();
+                    $b = Carbon::now()->format('ymd').rand(1000,9999);
+                    $c = 'M'.Carbon::now()->format('ymdHi').rand(100,999);
+                    User::create([
+                        'id' => $b,
+                        'role_id' => $a['id'],
+                        'nama' =>  $row[0],
+                        'username' =>  substr ($row[1], 3, 6),
+                        'password' => \Hash::make(substr ($row[1], 3, 6)),
+                    ]);
+                    Mahasiswa::create([
+                        'id' => $c,
+                        'user_id' => $b,
+                        'nim' => $row[1]
+                    ]);
+					$berhasil++;
+                }
+				$total_data++;
             }
         }
+        if($berhasil==0 && $gagal>0){
+            Session::flash('statuscode','error');
+            return redirect('admin/pengguna/user-mahasiswa')->with('status', "Gagal menambahkan ".$gagal." data"); 
+        }elseif($gagal>0 && $berhasil>0){
+            Session::flash('statuscode','error');
+            return redirect('admin/pengguna/user-mahasiswa')->with('status', "Berhasil menambahkan ".$berhasil." data. Gagal menambahkan ".$gagal." data"); 
+        }elseif($gagal==0 && $berhasil>0){
+            Session::flash('statuscode','success');
+            return redirect('admin/pengguna/user-mahasiswa')->with('status', "Berhasil menambahkan ".$berhasil." data");
+        }
+		// $status = "Dari Total Data: ".$total_data." Data berhasil ditambahkan: ".$berhasil." Data gagal ditambahkan: ".$gagal;
+        
+        
     }
 }

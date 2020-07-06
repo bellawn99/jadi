@@ -25,7 +25,7 @@ class ProfilController extends Controller
         ->select('user.email','user.username','mahasiswa.id as mhs_id',
         'mahasiswa.nik','mahasiswa.npwp','mahasiswa.jk','mahasiswa.alamat',
         'mahasiswa.tempat','mahasiswa.nim','mahasiswa.tgl_lahir',
-        'mahasiswa.prodi','mahasiswa.khs','mahasiswa.semester',
+        'mahasiswa.prodi','mahasiswa.khs','mahasiswa.semester', 'mahasiswa.ipk',
         'mahasiswa.nama_bank','mahasiswa.no_rekening','mahasiswa.nama_rekening',
         'user.id','user.nama','user.username','user.password','user.no_hp',
         'user.foto')
@@ -196,11 +196,13 @@ class ProfilController extends Controller
     {
             $this->validate($request,[
                 'prodi' => 'required',
+                'ipk' => 'required',
                 'khs' => 'required|mimes:pdf',
                 'semester' => 'required',
             ],
             [
                 'prodi.required' => 'Prodi Wajib Diisi',
+                'ipk.required' => 'IPK Wajib Diisi',
                 'khs.required' => 'KHS Wajib Diisi',
                 'khs.mimes' => 'KHS Harus Berupa File pdf',
                 'semester.required' => 'Semester Wajib Diisi',

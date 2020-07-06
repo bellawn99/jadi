@@ -228,6 +228,14 @@ h3 > span {
                                     </div>
                                     <div class="profile-user-details clearfix">
                                         <div class="profile-user-details-label">
+                                            IPK
+                                        </div>
+                                        <div class="profile-user-details-value">
+                                            {{ $item->ipk }}
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-details clearfix">
+                                        <div class="profile-user-details-label">
                                             Kartu Rencana Studi
                                         </div>
                                         <div class="profile-user-details-value">

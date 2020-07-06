@@ -65,6 +65,7 @@
   <script src="{{ url('landing/js/main.js')}}"></script>
   <script>
     $('.without-loop').owlCarousel({
+    dots:true,
     loop:false,
     margin:30,
     nav:true,
@@ -79,7 +80,7 @@
             items:3
         }
     }
-})
+  })
   </script>
   </body>
 </html>

@@ -62,7 +62,6 @@
     <div class="site-section courses-entry-wrap"  data-aos="fade-up" data-aos-delay="100">
       <div class="container">
         <div class="row">
-
           <div class="owl-carousel col-12 nonloop-block-14 without-loop">
           @foreach($lain as $b)
             <div class="course bg-white h-100 align-self-stretch">
@@ -79,7 +78,7 @@
             </div>
           @endforeach
           </div>
-        </div>
+        </div><br><br><br><br><br>
 
 
         @if(count($lain) > 3)

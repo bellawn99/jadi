@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Hash;
+use Session;
 use Auth;
 
 class UbahPasswordController extends Controller
@@ -36,7 +37,8 @@ class UbahPasswordController extends Controller
         $user->password = bcrypt($request->get('new-password'));
         $user->save();
          
-        return redirect()->back()->with("success","Berhasil ubah password");
+        Session::flash('statuscode','success');
+        return redirect()->back()->with('status',"Berhasil ubah password");
          
         }
 }

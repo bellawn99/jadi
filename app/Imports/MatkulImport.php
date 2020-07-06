@@ -6,6 +6,7 @@ use App\Matkul;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Carbon\Carbon;
 use Session;
+use App\Validator;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -33,23 +34,50 @@ class MatkulImport implements ToCollection
     // }
 
     public function collection(Collection $collection){
+		$total_data=0;
+		$berhasil=0;
+        $gagal=0;
+        
+        $rules = ['0' => 'regex:/(^([a-zA-Z]+)(\d+)?$)/u',
+        '1' => 'regex:/(^([a-zA-Z]+)(\d+)?$)/u',
+        '2' => 'numeric'];
+
+        $pesan = ['0' => 'Kode VMK Harus String',
+        '1' => 'Nama Matakuliah Harus String',
+        '2' => 'SKS Harus Integer'];
+
         foreach($collection as $key => $row){
             if($key>=1){
+                $validator = \Validator::make($row->toArray(),$rules,$pesan);
+                if($validator->fails()){ $gagal++; continue; }
                 if(Matkul::where(['kode_vmk'=>$row[0],'nama_matkul'=>$row[1],'sks'=>$row[2]])->exists()){
-                    Session::flash('statuscode','error');
-                    return redirect('admin/master/matkul')->with('status', 'Data Matakuliah Sudah Ada Dalam Sistem');
-                }else{
-                $b = 'M'.Carbon::now()->format('ymdHi').rand(100,999);
+                    $gagal++;
+                }
+				else{
+					$b = 'M'.Carbon::now()->format('ymdHi').rand(100,999);
                     Matkul::create([    
                         'id' => $b,
                         'kode_vmk' => $row[0],
                         'nama_matkul' =>  $row[1],
                         'sks' =>  $row[2]
                     ]);
-                    Session::flash('statuscode','success');
-                    return redirect('admin/master/matkul')->with('status', 'Berhasil Menambahkan Data Matakuliah');
+					$berhasil++;
                 }
+				$total_data++;
             }
         }
+        if($berhasil==0 && $gagal>0){
+            Session::flash('statuscode','error');
+            return redirect('admin/master/matkul')->with('status', "Gagal menambahkan ".$gagal." data"); 
+        }elseif($gagal>0 && $berhasil>0){
+            Session::flash('statuscode','error');
+            return redirect('admin/master/matkul')->with('status', "Berhasil menambahkan ".$berhasil." data. Gagal menambahkan ".$gagal." data"); 
+        }elseif($gagal==0){
+            Session::flash('statuscode','success');
+            return redirect('admin/master/matkul')->with('status', "Berhasil menambahkan ".$berhasil." data");
+        }
+		// $status = "Dari Total Data: ".$total_data." Data berhasil ditambahkan: ".$berhasil." Data gagal ditambahkan: ".$gagal;
+        
+        
     }
 }

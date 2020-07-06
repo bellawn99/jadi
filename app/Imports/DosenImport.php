@@ -6,6 +6,7 @@ use App\Dosen;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Carbon\Carbon;
 use Session;
+use App\Validator;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -33,22 +34,48 @@ class DosenImport implements ToCollection
     // }
 
     public function collection(Collection $collection){
+		$total_data=0;
+		$berhasil=0;
+		$gagal=0;
+
+
+        $rules = ['0' => 'regex:/(^([a-zA-Z]+)(\d+)?$)/u',
+        '1' => 'regex:/(^([a-zA-Z]+)(\d+)?$)/u'];
+
+        $pesan = ['0' => 'NIDN Harus String',
+        '1' => 'Nama Dosen Harus String'];
+
         foreach($collection as $key => $row){
             if($key>=1){
+                $validator = \Validator::make($row->toArray(),$rules,$pesan);
+                if($validator->fails()){ $gagal++; continue; }
                 if(Dosen::where(['nidn'=>$row[0],'nama'=>$row[1]])->exists()){
-                    Session::flash('statuscode','error');
-                    return redirect('admin/master/dosen')->with('status', 'Data Dosen Sudah Ada Dalam Sistem');
-                }else{
-                $b = 'D'.Carbon::now()->format('ymdHi').rand(100,999);
+                    $gagal++;
+                }
+				else{
+					$b = 'D'.Carbon::now()->format('ymdHi').rand(100,999);
                     Dosen::create([    
                         'id' => $b,
                         'nidn' => $row[0],
                         'nama' =>  $row[1]
                     ]);
-                    Session::flash('statuscode','success');
-                    return redirect('admin/master/dosen')->with('status', 'Berhasil Menambahkan Data Dosen');
+					$berhasil++;
                 }
+				$total_data++;
             }
         }
+        if($berhasil==0 && $gagal>0){
+            Session::flash('statuscode','error');
+            return redirect('admin/master/dosen')->with('status', "Gagal menambahkan ".$gagal." data"); 
+        }elseif($gagal>0 && $berhasil>0){
+            Session::flash('statuscode','error');
+            return redirect('admin/master/dosen')->with('status', "Berhasil menambahkan ".$berhasil." data. Gagal menambahkan ".$gagal." data"); 
+        }elseif($gagal==0){
+            Session::flash('statuscode','success');
+            return redirect('admin/master/dosen')->with('status', "Berhasil menambahkan ".$berhasil." data");
+        }
+		// $status = "Dari Total Data: ".$total_data." Data berhasil ditambahkan: ".$berhasil." Data gagal ditambahkan: ".$gagal;
+        
+        
     }
 }

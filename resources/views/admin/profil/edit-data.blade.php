@@ -57,7 +57,7 @@ in: "Cari",
                         <label for="no_hp">No Telepon</label>
                         <input type="text" class="form-control" id="no_hp" name="no_hp" value="{{$users->no_hp}}">
                       </div>
-                      <span>(*) Wajib Diisi</span>
+                      <span>(*) Wajib Diisi</span><br><br>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
                       <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Ubah">

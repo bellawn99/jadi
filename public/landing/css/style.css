@@ -644,6 +644,7 @@ h1, h2, h3, h4, h5,
     @media (max-width: 991.98px) {
       .img-absolute img {
         max-width: 100%; } }
+        
 
 .slide-1 {
   background-size: cover;
@@ -852,7 +853,23 @@ h1, h2, h3, h4, h5,
   display: none; }
 
 .nonloop-block-14 .owl-dots {
-  margin-top: 30px;
+  margin-top: 100px;
+  width: 100%;
+  text-align: center; }
+  .nonloop-block-14 .owl-dots .owl-dot {
+    display: inline-block;
+    margin: 5px; }
+    .nonloop-block-14 .owl-dots .owl-dot span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #e6e6e6; }
+    .nonloop-block-14 .owl-dots .owl-dot.active span {
+      background-color: #7971ea; }
+
+.nonloop-block-14 .owl-dots {
+  margin-top: 20px;
   width: 100%;
   text-align: center; }
   .nonloop-block-14 .owl-dots .owl-dot {
@@ -1006,7 +1023,7 @@ h1, h2, h3, h4, h5,
 
 .nonloop-block-14 .owl-stage {
   padding-top: 5rem;
-  padding-bottom: 5rem; }
+  padding-bottom: 1rem; }
 
 .course {
   -webkit-box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.3);

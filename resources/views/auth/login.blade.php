@@ -42,7 +42,7 @@
                 <form class="pt-3" method="POST" action="{{ route('login') }}">
                   @csrf
                   <div class="form-group">
-                    <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username" @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                    <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username" @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="username" autofocus>
                     @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
                     @enderror
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

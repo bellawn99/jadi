@@ -30,9 +30,7 @@ class DaftarController extends Controller
         ->join('jadwal','praktikum.jadwal_id','=','jadwal.id')
         ->join('ruangan','praktikum.ruangan_id','=','ruangan.id')
         ->join('kelas','praktikum.kelas_id','=','kelas.id')
-        ->select('praktikum.id as praktikum','praktikum.semester','praktikum.id', 'kelas.nama',
-        'jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir',
-        'matkul.nama_matkul','dosen.nama as nama_dosen','ruangan.nama_ruangan')
+        ->select('praktikum.id','praktikum.semester','kelas.id as id_kelas','praktikum.matkul_id','praktikum.jadwal_id','praktikum.dosen_id','praktikum.ruangan_id','kelas.nama','praktikum.kelas_id','jadwal.hari','jadwal.jam_mulai','jadwal.jam_akhir','praktikum.matkul_id','matkul.nama_matkul','dosen.id as id_dosen','dosen.nama as nama_dosen','jadwal.id as id_jadwal','ruangan.id as id_ruangan','ruangan.nama_ruangan')
         ->get();
 
 
@@ -49,6 +47,7 @@ class DaftarController extends Controller
         ->get();
 
         $usr = Daftar::join('mahasiswa','daftar.mahasiswa_id','=','mahasiswa.id')
+        ->select('daftar.*')
         ->where('mahasiswa.user_id',Auth::user()->id)->get();
         foreach($usr as $key=>$val){
             $users[$val->praktikum_id]=$val->id;
@@ -116,7 +115,7 @@ class DaftarController extends Controller
 
     public function delete($id){
 
-        $daftars = Daftar::where('mahasiswa_id',$id);
+        $daftars = Daftar::findOrFail($id);
         $daftars->delete();
 
         Session::flash('statuscode','success');

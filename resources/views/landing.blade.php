@@ -65,7 +65,7 @@
       <div class="container">
         <div class="row">
 
-          <div class="owl-carousel col-12 nonloop-block-14 without-loop">
+        <div class="owl-carousel col-12 nonloop-block-14 without-loop">
           @foreach($berita as $b)
             <div class="course bg-white h-100 align-self-stretch">
               
@@ -81,7 +81,7 @@
             </div>
           @endforeach
           </div>
-        </div>
+        </div><br><br><br><br><br>
 
 
         @if(count($berita) > 3)

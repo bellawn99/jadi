@@ -44,6 +44,7 @@ in: "Cari",
                           <label class="custom-file-label" for="kolomEditFoto" data-browse="Cari" value="{{$users->foto}}">{{$users->foto}}</label>                         
                         </div>
                       </div>
+                      <span>(*) Wajib Diisi</span><br><br>
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="put">
                       <input type="submit" class="btn btn-gradient-primary mr-2 btn-sm" value="Ubah">

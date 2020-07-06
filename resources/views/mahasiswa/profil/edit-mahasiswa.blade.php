@@ -44,6 +44,10 @@ in: "Cari",
                       <div class="form-group">
                         <label for="semester">Semester</label>&nbsp;<span>*</span>
                         <input type="semester" class="form-control" id="semester" name="semester" value="{{$mahasiswas->semester}}">
+                      </div>   
+                      <div class="form-group">
+                        <label for="ipk">IPK</label>&nbsp;<span>*</span>
+                        <input type="ipk" class="form-control" id="ipk" name="ipk" value="{{$mahasiswas->ipk}}">
                       </div>                          
                       <div class="form-group">
                           <label for="khs">KHS</label>&nbsp;<span>*</span>

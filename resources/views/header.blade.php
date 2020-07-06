@@ -23,7 +23,14 @@
     <link rel="shortcut icon" href="{{url('assets/images/logo-mini.svg')}}" />
 
     <link rel="stylesheet" href="{{ url('landing/css/style.css')}}">
-    
+    <style>
+@media screen (max-width: 425px) {
+   img {
+      width: 100%
+   }
+}
+</style>
+
   </head>
   <body>
   
@@ -43,10 +50,10 @@
       
       <div class="container-fluid">
         <div class="d-flex align-items-center">
-          <div class="site-logo mr-auto w-25"><a href="{{ url('/') }}"><img src="{{ url('assets/images/logo.svg') }}" style="max-width: 100%; height: auto;"></a></div>
+          <div class="site-logo mr-auto"><a href="{{ url('/') }}"><img src="{{ url('assets/images/logo.svg') }}" style="max-width: 100%; height: 30px;"></a></div>
 
                 <a href="{{url('/login')}}">
-                <button type="button" class="btn btn-primary btn-pill btn-sm" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></a>
+                <button type="button" class="site-logo btn btn-primary btn-pill btn-xs" style="padding-top:5%; padding-bottom:5%; font-size:inherit; padding-right:10%;padding-left:10%" >&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;</button></a>
           
         </div>
       </div>
