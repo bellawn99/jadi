@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
-use App\Role;
 use App\Mahasiswa;
 use Carbon\Carbon;
 use Session;
@@ -21,8 +20,8 @@ class PenggunaMahasiswaController extends Controller
 {
     public function index()
     {
-        $users = Mahasiswa::leftJoin('user','mahasiswa.user_id','=','user.id')->leftJoin('role','user.role_id','=','role.id')
-        ->select('mahasiswa.nim','user.email','user.nama','user.id', 'user.foto', 'user.no_hp', 'user.role_id', 'user.nama', 'user.username', 'role.role')
+        $users = Mahasiswa::leftJoin('user','mahasiswa.user_id','=','user.id')
+        ->select('mahasiswa.nim','user.email','user.nama','user.id', 'user.foto', 'user.no_hp', 'user.role', 'user.nama', 'user.username')
         ->distinct()->get();
         return view('admin.pengguna.mahasiswa.mahasiswa')->with('users',$users);        
         // return $users;
@@ -62,7 +61,6 @@ class PenggunaMahasiswaController extends Controller
 
         
         
-        $a = Role::select('id')->where('role','mahasiswa')->first();
         $b = Carbon::now()->format('ymd').rand(1000,9999);
 
         $mahasiswas = new Mahasiswa;
@@ -72,7 +70,7 @@ class PenggunaMahasiswaController extends Controller
 
         $users = new User;
         $users->id = $b;
-        $users->role_id = $a->id;
+        $users->role = 'Mahasiswa';
         $users->nama = $request->input('nama');
         $users->email = $request->input('email');
         $users->created_at = Carbon::now();

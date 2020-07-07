@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
-use App\Role;
 use App\Admin;
 use Carbon\Carbon;
 use Session;
@@ -23,9 +22,8 @@ class PenggunaAdminController extends Controller
     public function index()
     {
         $users = Admin::join('user','admin.user_id','=','user.id')
-        ->join('role','user.role_id','=','role.id')
         ->select('admin.nip','user.email','user.nama','user.id', 'user.foto',
-        'user.no_hp', 'user.role_id', 'user.nama', 'user.username', 'role.role')
+        'user.no_hp', 'user.role', 'user.nama', 'user.username')
         ->distinct()->get();
         return view('admin.pengguna.admin.admin')->with('users',$users);        
         // return $users;
@@ -65,7 +63,6 @@ class PenggunaAdminController extends Controller
 
         
         
-        $a = Role::select('id')->where('role','admin')->first();
         $b = Carbon::now()->format('ymd').rand(1000,9999);
 
         $admins = new Admin;
@@ -75,7 +72,7 @@ class PenggunaAdminController extends Controller
 
         $users = new User;
         $users->id = $b;
-        $users->role_id = $a->id;
+        $users->role = 'Admin';
         $users->email = $request->input('email');
         $users->nama = $request->input('nama');
         $users->created_at = Carbon::now();
@@ -143,6 +140,10 @@ class PenggunaAdminController extends Controller
     {
         $users = User::findOrFail($id);
 
+        if($id == Auth()->user()->id){
+            Session::flash('statuscode','error');
+            return redirect('admin/pengguna/user-admin')->with('status','Tidak dapat reset password diri sendiri!');
+        }else{
         $admins = User::where('id', $users->id)->get();
         foreach ($admins as $admin) {
             Admin::where('user_id', $admin->id)->delete();
@@ -152,6 +153,7 @@ class PenggunaAdminController extends Controller
 
         Session::flash('statuscode','success');
         return redirect('admin/pengguna/user-admin')->with('status', 'Berhasil Hapus Admin');
+    }
     }
 
 }

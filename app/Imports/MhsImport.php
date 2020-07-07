@@ -40,11 +40,9 @@ class MhsImport implements ToCollection
 		$gagal=0;
 
 
-        $rules = ['0' => 'regex:/(^([a-zA-Z]+)(\d+)?$)/u',
-        '1'=>'string'];
+        $rules = ['0' => 'string'];
 
-        $pesan = ['0' => 'Nama Harus String',
-        '1'=>'NIM Harus String'];
+        $pesan = ['0' => 'Nama Harus String'];
 
         foreach($collection as $key => $row){
             if($key>=1){
@@ -54,12 +52,11 @@ class MhsImport implements ToCollection
                     $gagal++;
                 }
 				else{
-					$a = Role::select('id')->where('role','mahasiswa')->get()->first()->toArray();
-                    $b = Carbon::now()->format('ymd').rand(1000,9999);
+					$b = Carbon::now()->format('ymd').rand(1000,9999);
                     $c = 'M'.Carbon::now()->format('ymdHi').rand(100,999);
                     User::create([
                         'id' => $b,
-                        'role_id' => $a['id'],
+                        'role' => 'Mahasiswa',
                         'nama' =>  $row[0],
                         'username' =>  substr ($row[1], 3, 6),
                         'password' => \Hash::make(substr ($row[1], 3, 6)),

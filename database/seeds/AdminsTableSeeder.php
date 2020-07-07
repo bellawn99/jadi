@@ -14,7 +14,7 @@ class AdminsTableSeeder extends Seeder
      */
     public function run()
     {
-        $a = User::select('id')->where('role_id', 1 )->get()->first();
+        $a = User::select('id')->where('role', 'Admin' )->get()->first();
 
         Admin::create([
             'id' => 'A'.Carbon::now()->format('ymdHi').rand(100,999),

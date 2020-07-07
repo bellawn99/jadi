@@ -19,7 +19,7 @@ Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => ['auth', 'admin'], 'prefix'=> 'admin'], function() {
+Route::group(['middleware' => 'admin', 'prefix'=> 'admin'], function() {
     Route::get('/dashboard', 'Admin\AdminController@home')->name('admin.dashboard');
     Route::get('/dashboard/stat', 'Admin\AdminController@get_data')->name('search');
     // Route::get('/dashboard/', 'Admin\AdminController@search')->name('search');
@@ -154,7 +154,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix'=> 'admin'], function()
     });
 });
 
-Route::group(['middleware' => ['auth', 'mahasiswa'], 'prefix'=> 'mahasiswa'], function() {
+Route::group(['middleware' => 'mahasiswa', 'prefix'=> 'mahasiswa'], function() {
     Route::get('/dashboard', 'Mahasiswa\MahasiswaController@index')->name('mahasiswa.beranda');
     //profil
     Route::group(['prefix' => 'profil'],function(){

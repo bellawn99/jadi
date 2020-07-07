@@ -16,13 +16,16 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $user = $request->user();
-
-        if($user){
-            if($user->isAdmin()){
+        if(Auth::user()){
+            if (Auth::user()->role=='Admin') {
                 return $next($request);
             }
+            if (Auth::user()->role=='Mahasiswa') {
+                return $next($request);
+            }
+        }else{
+            // return redirect();
+            return redirect('/login');
         }
-        return back()->with('error', 'Access Denied');
     }
 }

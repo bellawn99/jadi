@@ -207,7 +207,7 @@
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        @if (Auth::user()->role_id == 1)
+        @if (Auth::user()->role == 'Admin')
           <a class="navbar-brand brand-logo" href="{{ route('admin.dashboard') }}"><img src="{{url('assets/images/logo.svg')}}" alt="logo" /></a>
           <a class="navbar-brand brand-logo-mini" href="{{ route('admin.dashboard') }}"><img src="{{url('assets/images/logo-mini.svg')}}" alt="logo" /></a>
         @else
@@ -231,7 +231,7 @@
                 </div>
               </a>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-              @if (Auth::user()->role_id == 1)
+              @if (Auth::user()->role == 'Admin')
                 <a class="dropdown-item" href="{{ route('admin.ubahPass') }}">
                   <i class="mdi mdi-lock-open mr-2 text-success"></i> Ubah Password </a>
                 <div class="dropdown-divider"></div>
@@ -260,7 +260,7 @@
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
         <?php $a = Route::current()->getName(); !empty($a)&&isset($a)?$rut=$a:$rut=''; ?>
-        @if (Auth::user()->role_id == 1)
+        @if (Auth::user()->role == 'Admin')
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
             <li class="nav-item">

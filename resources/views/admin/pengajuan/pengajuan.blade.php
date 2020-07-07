@@ -15,6 +15,9 @@
 <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
+                  @if(count($pengajuans) == 0 )
+                  <h3><center>TIDAK ADA PENGAJUAN</center></h3>
+                  @else
                     <h4 class="card-title">Pengajuan Asistensi</h4>
                     
                     @if (count($errors)>0)
@@ -63,6 +66,7 @@
                         @endforeach
                       </tbody>
                     </table>
+                    @endif
 
 <!-- Detail PDF Modal -->
 @foreach ($pengajuans as $item)

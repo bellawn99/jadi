@@ -39,11 +39,9 @@ class AdminImport implements ToCollection
 		$berhasil=0;
         $gagal=0;
         
-        $rules = ['0' => 'regex:/(^([a-zA-Z]+)(\d+)?$)/u',
-        '1'=>'regex:/(^([a-zA-Z]+)(\d+)?$)/u'];
+        $rules = ['0' => 'regex:/(^([a-zA-Z]+)(\d+)?$)/u'];
 
-        $pesan = ['0' => 'Nama Harus String',
-        '1'=>'NIP Harus String'];
+        $pesan = ['0' => 'Nama Harus String'];
 
         foreach($collection as $key => $row){
             if($key>=1){
@@ -53,12 +51,11 @@ class AdminImport implements ToCollection
                     $gagal++;
                 }
 				else{
-					$a = Role::select('id')->where('role','admin')->get()->first()->toArray();
-                    $b = Carbon::now()->format('ymd').rand(1000,9999);
+					$b = Carbon::now()->format('ymd').rand(1000,9999);
                     $c = 'A'.Carbon::now()->format('ymdHi').rand(100,999);
                     User::create([
                         'id' => $b,
-                        'role_id' => $a['id'],
+                        'role' => 'Admin',
                         'nama' =>  $row[0],
                         'username' =>  substr ($row[1], 0, 6),
                         'password' => \Hash::make(substr ($row[1], 0, 6)),

@@ -49,29 +49,38 @@ class DaftarController extends Controller
         $usr = Daftar::join('mahasiswa','daftar.mahasiswa_id','=','mahasiswa.id')
         ->select('daftar.*')
         ->where('mahasiswa.user_id',Auth::user()->id)->get();
+        $a = Daftar::join('mahasiswa','daftar.mahasiswa_id','=','mahasiswa.id')
+        ->select('daftar.*')
+        ->where('mahasiswa.user_id',Auth::user()->id)->first();
         foreach($usr as $key=>$val){
             $users[$val->praktikum_id]=$val->id;
+            $users[$val->status]=$val->id;
         }
+// return $users;
 
         // return response()->json(['praktikum'=>$daftars,'awal'=>$awals,'akhir'=>$akhirs,'user'=>$users,'tes'=>$tes]);
         // exit();
        // $status = Praktikum::leftJoint()->leftJoin('daftar','daftar.praktikum_id','=','praktikum.id')
        // ->select('status')->first();
     //    dd($awals);
-       return view('mahasiswa.daftar.daftar',compact('daftars','awals','akhirs','users','tes'));        
+       return view('mahasiswa.daftar.daftar',compact('daftars','awals','akhirs','users','tes','a'));        
     }
 
     public function store(Request $request){
 
         $z = Mahasiswa::where('user_id',Auth::user()->id)->first();
     
-        $a = Daftar::where('mahasiswa_id',$z->id)->get();
+        $a = Daftar::where('mahasiswa_id',$z->id)->first();
 
-        $ngecek = Daftar::where(['mahasiswa_id'=>$z->id, 'praktikum_id'=>$request->id])->get();
+        // return $a->status;
+
+        $ngecek = Daftar::where(['mahasiswa_id'=>$z->id, 'praktikum_id'=>$request->id, 'status' => 'daftar'])->get();
+        $u = Daftar::where(['mahasiswa_id'=>$z->id, 'praktikum_id'=>$request->id, 'status' => 'ditolak'])->get();
+
 
         //return $a[1];
 
-        if(count($ngecek) > 1){
+        if(count($ngecek) > 1 || count($u) > 1){
             Session::flash('statuscode','error');
         return redirect('mahasiswa/daftar')->with('status', 'Gagal Mendaftar!');
         }else{
@@ -82,6 +91,7 @@ class DaftarController extends Controller
             Session::flash('statuscode','error');
         return redirect('mahasiswa/daftar')->with('status', 'Silahkan Melengkapi Profil Terlebih Dahulu!');
         }else{
+        if(empty($a)){
         $daftars = new Daftar;
         
         $b = 'D'.Carbon::now()->format('ymdHi').rand(100,999);
@@ -106,7 +116,16 @@ class DaftarController extends Controller
         
         Session::flash('statuscode','success');
         return redirect('mahasiswa/daftar')->with('status', 'Berhasil Mendaftar');
-        
+        }
+        if($a->status == 'ditolak'){
+            $a->status = 'daftar';
+    
+            $a->updated_at = Carbon::today();
+            $a->save();
+            
+            Session::flash('statuscode','success');
+            return redirect('mahasiswa/daftar')->with('status', 'Berhasil Mendaftar');
+            }
         }
         }
         //return $request->id;

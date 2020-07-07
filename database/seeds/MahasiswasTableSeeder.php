@@ -14,8 +14,8 @@ class MahasiswasTableSeeder extends Seeder
      */
     public function run()
     {
-        $a = User::select('id')->where('role_id', 2 )->get()->first();
-        $b = User::select('username')->where('role_id', 2 )->get()->first();
+        $a = User::select('id')->where('role', 'Mahasiswa' )->get()->first();
+        $b = User::select('username')->where('role', 'Mahasiswa' )->get()->first();
 
         Mahasiswa::create([
             'id' => 'M'.Carbon::now()->format('ymdHi').rand(100,999),

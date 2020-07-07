@@ -23,7 +23,7 @@ class LandingController extends Controller
             $ketentuans = Ketentuan::all();
             $berita = Berita::all();
             return view('landing')->with('ketentuans',$ketentuans)->with('berita',$berita);  
-        }elseif($user->role_id == 1){
+        }elseif($user->role == 'Admin'){
             return redirect()->route('admin.dashboard');
         }else{
             return redirect()->route('mahasiswa.beranda'); 
